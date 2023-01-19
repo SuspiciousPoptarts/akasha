@@ -1,0 +1,710 @@
+function expandOperators(eq) {
+    eq = eq.replaceAll("/", " / ");
+    eq = eq.replaceAll("+", " + ");
+    eq = eq.replaceAll("*", " * ");
+
+    return eq;
+}
+
+function trimString(tstring) {
+    return tstring.replaceAll("\n"," </br>").replaceAll(/[*]{2}(.+?)[*]{2}/g,"<b>$1</b>").replaceAll("·"," • ");
+}
+
+function renderTalents(talentdata) {
+    $("#info-na").append(talentdata["combat1"]["name"]);
+    $("#na-skill").append(trimString(talentdata["combat1"]["info"]));
+
+    $("#info-skill").append(talentdata["combat2"]["name"]);
+    $("#es-skill").append(trimString(talentdata["combat2"]["info"]));
+
+    $("#info-burst").append(talentdata["combat3"]["name"]);
+    $("#eb-skill").append(trimString(talentdata["combat3"]["info"]));
+
+    $("#p1-name").append(talentdata["passive1"]["name"]);
+    $("#passive-1").append(trimString(talentdata["passive1"]["info"]));
+
+    $("#p2-name").append(talentdata["passive2"]["name"]);
+    $("#passive-2").append(trimString(talentdata["passive2"]["info"]));
+
+    $("#p3-name").append(talentdata["passive3"]["name"]);
+    $("#passive-3").append(trimString(talentdata["passive3"]["info"]));
+}
+
+function renderStats(labels, parameters, renderto, level) {
+    $(renderto).text("");
+    if(level == undefined || level == 0) level = 1;
+    labels.map(function(self, i) {
+        let sentence = self;
+        let replacelets = self.match(/{(param[0-9]{0,}):.+?}/gi);
+
+        replacelets = replacelets.map(function(iself) {
+            let p = iself.replaceAll(/{(.+?):.{0,}P}/gmi,"$1");
+            try {
+                sentence = sentence.replaceAll(iself, Math.round(parameters[p][level-1] * 10000)/100 + "%");
+            } catch {
+                let d = iself.replaceAll(/{(.+?):.+?}/gmi,"$1");
+                sentence = sentence.replaceAll(iself, Math.round(parameters[d][level-1]*100)/100);
+            }
+        });
+
+        sentence = expandOperators(sentence);
+        sentence = "<b>" + sentence.replaceAll("|", ":</b> ");
+        $(renderto).append(sentence + "</br>");
+    });
+}
+
+function renderTalentCost(cost, renderto, level) {
+    $(renderto).find("#upg-mora-cost").append(cost["lvl"+level][0]["count"] + " " + cost["lvl"+level][0]["name"]);
+    $(renderto).find("#sk-book").append(cost["lvl"+level][1]["count"] + " " + cost["lvl"+level][1]["name"]);
+    $(renderto).find("#sk-mat").append(cost["lvl"+level][2]["count"] + " " + cost["lvl"+level][2]["name"]);
+
+    try {
+        $(renderto).find("#sk-dom").append(cost["lvl"+level][3]["count"] + " " + cost["lvl"+level][3]["name"]);
+    } catch {}
+}
+
+function renderTalentCostMulti(cost, rendermap, levelmap) {
+    rendermap.forEach(function(renderto, index) {
+        renderTalentCost(cost, renderto, levelmap[index])
+    });
+}
+
+function renderAscMats(parameters, renderto, asc) {
+    $(renderto).find("#upg-mora-cost").append(parameters[asc][0]["count"] + " " + parameters[asc][0]["name"]);
+    $(renderto).find("#asc-crystal").append(parameters[asc][1]["count"] + " " + parameters[asc][1]["name"]);
+
+    $(renderto).find("#asc-mat-1").append(parameters[asc][2]["count"] + " " + parameters[asc][2]["name"]);
+    $(renderto).find("#asc-mat-2").append(parameters[asc][3]["count"] + " " + parameters[asc][3]["name"]);
+    
+    try{ // catches error if trying to render to asc-1
+        $(renderto).find("#asc-mat-3").append(parameters[asc][4]["count"] + " " + parameters[asc][4]["name"]);
+    } catch {}
+}
+
+function renderAscMatsMulti(parameters, rendermap, ascmap) {
+    rendermap.forEach(function(renderto, index) {
+        renderAscMats(parameters, renderto, ascmap[index])
+    });
+}
+
+function attachCollapseToggle(collapseable, button) {
+    $(button).click(function() {
+        if($(collapseable).css("visibility") != "collapse") {
+            $(collapseable).css("visibility","collapse");
+            $(collapseable).css("position","absolute");
+            $(collapseable).css("left","-3000");
+        }
+        else {
+            $(collapseable).css("visibility","initial");
+            $(collapseable).css("position","initial");
+            $(collapseable).css("left","initial");
+        }
+    });
+}
+
+function attachCollapseToggleMulti(list, button) {
+    $(button).click(function() {
+
+        list.forEach(collapseable => {
+            if($(collapseable).css("visibility") != "collapse") {
+                $(collapseable).css("visibility","collapse");
+                $(collapseable).css("position","absolute");
+                $(collapseable).css("left","-3000");
+            }
+            else {
+                $(collapseable).css("visibility","initial");
+                $(collapseable).css("position","initial");
+                $(collapseable).css("left","initial");
+            }
+        })   
+    });
+}
+
+function renderTotalAscensionCost(costs, renderto) {
+    let mora = 0;
+
+    let scrystal = 0;
+    let fcrystal = 0;
+    let ccrystal = 0;
+    let gcrystal = 0;
+
+    let bdrop = 0;
+
+    let witem = 0;
+
+    let wdrops = 0;
+    let wdropm = 0;
+    let wdropl = 0;
+
+    /*
+        0 -> Mora
+        1 -> Sliver
+        2 -> witem
+        3 -> wdrops
+        4 -> Fragment
+        5 -> bdrop
+        6 -> wdropm
+        7 -> Chunk
+        8 -> wdropl
+        9 -> Gemstone
+
+    */
+    let names = [];
+
+    costs["ascend1"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                names.push(self["name"]);
+                break;
+            case 1:
+                scrystal += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                witem += self["count"];
+                names.push(self["name"]);
+                break;
+            case 3:
+                wdrops += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+
+    costs["ascend2"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                break;
+            case 1:
+                fcrystal += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                bdrop += self["count"];
+                names.push(self["name"]);
+                break;
+            case 3:
+                witem += self["count"];
+                break;
+            case 4:
+                wdrops += self["count"];
+                break;
+        }
+    });
+
+    costs["ascend3"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                break;
+            case 1:
+                fcrystal += self["count"];
+                break;
+            case 2:
+                bdrop += self["count"];
+                break;
+            case 3:
+                witem += self["count"];
+                break;
+            case 4:
+                wdropm += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+
+    costs["ascend4"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                break;
+            case 1:
+                ccrystal += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                bdrop += self["count"];
+                break;
+            case 3:
+                witem += self["count"];
+                break;
+            case 4:
+                wdropm += self["count"];
+                break;
+        }
+    });
+
+    costs["ascend5"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                break;
+            case 1:
+                ccrystal += self["count"];
+                break;
+            case 2:
+                bdrop += self["count"];
+                break;
+            case 3:
+                witem += self["count"];
+                break;
+            case 4:
+                wdropl += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+
+    costs["ascend6"].forEach(function(self, index) {
+        switch(index) {
+            case 0:
+                mora += self["count"];
+                break;
+            case 1:
+                gcrystal += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                bdrop += self["count"];
+                break;
+            case 3:
+                witem += self["count"];
+                break;
+            case 4:
+                wdropl += self["count"];
+                break;
+        }
+    });
+
+    
+
+    // Mora
+    $(renderto).find("#mora").append(mora + " " + names[0]);
+
+    // Crystals
+    $(renderto).find("#sliver").append(scrystal + " " + names[1]);
+    $(renderto).find("#fragment").append(fcrystal + " " + names[4]);
+    $(renderto).find("#chunk").append(ccrystal + " " + names[7]);
+    $(renderto).find("#gemstone").append(gcrystal + " " + names[9]);
+
+    // World
+    $(renderto).find("#witem").append(witem + " " + names[2]);
+    $(renderto).find("#wdrops").append(wdrops + " " + names[3]);
+    $(renderto).find("#wdropm").append(wdropm + " " + names[6]);
+    $(renderto).find("#wdropl").append(wdropl + " " + names[8]);
+
+    // Boss
+    $(renderto).find("#bdrop").append(bdrop + " " + names[5]);
+}
+
+function renderTotalSkillCost(costs, renderto, cap) {
+    let mora = 0;
+
+    let books = 0;
+    let bookm = 0;
+    let bookl = 0;
+
+    let drops = 0;
+    let dropm = 0;
+    let dropl = 0;
+
+    let bdrop = 0;
+
+
+    /*
+        0 -> Mora
+        1 -> books
+        2 -> drops
+        3 -> bookm
+        4 -> dropm
+        5 -> bookl
+        6 -> dropl
+        7 -> bdrop
+    */
+    let names = [];
+
+    costs["lvl2"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                names.push(self["name"]);
+                break;
+            case 1:
+                books += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                drops += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+    costs["lvl3"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookm += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                dropm += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+    costs["lvl4"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookm += self["count"];
+                break;
+            case 2:
+                dropm += self["count"];
+                break;
+        }
+    });
+    costs["lvl5"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookm += self["count"];
+                break;
+            case 2:
+                dropm += self["count"];
+                break;
+        }
+    });
+    costs["lvl6"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookm += self["count"];
+                break;
+            case 2:
+                dropm += self["count"];
+                break;
+        }
+    });
+    costs["lvl7"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookl += self["count"];
+                names.push(self["name"]);
+                break;
+            case 2:
+                dropl += self["count"];
+                names.push(self["name"]);
+                break;
+            case 3:
+                bdrop += self["count"];
+                names.push(self["name"]);
+                break;
+        }
+    });
+    costs["lvl8"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookl += self["count"];
+                break;
+            case 2:
+                dropl += self["count"];
+                break;
+            case 3:
+                bdrop += self["count"];
+                break;
+        }
+    });
+    costs["lvl9"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookl += self["count"];
+                break;
+            case 2:
+                dropl += self["count"];
+                break;
+            case 3:
+                bdrop += self["count"];
+                break;
+        }
+    });
+    costs["lvl10"].forEach(function(self, index) {
+        switch(index) {
+            case 0: 
+                mora += self["count"];
+                break;
+            case 1:
+                bookl += self["count"];
+                break;
+            case 2:
+                dropl += self["count"];
+                break;
+            case 3:
+                bdrop += self["count"];
+                break;
+        }
+    });
+
+    $(renderto).find("#mora").append(mora + " " + names[0]);
+
+    $(renderto).find("#sb-1").append(books + " " + names[1]);
+    $(renderto).find("#sb-2").append(bookm + " " + names[3]);
+    $(renderto).find("#sb-3").append(bookl + " " + names[5]);
+
+    $(renderto).find("#wd-1").append(drops + " " + names[2]);
+    $(renderto).find("#wd-2").append(dropm + " " + names[4]);
+    $(renderto).find("#wd-3").append(dropl + " " + names[6]);
+
+    $(renderto).find("#bd").append(bdrop + " " + names[7]);
+}
+
+function rendercharwikipage(name) {
+    let chardata = '../../data/characters/';
+    chardata += name + '/';
+    chardata += name + '.json';
+
+    let talentdata = '../../data/characters/';
+    talentdata += name + '/';
+    talentdata += 'talents.json';
+    
+    let constdata = '../../data/characters/';
+    constdata += name + '/';
+    constdata += 'constellations.json';
+
+    fetch(chardata)
+        .then(response => response.json())
+        .then(jsondata => {
+            // Element
+            switch(jsondata["element"]) {
+                case 'Pyro':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--pyro-accent)");
+                    $("#element").append("&#xf16a;");
+                    break;
+                case 'Hydro':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--hydro-accent)");
+                    $("#element").append("&#xe798;");
+                    break;
+                case 'Electro':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--electro-accent)");
+                    $("#element").append("&#xea0b;");
+                    break;
+                case 'Dendro':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--dendro-accent)");
+                    $("#element").append("&#xea35;");
+                    break;
+                case 'Cryo':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--cryo-accent)");
+                    $("#element").append("&#xeb3b;");
+                    break;
+                case 'Anemo':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--anemo-accent)");
+                    $("#element").append("&#xefd8;");
+                    break;
+                case 'Geo':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--geo-accent)");
+                    $("#element").append("&#xe3f7;");
+                    break;
+            }
+
+            // <!-- Name and Title --->
+            $("#title").append(jsondata["title"]);
+            $("#fullname").append(jsondata["name"]);
+
+            // Rarity
+            switch(jsondata["rarity"]) {
+                case '5':
+                    $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;&#xE838;")
+                    break;
+                case '4':
+                    $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;")
+                    break;
+            }
+
+            $("#cover-image").attr("src", jsondata["images"]["cover1"]);
+
+            $("#info-element").append(jsondata["element"]);
+            $("#info-weapon").append(jsondata["weapontype"]);
+            $("#info-substat").append(jsondata["substat"]);
+            $("#info-region").append(jsondata["region"]);
+            $("#info-constellation").append(jsondata["constellation"]);
+            $("#info-gender").append(jsondata["gender"]);
+            $("#info-birthday").append(jsondata["birthday"]);
+
+            $("#cv-english").append(jsondata["cv"]["english"]);
+            $("#cv-chinese").append(jsondata["cv"]["chinese"]);
+            $("#cv-japanese").append(jsondata["cv"]["japanese"]);
+            $("#cv-korean").append(jsondata["cv"]["korean"]);
+
+            $("#char-description").append(jsondata["description"]);
+
+            renderAscMatsMulti(
+                jsondata["costs"],
+                ["#asc-1", "#asc-2", "#asc-3", "#asc-4", "#asc-5", "#asc-6"],
+                ["ascend1", "ascend2", "ascend3", "ascend4", "ascend5", "ascend6"]
+            );
+
+            renderTotalAscensionCost(jsondata["costs"],"#total-ascension");
+        });
+
+    fetch(talentdata)
+        .then(response => response.json())
+        .then(talentdata => { 
+
+            renderTalents(talentdata);
+
+            renderStats(
+                talentdata["combat1"]["attributes"]["labels"],
+                talentdata["combat1"]["attributes"]["parameters"],
+                "#na-num",
+                1
+            );
+
+            renderStats(
+                talentdata["combat2"]["attributes"]["labels"],
+                talentdata["combat2"]["attributes"]["parameters"],
+                "#es-num",
+                1
+            );
+
+            renderStats(
+                talentdata["combat3"]["attributes"]["labels"],
+                talentdata["combat3"]["attributes"]["parameters"],
+                "#eb-num",
+                1
+            );
+            
+            renderTotalSkillCost(talentdata["costs"], "#total-skills")
+
+            $("#na-slider").change(function() {
+                $("#na-level").val(this.value);
+                renderStats(
+                    talentdata["combat1"]["attributes"]["labels"],
+                    talentdata["combat1"]["attributes"]["parameters"],
+                    "#na-num",
+                    this.value
+                );
+            });
+
+            $("#na-level").change(function() {
+                $("#na-slider").val(this.value);
+                renderStats(
+                    talentdata["combat1"]["attributes"]["labels"],
+                    talentdata["combat1"]["attributes"]["parameters"],
+                    "#na-num",
+                    this.value
+                );
+            });
+
+            $("#es-slider").change(function() {
+                $("#es-level").val(this.value);
+                renderStats(
+                    talentdata["combat2"]["attributes"]["labels"],
+                    talentdata["combat2"]["attributes"]["parameters"],
+                    "#es-num",
+                    this.value
+                );
+            });
+
+            $("#es-level").change(function() {
+                $("#es-slider").val(this.value);
+                renderStats(
+                    talentdata["combat2"]["attributes"]["labels"],
+                    talentdata["combat2"]["attributes"]["parameters"],
+                    "#es-num",
+                    this.value
+                );
+            });
+
+            $("#eb-slider").change(function() {
+                $("#eb-level").val(this.value);
+                renderStats(
+                    talentdata["combat3"]["attributes"]["labels"],
+                    talentdata["combat3"]["attributes"]["parameters"],
+                    "#eb-num",
+                    this.value
+                );
+            });
+
+            $("#eb-level").change(function() {
+                $("#eb-slider").val(this.value);
+                renderStats(
+                    talentdata["combat3"]["attributes"]["labels"],
+                    talentdata["combat3"]["attributes"]["parameters"],
+                    "#eb-num",
+                    this.value
+                );
+            });
+
+            $("#invert-collapse").click(function() {
+                $("#expand-skill-table").click();
+                $("#expand-passive-table").click();
+                $("#expand-constellation-table").click();
+
+                $("#expand-ascension-table").click();
+                $("#expand-skill-upgrade-table").click();
+                $("#expand-total-table").click();
+            });
+
+            attachCollapseToggle("#character-skill-table","#expand-skill-table");
+            attachCollapseToggle("#character-passive-table","#expand-passive-table");
+            attachCollapseToggle("#character-constellation-table","#expand-constellation-table");
+            attachCollapseToggle("#character-ascension-mats", "#expand-ascension-table");
+            attachCollapseToggle("#character-skill-upgrade-table", "#expand-skill-upgrade-table");
+            attachCollapseToggle("#character-total-table", "#expand-total-table");
+
+            renderTalentCostMulti(
+                talentdata["costs"],
+                ["#sk-2","#sk-3","#sk-4","#sk-5","#sk-6","#sk-7","#sk-8","#sk-9","#sk-10"],
+                [2,3,4,5,6,7,8,9,10]
+            );
+
+        }); 
+    
+    fetch(constdata)
+        .then(response => response.json())
+        .then(constdata => {
+            $("#const-name-1").append(constdata["c1"]["name"]);
+            $("#const-name-2").append(constdata["c2"]["name"]);
+            $("#const-name-3").append(constdata["c3"]["name"]);
+            $("#const-name-4").append(constdata["c4"]["name"]);
+            $("#const-name-5").append(constdata["c5"]["name"]);
+            $("#const-name-6").append(constdata["c6"]["name"]);
+
+            
+            $("#const-desc-1").append(trimString(constdata["c1"]["effect"]));
+            $("#const-desc-2").append(trimString(constdata["c2"]["effect"]));
+            $("#const-desc-3").append(trimString(constdata["c3"]["effect"]));
+            $("#const-desc-4").append(trimString(constdata["c4"]["effect"]));
+            $("#const-desc-5").append(trimString(constdata["c5"]["effect"]));
+            $("#const-desc-6").append(trimString(constdata["c6"]["effect"]));
+        });
+}
+
+let paramString = document.URL.split('?')[1];
+let queryString = new URLSearchParams(paramString);
+
+for (let pair of queryString.entries()) {
+    switch(pair[0]) {
+        case 'character':
+            rendercharwikipage(pair[1]);
+            break;
+    }
+}

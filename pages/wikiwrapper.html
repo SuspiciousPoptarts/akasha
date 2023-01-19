@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" href="wiki.css">
+    <link rel="stylesheet" href="root.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<div class="wiki-wrapper-sidebar">
+    <div class="sidebar-wrapper">
+        <!-- BADGE -->
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001" class="w100p margin-b32">
+        <!-- SEARCH -->
+        <input type="text" class="w100p" id="search" placeholder="Search..." >
+        
+        <!-- HOYOLAB MAP -->
+        <button class="anchor no-left margin-l12p5 w75p" style="margin-bottom: 70px;" id="map"><span class="default-color icon padding-r8">&#xe2db;</span>HoyoLab Map</button>
+        <!-- ZOOM -->
+        <button class="anchor no-left margin-l12p5 w96" id="zoom-out"><span class="default-color icon padding-r8">&#xe15b;</span>Zoom</button>
+        <button class="anchor no-right margin-r12p5 w96" id="zoom-in"><span class="default-color icon padding-r8">&#xe145;</span>Zoom</button>
+        
+    </div>
+</div>
+
+<div class="iframe-wrapper">
+    <iframe src="" frameborder="0" class="wiki-window" id="info-panel"></iframe>
+</div>
+
+<script src="windowfunc.js" type="module"></script>

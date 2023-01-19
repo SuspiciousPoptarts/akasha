@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
+@import "root.css";
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.iframe-wrapper {
+    position: absolute;
+    left: 288px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.wiki-window {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.wiki-wrapper-sidebar {
+    position: absolute;
+    height: 100%;
+    width: 256px;
+    box-shadow: 0px 0px 16px 0px var(--shadow-color) ;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    z-index: 99;
+}
+
+.sidebar-wrapper {
+    padding: 16px;
+    padding-top: 32px;
+}

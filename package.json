@@ -1,0 +1,32 @@
+{
+  "name": "Akasha",
+  "version": "0.1.0",
+  "description": "local genshin knowledge base",
+  "main": "serveelectron.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "Akasha",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "author": "SavedPoptarts",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^22.0.0",
+    "genshin-db": "^4.3.5"
+  },
+  "dependencies": {
+    "jquery": "^3.6.3"
+  }
+}

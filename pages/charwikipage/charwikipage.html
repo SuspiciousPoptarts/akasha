@@ -1,0 +1,509 @@
+<head>
+    <link rel="stylesheet" href="../@components.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="float-container w1280 no-shadow">
+        <!-- CHARACTER HEADER -->
+        <div class="flex-container h64 accent-1 no-right-margin">
+            <div class="flex-1 icon f32 accent-1" id="element"></div>
+            <div class="flex-1">
+                <div class="half-height f16" id="title"></div>
+                <div class="half-height header f24" id="fullname"></div>
+            </div>
+            <div class="flex-1 icon f24 accent-1" id="rarity"></div>
+        </div>
+        <!-- IMAGE -->
+        <img class="h768 w768 float-left" id="cover-image">
+        <!-- CHARACTER INFO TABLE -->
+        <table class="h768 w512 s-w16 no-right-margin">
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xf16b;</span>Element</td>
+                <td id="info-element"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xf889;</span>Weapon</td>
+                <td id="info-weapon"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe4fc;</span>Substat</td>
+                <td id="info-substat"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe56a;</span>Region</td>
+                <td id="info-region"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe65f;</span>Constellation</td>
+                <td id="info-constellation"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe63d;</span>Gender</td>
+                <td id="info-gender"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe7e9;</span>Birthday</td>
+                <td id="info-birthday"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xef49;</span>Character Voice</td>
+                <td id="cv-english"></td>
+            </tr>
+            <tr>
+                <td class="half-width"></td>
+                <td id="cv-chinese"></td>
+            </tr>
+            <tr>
+                <td class="half-width"></td>
+                <td id="cv-japanese"></td>
+            </tr>
+            <tr>
+                <td class="half-width"></td>
+                <td id="cv-korean"></td>
+            </tr>
+        </table>
+        <!-- DESCRIPTION -->
+        <table class="w1280">
+            <tr class="h64">
+                <th>Description</th>
+            </tr>
+            <tr><td id="char-description"></td></tr>
+        </table>
+        <!-- INVERT COLLAPSE -->
+        <button class="default-color" id="invert-collapse"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Invert Collapse State</button>
+        <!-- SKILLS -->
+        <button class="default-color" id="expand-skill-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Talents</button>
+        <table class="w1280" id="character-skill-table">
+            <tr class="h64">
+                <th class="w256">Talents</th>
+                <th class="w384">Details</th>
+                <th class="w384">Multipliers</th>
+                <th>Skill Level</th>
+            </tr>
+            <tr class="h256">
+                <td class="text-top" id="info-na"><span class="icon default-color padding-r8">&#xf84b;</span></td>
+                <td class="text-top" id="na-skill"></td>
+                <td class="text-top" id="na-num"></td>
+                <td>
+                    <input type="range" variant="vertical" class="buoy" value="1" min="1" max="15" id="na-slider">
+                    <input type="text" value="1" class="w128 buoy left-16" id="na-level"></input>
+                </td>
+            </tr>
+            <tr class="h256">
+                <td class="text-top" id="info-skill"><span class="icon default-color padding-r8">&#xe1ad;</span></td>
+                <td class="text-top" id="es-skill"></td>
+                <td class="text-top" id="es-num"></td>
+                <td>
+                    <input type="range" variant="vertical" class="buoy" value="1" min="1" max="15" id="es-slider">
+                    <input type="text" value="1" class="w128 buoy left-16" id="es-level"></input>
+                </td>
+            </tr>
+            <tr class="h256">
+                <td class="text-top" id="info-burst"><span class="icon default-color padding-r8">&#xe1ac;</span></td>
+                <td class="text-top" id="eb-skill"></td>
+                <td class="text-top" id="eb-num"></td>
+                <td>
+                    <input type="range" variant="vertical" class="buoy" value="1" min="1" max="15" id="eb-slider">
+                    <input type="text" value="1" class="w128 buoy left-16" id="eb-level"></input>
+                </td>
+            </tr>
+        </table>
+        <!-- PASSIVES -->
+        <button class="default-color" id="expand-passive-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Passives</button>
+        <table class="w1280" id="character-passive-table">
+            <tr class="h64">
+                <th class="w256">Passives</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td id="p1-name"></td>
+                <td id="passive-1"></td>
+            </tr>
+            <tr>
+                <td id="p2-name"></td>
+                <td id="passive-2"></td>
+            </tr>
+            <tr>
+                <td id="p3-name"></td>
+                <td id="passive-3"></td>
+            </tr>
+        </table> 
+        <!-- CONSTELLATIONS -->
+        <button class="default-color" id="expand-constellation-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Constellations</button>
+        <table class="w1280" id="character-constellation-table">
+            <tr class="h64">
+                <th class="w256">Constellation Name</th>
+                <th>Effect</th>
+            </tr>
+            <tr>
+                <td id="const-name-1"></td>
+                <td id="const-desc-1"></td>
+            </tr>
+            <tr>
+                <td id="const-name-2"></td>
+                <td id="const-desc-2"></td>
+            </tr>
+            <tr>
+                <td id="const-name-3"></td>
+                <td id="const-desc-3"></td>
+            </tr>
+            <tr>
+                <td id="const-name-4"></td>
+                <td id="const-desc-4"></td>
+            </tr>
+            <tr>
+                <td id="const-name-5"></td>
+                <td id="const-desc-5"></td>
+            </tr>
+            <tr>
+                <td id="const-name-6"></td>
+                <td id="const-desc-6"></td>
+            </tr>
+        </table>
+        <!-- ASCENSION MATS -->
+        <button class="default-color" id="expand-ascension-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Ascension Materials</button>
+        <div class="no-padding no-shadow w1280" id="character-ascension-mats">
+            <table id="asc-1" class="float-left cost-card h384">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 1</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table id="asc-2" class="float-left cost-card h384">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 2</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table id="asc-3" class="float-left cost-card h384 no-right-margin">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 3</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table id="asc-4" class="float-left cost-card h384">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 4</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table id="asc-5" class="float-left cost-card h384">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 5</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table id="asc-6" class="float-left cost-card h384 no-right-margin">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf092;</span>Ascension 6</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-crystal"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+        </div>
+        <!-- SKILL MATS -->
+        <button class="default-color" id="expand-skill-upgrade-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Skill Upgrade Materials</button>
+        <div class="no-padding no-shadow w1280" id="character-skill-upgrade-table">
+            <table class="float-left cost-card h384" id="sk-2">
+                <tr>
+                    <th class="accent-1 h64"><span class="icon padding-r8">&#xf136;</span>Skill Upgrade <span class="icon padding-r8">&#xf0fb;</span>2</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384" id="sk-3">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>3</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384 no-right-margin" id="sk-4">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>4</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384" id="sk-5">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>5</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384" id="sk-6">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>6</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384 no-right-margin" id="sk-7">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>7</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-dom"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384" id="sk-8">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>8</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-dom"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384" id="sk-9">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>9</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr class="no-bottom">
+                <td id="sk-dom"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+            </table>
+            <table class="float-left cost-card h384 no-right-margin" id="sk-10">
+                <tr>
+                    <th class="accent-1 h64"><span class="default-color icon padding-r8">&#xf136;</span>Skill Upgrade <span class="default-color icon padding-r8">&#xf0fb;</span>10</th>
+                </tr>
+                <tr>
+                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-book"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-mat"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                <td id="sk-dom"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+                <tr>
+                <td><span class="default-color icon padding-r8">&#xe8d0;</span>1 Crown of Insight</td>
+                </tr>
+            </table>
+        </div>
+        <!-- TOTALS -->
+        <button class="default-color" id="expand-total-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Skill Upgrade Materials</button>
+        <div class="no-padding no-shadow w1280" id="character-total-table">
+            <table class="cost-card-wide float-left h768" id="total-ascension">
+                <tr class="h64">
+                    <th class="accent-1"><span class="default-color icon padding-r8">&#xf136;</span>Total Ascension Cost <span class="default-color icon padding-r8">&#xf0fb;</span>6</th>
+                </tr>
+                <tr>
+                    <td id="mora"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <!-- Gems -->
+                <tr>
+                    <td id="sliver"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                    <td id="fragment"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                    <td id="chunk"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <tr>
+                    <td id="gemstone"><span class="default-color icon padding-r8">&#xead5;</span></td>
+                </tr>
+                <!-- World --> 
+                <tr>
+                    <td id="witem"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="wdrops"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="wdropm"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="wdropl"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <!-- Boss Item -->
+                <tr>
+                    <td id="bdrop"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+            </table>
+            <table class="cost-card-wide float-left h768 no-right-margin" id="total-skills">
+                <tr class="h64">
+                    <th class="accent-1"><span class="default-color icon padding-r8">&#xf136;</span>Total Per-Skill Cost <span class="default-color icon padding-r8">&#xf0fb;</span>10</th>
+                </tr>
+                <tr>
+                    <td id="mora"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                </tr>
+                <tr>
+                    <td id="sb-1"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                    <td id="sb-2"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                    <td id="sb-3"><span class="default-color icon padding-r8">&#xe666;</span></td>
+                </tr>
+                <tr>
+                    <td id="wd-1"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="wd-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="wd-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                </tr>
+                <tr>
+                    <td id="bd"><span class="default-color icon padding-r8">&#xebd5;</span></td>
+                </tr>
+                <tr>
+                    <td id="crown"><span class="default-color icon padding-r8">&#xe8d0;</span>1 Crown of Insight</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+<script src="../postrender.js"></script>
+<script src="./charwikipage.js"></script>
