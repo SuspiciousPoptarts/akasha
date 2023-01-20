@@ -27,41 +27,42 @@ function search(list, query) {
     return matches;
 }
 
+function pushToHistory(element) {
+    if(history.length >= 50) history.shift();
+    history.push(element);
+}
+
+function pushToWindow(href) {
+    $("#info-panel").attr("src", href);
+}
+
+function filterToPush(term) {
+    let matches = search(base, term);
+
+    if(matches == [] || matches == "") return;
+    if(matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
+
+    // CHARACTERS
+    if(matches[0][1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + matches[0][0]); }
+    // WEAPONS
+    else if(matches[0][1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + matches[0][0]); }
+    // ARTIFACTS
+    else if(matches[0][1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + matches[0][0]); }
+
+    pushToHistory(matches[0][0]);
+}
+
 var base = compileSearchOptions();
 
 $("#search").keypress(function(e) {
     if(e.which == 13) {
-        let matches = search(base, this.value);
-
-        if(matches == []) return;
-        if(matches[0] == "@componentcreator") {
-            $("#info-panel").attr("src", "styler/componentcreator.html");
-        }
-        // CHARACTERS
-        if(matches[0][1] < ranges[0]) {
-            $("#info-panel").attr("src", "charwikipage/charwikipage.html?character=" + matches[0][0]);
-            $("#info-panel").attr("opacity","0");
-            
-        }
-        // WEAPONS
-        else if(matches[0][1] < ranges[1]) {
-            $("#info-panel").attr("src", "wepwikipage/wepwikipage.html?weapon=" + matches[0][0]);
-            $("#info-panel").attr("opacity","0");
-        }
-        // ARTIFACTS
-        else if(matches[0][1] < ranges[2]) {
-            $("#info-panel").attr("src", "artiwikipage/artiwikipage.html?artifact=" + matches[0][0]);
-            $("#info-panel").attr("opacity","0");
-        }
-        if(history.length >= 5) history.shift();
-        history.push(matches[0][0]);
-        console.log(history);
+        filterToPush(this.value);
     }
 });
 
 $("#zoom-in").click(function() {
     window.electronAPI.sendZoom("in");
-}) ;
+});
 
 $("#zoom-out").click(function() {
     window.electronAPI.sendZoom("out");
@@ -69,5 +70,13 @@ $("#zoom-out").click(function() {
 
 $("#map").click(function() {
     $("#info-panel").attr("src", "https://act.hoyolab.com/ys/app/interactive-map/index.html");
+});
+
+$("#history").click(function() {
+    if(history.length <= 1) return;
+
+    history.pop();
+    filterToPush(history[history.length-1]);
+    history.pop();
 });
 
