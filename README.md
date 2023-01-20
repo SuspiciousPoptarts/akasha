@@ -50,5 +50,7 @@ ___
 * Animal/Creature Pages
 ___
 
-![electron_UQ5dThv43I](https://user-images.githubusercontent.com/98726245/213424777-f6472f11-29b0-4ded-bc3d-3995b8a40ff1.png)
-![electron_AYMnrwEqld](https://user-images.githubusercontent.com/98726245/213424798-3f27e3d1-5afb-4a29-9370-41451bcdea9e.png)
+# Screenshots
+
+![electron_T3HyP1Kl3M](https://user-images.githubusercontent.com/98726245/213595882-ccab3b46-8636-484f-b764-7a57ee38b2fd.png)
+![electron_UasfZEhi1p](https://user-images.githubusercontent.com/98726245/213595890-5836fb06-d239-4a48-9988-7c120d81cd18.png)
