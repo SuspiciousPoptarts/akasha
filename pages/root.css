@@ -36,7 +36,7 @@
     --anemo-accent:#006064;
     --geo-accent:#FBC02D;
     /* RARITY ACCENTS */
-    --five-star-accent: #F57F17;
+    --five-star-accent: #ffdc5f;
     --four-star-accent: #7E57C2;
     --three-star-accent: #1565C0;
     --two-star-accent: #607D8B;
@@ -48,6 +48,7 @@
     color: var(--font-color);
 
     transition: var(--universal-transition-time);
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -58,6 +59,40 @@
 .icon {
     font-family: 'Material Symbols Rounded';
     color: var(--icon-color);
+}
+
+.accent-1 {
+    background-color: var(--accent-color);
+    color: var(--accent-font-color);
+}
+
+.accent-2 {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+.header {
+    font-weight: 700;
+}
+
+.default-color {
+    color: var(--font-color);
+}
+
+.opacity-0p9 {
+    opacity: 0.9;
+}
+
+.opacity-0p75 {
+    opacity: 0.75;
+}
+
+.opacity-0p5 {
+    opacity: 0.5;
 }
 
 /* TEXT */
@@ -360,6 +395,30 @@
     margin-top: 128px;
 }
 
+.margin-l384 {
+    margin-left: 384px;
+}
+
+.margin-l320 {
+    margin-left: 320px;
+}
+
+.margin-l256 {
+    margin-left: 256px;
+}
+
+.margin-l64 {
+    margin-left: 64px;
+}
+
+.margin-l48 {
+    margin-left: 48px;
+}
+
+.margin-l32 {
+    margin-left: 32px;
+}
+
 .margin-l16 {
     margin-left: 16px;
 }
@@ -386,6 +445,10 @@
 
 .left-16 {
     left: 16px;
+}
+
+.left-256 {
+    left: 256px;
 }
 
 .top-128 {
@@ -421,7 +484,6 @@
 .no-right {
     right: 0;
 }
-
 
 /* INPUTS */
 
@@ -508,6 +570,7 @@ button {
 button:hover {
     background-color: var(--accent-color);
     color: var(--background-color);
+    opacity: 1;
 }
 
 button:focus {
@@ -517,7 +580,7 @@ button:focus {
 }
 
 button[variant="solid"] {
-    color: var(--background-color);
+    color: var(--accent-font-color);
     background-color: var(--accent-color);
     box-shadow: var(--card-shadow);
 }

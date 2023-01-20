@@ -12,29 +12,6 @@ body {
     transition: var(--universal-transition-time);
     opacity: 0;
 }
-/* THEMING */
-
-.accent-1 {
-    background-color: var(--accent-color);
-    color: var(--accent-font-color);
-}
-
-.accent-2 {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.no-shadow {
-    box-shadow: none;
-}
-
-.header {
-    font-weight: 700;
-}
-
-.default-color {
-    color: var(--font-color);
-}
 
 /* TABLES */
 
