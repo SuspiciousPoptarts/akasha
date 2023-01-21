@@ -11,20 +11,18 @@
             <div class="flex-1 header f24" id="name"></div>
             <div class="flex-1 icon f24 accent-1" id="rarity"></div>
         </div>
-        <!-- IMAGE -->
-        <img class="h256 w256 float-left" id="cover-image">
         <!-- INFO -->
-        <table class="h256 w512 s-w16 no-right-margin">
+        <table class="h256 w100p no-right-margin">
             <tr>
-                <td class="half-width"><span class="default-color icon padding-r8">&#xea24;</span>Type</td>
-                <td id="info-type"></td>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xea24;</span>Special Name</td>
+                <td id="info-spname"></td>
             </tr>
             <tr>
-                <td class="half-width"><span class="default-color icon padding-r8">&#xe123;</span>Tier</td>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe123;</span>Enemy Type</td>
                 <td id="info-tier"></td>
             </tr>
             <tr>
-                <td class="half-width"><span class="default-color icon padding-r8">&#xe574;</span>Internal Category</td>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe574;</span>Category</td>
                 <td id="info-categ"></td>
             </tr>
         </table>
@@ -38,15 +36,23 @@
             </tr>
         </table>
         <!-- SOURCE -->
-        <button class="default-color" id="expand-sources"><span class="default-color icon padding-r8">&#xe5d7;</span>Sources</button>
-
-        <table class="w100p no-right-margin" id="sources">
+        <table class="w100p">
             <tr class="h64">
-                <td class="accent-1"><span class="default-color icon padding-r8">&#xe2db;</span>Source</td>
+                <th>Investigation</th>
+            </tr>
+            <tr>
+                <td id="i-description"></td>
+            </tr>
+        </table>
+        <!-- DROPS -->
+        <button class="default-color" id="expand-drops"><span class="default-color icon padding-r8">&#xe5d7;</span>Drops</button>
+        <table class="w100p no-right-margin" id="drops">
+            <tr class="h64">
+                <td class="accent-1"><span class="default-color icon padding-r8">&#xe2db;</span>Reward Preview</td>
             </tr>
         </table>
     </div>
 </body>
 
 <script src="../postrender.js"></script>
-<script src="matwikipage.js"></script>
+<script src="enewikipage.js"></script>

@@ -40,46 +40,43 @@ function capitalize(word) {
 }
 
 function rendermatwikipage(name) {
-    let matdata = '../../data/materials/';
-    matdata += name + '.json';
+    let enedata = '../../data/enemies/';
+    enedata += name + '.json';
 
-    fetch(matdata)
+    fetch(enedata)
         .then(response => response.json())
         .then(jsondata => {
             $("#name").append(jsondata["name"]);
-            $("#info-type").append(jsondata["materialtype"]);
-            $("#info-tier").append(jsondata["rarity"]);
-            $("#info-categ").append(capitalize(jsondata["category"].toLowerCase()));
+            $("#info-spname").append(jsondata["specialname"]);
+            $("#info-tier").append(capitalize(jsondata["enemytype"].toLowerCase()));
+            $("#info-categ").append(jsondata["category"]);
             $("#description").append(jsondata["description"]);
-            $("#cover-image").attr("src",jsondata["images"]["fandom"])
+            try{
+                $("#i-description").append(jsondata["investigation"]["description"].replaceAll("\\n"," "));
+            } catch { $("#i-description").append("...") }
 
-            jsondata["source"].forEach(function(e) {
-                $("#sources").append(`<tr><td>${e}</td></tr>`);
+
+            jsondata["rewardpreview"].forEach(function(e) {
+                let r = (e["rarity"] != null || e["rarity"] != undefined)? e["rarity"] + "<span class=\"default-color icon padding-8\">&#xe838;</span>":"";
+                $("#drops").append(`<tr><td>${e["name"]} ${r}</td></tr>`);
             });
 
-            switch(jsondata["rarity"]) {
-                case '5':
+            switch(jsondata["enemytype"]) {
+                case 'BOSS':
                     $(":root").get(0).style.setProperty("--accent-color","var(--five-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
-                case '4':
+                case 'ELITE':
                     $(":root").get(0).style.setProperty("--accent-color","var(--four-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
-                case '3':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--three-star-accent)");
-                    $("#rarity").append("&#xE838;&#xE838;&#xE838;")
-                    break;
-                case '2':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--two-star-accent)");
-                    $("#rarity").append("&#xE838;&#xE838;")
-                    break;
-                case '1':
+                case 'COMMON':
                     $(":root").get(0).style.setProperty("--accent-color","var(--one-star-accent)");
                     $("#rarity").append("&#xE838;")
                     break;
             }
-            attachCollapseToggle("#sources","#expand-sources")
+
+            attachCollapseToggle("#drops","#expand-drops")
         });
 }
 
@@ -88,7 +85,7 @@ let queryString = new URLSearchParams(paramString);
 
 for (let pair of queryString.entries()) {
     switch(pair[0]) {
-        case 'mat':
+        case 'enemy':
             rendermatwikipage(pair[1]);
             break;
     }
