@@ -1,17 +1,19 @@
 import charlist from '../data/characters/meta.json' assert { type: 'json' };
 import weplist from '../data/weapons/@meta.json' assert { type: 'json' };
 import artilist from '../data/artifacts/@meta.json' assert { type: 'json' };
+import matlist from '../data/materials/@meta.json' assert { type: 'json' };
 
 const ranges = [
     charlist.length,
     charlist.length + weplist.length,
     charlist.length + weplist.length + artilist.length,
+    charlist.length + weplist.length + artilist.length + matlist.length,
 ];
 
 var history = [];
 
 function compileSearchOptions() {
-    let options = [].concat(charlist, weplist, artilist);
+    let options = [].concat(charlist, weplist, artilist, matlist);
     
     return options;
 }
@@ -48,6 +50,8 @@ function filterToPush(term) {
     else if(matches[0][1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + matches[0][0]); }
     // ARTIFACTS
     else if(matches[0][1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + matches[0][0]); }
+    // MATERIALS
+    else if(matches[0][1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + matches[0][0]); }
 
     pushToHistory(matches[0][0]);
 }
