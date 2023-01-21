@@ -44,8 +44,8 @@ ___
 
 # 📝 TO-DO:
 * Theming Support
-* Enemy Pages
-* Material Pages
+* Enemy Pages ✅
+* Material Pages ✅
 * Food Pages
 * Animal/Creature Pages
 ___
