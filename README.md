@@ -7,7 +7,7 @@ No-frills [Electron](https://github.com/electron/electron)-powered local databas
 
 ___
 
-⚠️ 0.1.0-0.1.5 is a very early initial build: only characters, weapons, artifacts, and very basic search functionality are currently implemented.
+⚠️ Versions <= 1.0.0 are very early initial builds
 ___
 
 # Building Akasha:
