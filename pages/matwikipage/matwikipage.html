@@ -1,0 +1,52 @@
+<head>
+    <link rel="stylesheet" href="../@components.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="float-container w768 no-shadow">
+        <!-- WEAPON HEADER -->
+        <div class="flex-container h64 accent-1 no-right-margin">
+            <div class="flex-1 header f24" id="name"></div>
+            <div class="flex-1 icon f24 accent-1" id="rarity"></div>
+        </div>
+        <!-- IMAGE -->
+        <img class="h256 w256 float-left" id="cover-image">
+        <!-- INFO -->
+        <table class="h256 w512 s-w16 no-right-margin">
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xea24;</span>Type</td>
+                <td id="info-type"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe123;</span>Tier</td>
+                <td id="info-tier"></td>
+            </tr>
+            <tr>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xe574;</span>Internal Category</td>
+                <td id="info-categ"></td>
+            </tr>
+        </table>
+        <!-- DESCRIPTION -->
+        <table class="w100p">
+            <tr class="h64">
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td id="description"></td>
+            </tr>
+        </table>
+        <!-- SOURCE -->
+        <button class="default-color" id="expand-sources"><span class="default-color icon padding-r8">&#xe5d7;</span>Sources</button>
+
+        <table class="w100p no-right-margin" id="sources">
+            <tr class="h64">
+                <td class="accent-1"><span class="default-color icon padding-r8">&#xe2db;</span>Source</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<script src="../postrender.js"></script>
+<script src="matwikipage.js"></script>

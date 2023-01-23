@@ -161,7 +161,7 @@ function updateDomainList() {
 // ENEMIES
 function updateEnemyList() {
     var enemylist = genshindb.enemies("names", { matchCategories: true });
-    fs.writeFileSync("./data/enemies/@meta.json", JSON.stringify(enemylist));
+    fs.writeFileSync("./data/enemies/@meta.json", JSON.stringify(enemylist).toLowerCase().replaceAll(":",""));
 
     enemylist.forEach((name) => {
         try {
