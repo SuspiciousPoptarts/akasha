@@ -496,7 +496,7 @@ button {
     background-color: var(--background-color);
     color: var(--accent-color);
 
-    border-color: var(--accent-color);
+    border-color: var(--border-color);
     border-style: var(--border-style);
     border-radius: var(--corner-radius);
 
