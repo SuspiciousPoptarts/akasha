@@ -183,10 +183,6 @@ table tr:last-child>td {
 </style>
 
 <script>
-$("#reset").change(function(e) {
-    resetStyle();
-})
-
 function resetStyle() {
     let style = `:root {
         /* MARGINS AND PADDINGS */
@@ -247,6 +243,10 @@ function resetStyle() {
     }`;
     window.electronAPI.sendTheme(style);
 }
+
+$("#reset").click(function(e) {
+    resetStyle();
+})
 
 function compileStyle() {
     let style = `
