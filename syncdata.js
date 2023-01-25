@@ -116,7 +116,7 @@ function updateArtifactList() {
 // MATERIALS
 function updateMaterialList() {
     var materiallist = genshindb.materials("names", { matchCategories: true });
-    fs.writeFileSync("./data/materials/@meta.json", JSON.stringify(materiallist));
+    fs.writeFileSync("./data/materials/@meta.json", JSON.stringify(materiallist).toLowerCase().replaceAll(":",""));
 
     materiallist.forEach((name) => {
         try {
@@ -131,7 +131,7 @@ function updateMaterialList() {
 // FOODS
 function updateFoodList() {
     var foodlist = genshindb.foods("names", { matchCategories: true });
-    fs.writeFileSync("./data/food/@meta.json", JSON.stringify(foodlist));
+    fs.writeFileSync("./data/food/@meta.json", JSON.stringify(foodlist).toLowerCase().replaceAll(":",""));
 
     foodlist.forEach((name) => {
         try {
@@ -206,7 +206,7 @@ function updateWindgliderList() {
 // ANIMALS
 function updateAnimalList() {
     var animallist = genshindb.animals("names", { matchCategories: true });
-    fs.writeFileSync("./data/animals/@meta.json", JSON.stringify(animallist));
+    fs.writeFileSync("./data/animals/@meta.json", JSON.stringify(animallist).toLowerCase().replaceAll(":",""));
 
     animallist.forEach((name) => {
         try {

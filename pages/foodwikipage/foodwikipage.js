@@ -39,44 +39,66 @@ function capitalize(word) {
     return t;
 }
 
-function renderenewikipage(name) {
-    let enedata = '../../data/enemies/';
-    enedata += name + '.json';
+function renderfoodwikipage(name) {
+    let fooddata = '../../data/food/';
+    fooddata += name + '.json';
 
-    fetch(enedata)
+    fetch(fooddata)
         .then(response => response.json())
         .then(jsondata => {
             $("#name").append(jsondata["name"]);
-            $("#info-spname").append(jsondata["specialname"]);
-            $("#info-tier").append(capitalize(jsondata["enemytype"].toLowerCase()));
-            $("#info-categ").append(jsondata["category"]);
+            $("#info-foodtype").append(jsondata["foodfilter"]);
+            $("#info-tier").append(jsondata["rarity"]);
+            $("#info-categ").append(jsondata["foodcategory"]);
             $("#description").append(jsondata["description"]);
-            try{
-                $("#i-description").append(jsondata["investigation"]["description"].replaceAll("\\n"," "));
-            } catch { $("#i-description").append("...") }
+            $("#effects").append(jsondata["effect"]);
 
-
-            jsondata["rewardpreview"].forEach(function(e) {
-                let r = (e["rarity"] != null || e["rarity"] != undefined)? e["rarity"] + "<span class=\"default-color icon padding-8\">&#xe838;</span>":"";
-                $("#drops").append(`<tr><td>${e["name"]} ${r}</td></tr>`);
+            jsondata["ingredients"].forEach(function(self) {
+                $("#recipe").append("<tr><td>" + self.count + " " + self.name + ((self.count == 1)? "":"s") + "</td></tr>");
             });
 
-            switch(jsondata["enemytype"]) {
-                case 'BOSS':
+            if(jsondata["basedish"]) {
+                $("#specialty").append(
+                    `<table class="w100p">                        
+                    <tr>
+                        <th>Specialty</th>
+                        <th>Info</th>
+                    </tr>
+                        <tr>
+                            <td>Character</td>
+                            <td>${jsondata["character"]}</td>
+                        </tr>
+                        <tr>
+                            <td>Basedish</td>
+                            <td>${jsondata["basedish"]}</td>
+                        </tr>
+                    </table>`
+                );
+            }
+
+            switch(jsondata["rarity"]) {
+                case '5':
                     $(":root").get(0).style.setProperty("--accent-color","var(--five-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
-                case 'ELITE':
+                case '4':
                     $(":root").get(0).style.setProperty("--accent-color","var(--four-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
-                case 'COMMON':
+                case '3':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--three-star-accent)");
+                    $("#rarity").append("&#xE838;&#xE838;&#xE838;")
+                    break;
+                case '2':
+                    $(":root").get(0).style.setProperty("--accent-color","var(--two-star-accent)");
+                    $("#rarity").append("&#xE838;&#xE838;")
+                    break;
+                case '1':
                     $(":root").get(0).style.setProperty("--accent-color","var(--one-star-accent)");
                     $("#rarity").append("&#xE838;")
                     break;
             }
-
-            attachCollapseToggle("#drops","#expand-drops")
+            attachCollapseToggle("#sources","#expand-sources")
         });
 }
 
@@ -85,8 +107,8 @@ let queryString = new URLSearchParams(paramString);
 
 for (let pair of queryString.entries()) {
     switch(pair[0]) {
-        case 'enemy':
-            renderenewikipage(pair[1]);
+        case 'food':
+            renderfoodwikipage(pair[1]);
             break;
     }
 }

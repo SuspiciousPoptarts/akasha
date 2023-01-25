@@ -3,6 +3,8 @@ import weplist from '../data/weapons/@meta.json' assert { type: 'json' };
 import artilist from '../data/artifacts/@meta.json' assert { type: 'json' };
 import matlist from '../data/materials/@meta.json' assert { type: 'json' };
 import enelist from '../data/enemies/@meta.json' assert { type: 'json' };
+import foodlist from '../data/food/@meta.json' assert { type: 'json' };
+import anilist from '../data/animals/@meta.json' assert { type: 'json' };
 
 const ranges = [
     charlist.length,
@@ -10,12 +12,14 @@ const ranges = [
     charlist.length + weplist.length + artilist.length,
     charlist.length + weplist.length + artilist.length + matlist.length,
     charlist.length + weplist.length + artilist.length + matlist.length + enelist.length,
+    charlist.length + weplist.length + artilist.length + matlist.length + enelist.length + foodlist.length,
+    charlist.length + weplist.length + artilist.length + matlist.length + enelist.length + foodlist.length + anilist.length,
 ];
 
 var history = [];
 
 function compileSearchOptions() {
-    let options = [].concat(charlist, weplist, artilist, matlist, enelist);
+    let options = [].concat(charlist, weplist, artilist, matlist, enelist, foodlist, anilist);
     
     return options;
 }
@@ -42,6 +46,7 @@ function pushToWindow(href) {
 
 function filterToPush(term) {
     let matches = search(base, term);
+    console.log(matches);
 
     if(matches == [] || matches == "") return;
     if(matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
@@ -56,6 +61,10 @@ function filterToPush(term) {
     else if(matches[0][1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + matches[0][0]); }
     // ENEMIES
     else if(matches[0][1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + matches[0][0]); }
+    // FOOD
+    else if(matches[0][1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + matches[0][0]); }
+    // ANIMALS
+    else if(matches[0][1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + matches[0][0]); }
 
     pushToHistory(matches[0][0]);
 }
@@ -87,4 +96,3 @@ $("#history").click(function() {
     filterToPush(history[history.length-1]);
     history.pop();
 });
-
