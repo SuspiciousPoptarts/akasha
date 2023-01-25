@@ -48,4 +48,5 @@ ___
 * Material Pages ✅
 * Food Pages ✅
 * Animal/Creature Pages ✅
+* Category-lists (i.e. Character-list, Weapon-list, etc)
 ___
