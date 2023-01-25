@@ -2,6 +2,7 @@ const { create } = require('domain');
 const { app, BrowserWindow, ipcMain, ipcRenderer, webFrame, BrowserView} = require('electron');
 const fs = require('fs');
 const path = require('path');
+const { electron } = require('process');
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -73,6 +74,11 @@ const createChildWindow = (src) => {
 
   win.once('ready-to-show', () => {
     win.show()
+  })
+
+  win.on("close", event => {
+    event.preventDefault();
+    win.hide();
   })
 
   ipcMain.on("theme", (event, msg) => {
