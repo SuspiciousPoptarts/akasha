@@ -50,6 +50,7 @@ function renderfoodwikipage(name) {
     fetch(fooddata)
         .then(response => response.json())
         .then(jsondata => {
+            console.log(jsondata["name"]);
             $("#name").append(jsondata["name"]);
             $("#info-foodtype").append(jsondata["foodfilter"]);
             $("#info-tier").append(jsondata["rarity"]);
@@ -62,7 +63,7 @@ function renderfoodwikipage(name) {
                  asLinkable(
                     self.count + " " + self.name,
                     self.name,
-                    jsondata["name"]
+                    jsondata["name"].replaceAll("\"","")
                  )
                  + "</td></tr>");
             });

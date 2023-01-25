@@ -126,6 +126,7 @@ $("#map").click(function() {
 });
 
 $("#history").click(function() {
+    console.log(history);
     if(history.length <= 1) return;
 
     history.pop();
@@ -136,7 +137,7 @@ $("#history").click(function() {
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 
-for (let pair of queryString.entries()) {
+for (let pair of queryString.entries()) {;
     switch(pair[0]) {
         case 'q':
             $("#info-panel").attr("src",filterToPush(pair[1]));

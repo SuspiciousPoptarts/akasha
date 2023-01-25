@@ -57,29 +57,25 @@ function renderAscMats(costs, renderto, asc, name) {
             asLinkable(
                 ((costs[asc][0]["count"] == undefined)? 0:costs[asc][0]["count"]) + " " + costs[asc][0]["name"],
                 costs[asc][0]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
         $(renderto).find("#asc-mat-1").append(
             asLinkable(
                 costs[asc][1]["count"] + " " + costs[asc][1]["name"],
                 costs[asc][1]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
         $(renderto).find("#asc-mat-2").append(
             asLinkable(
                 costs[asc][2]["count"] + " " + costs[asc][2]["name"],
                 costs[asc][2]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
         $(renderto).find("#asc-mat-3").append(
             asLinkable(
                 costs[asc][3]["count"] + " " + costs[asc][3]["name"],
                 costs[asc][3]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
     }
     catch {}
@@ -91,7 +87,7 @@ function renderAscMatsMulti(cost, rendermap, ascmap, name) {
     });
 }
 
-function renderTotalAscensionCost(costs, renderto) {
+function renderTotalAscensionCost(costs, renderto, name) {
     let mora = 0;
 
     let ddrop1 = 0;
@@ -232,19 +228,85 @@ function renderTotalAscensionCost(costs, renderto) {
         });
     } catch {}
     // Mora
-    $(renderto).find("#mora").append(mora + " " + names[0]);
+    $(renderto).find("#mora").append(
+        asLinkable(
+            mora + " " + names[0],
+            names[0],
+            name
+        )
+    );
     // Domain Drops
-    $(renderto).find("#ddrop1").append(ddrop1 + " " + names[1]);
-    $(renderto).find("#ddrop2").append(ddrop2 + " " + names[4]);
-    $(renderto).find("#ddrop3").append(ddrop3 + " " + names[7]);
-    if(ddrop4 != 0) $(renderto).find("#ddrop4").append(ddrop4 + " " + names[10]);
+    $(renderto).find("#ddrop1").append(
+        asLinkable(
+            ddrop1 + " " + names[1],
+            names[1],
+            name
+        )
+    );
+    $(renderto).find("#ddrop2").append(
+        asLinkable(
+            ddrop2 + " " + names[4],
+            names[4],
+            name
+        )
+    );
+    $(renderto).find("#ddrop3").append(
+        asLinkable(
+            ddrop3 + " " + names[7],
+            names[7],
+            name
+        )
+    );
+    if(ddrop4 != 0) $(renderto).find("#ddrop4").append(
+        asLinkable(
+            ddrop4 + " " + names[10],
+            names[10],
+            name
+        )
+    );
     // World Drops
-    $(renderto).find("#wdrop1").append(wdrop1 + " " + names[2]);
-    $(renderto).find("#wdrop2").append(wdrop2 + " " + names[5]);
-    if(wdrop3 != 0) $(renderto).find("#wdrop3").append(wdrop3 + " " + names[8]);
-    $(renderto).find("#edrop1").append(edrop1 + " " + names[3]);
-    $(renderto).find("#edrop2").append(edrop2 + " " + names[6]);
-    if(edrop3 != 0) $(renderto).find("#edrop3").append(edrop3 + " " + names[9]);
+    $(renderto).find("#wdrop1").append(
+        asLinkable(
+            wdrop1 + " " + names[2],
+            names[2],
+            name
+        )
+    );
+    $(renderto).find("#wdrop2").append(
+        asLinkable(
+            wdrop2 + " " + names[5],
+            names[5],
+            name
+        )
+    );
+    if(wdrop3 != 0) $(renderto).find("#wdrop3").append(
+        asLinkable(
+            wdrop3 + " " + names[8],
+            names[8],
+            name
+        )
+    );
+    $(renderto).find("#edrop1").append(
+        asLinkable(
+            edrop1 + " " + names[3],
+            names[3],
+            name
+        )
+    );
+    $(renderto).find("#edrop2").append(
+        asLinkable(
+            edrop2 + " " + names[6],
+            names[6],
+            name
+        )
+    );
+    if(edrop3 != 0) $(renderto).find("#edrop3").append(
+        asLinkable(
+            edrop3 + " " + names[9],
+            names[9],
+            name
+        )
+    );
 }
 
 function renderwepwikipage(name) {
@@ -299,8 +361,7 @@ function renderwepwikipage(name) {
                 jsondata["costs"],
                 ["#asc-1","#asc-2","#asc-3","#asc-4","#asc-5","#asc-6"],
                 ["ascend1","ascend2","ascend3","ascend4","ascend5","ascend6"],
-                wepname
-                );
+                wepname.replaceAll("\"","")                );
 
             $("#r-slider").change(function() {
                 $("#r-level").val(this.value);

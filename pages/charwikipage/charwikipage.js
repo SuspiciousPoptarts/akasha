@@ -58,22 +58,19 @@ function renderTalentCost(cost, renderto, level, name) {
             asLinkable(
                 cost["lvl"+level][0]["count"] + " " + cost["lvl"+level][0]["name"],
                 cost["lvl"+level][0]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
     $(renderto).find("#sk-book").append(
         asLinkable(
             cost["lvl"+level][1]["count"] + " " + cost["lvl"+level][1]["name"],
             cost["lvl"+level][1]["name"],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#sk-mat").append(
         asLinkable(
             cost["lvl"+level][2]["count"] + " " + cost["lvl"+level][2]["name"],
             cost["lvl"+level][2]["name"],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     try {
@@ -81,15 +78,13 @@ function renderTalentCost(cost, renderto, level, name) {
             asLinkable(
                 cost["lvl"+level][3]["count"] + " " + cost["lvl"+level][3]["name"],
                 cost["lvl"+level][3]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
         $(renderto).find("#sk-crown").append(
             asLinkable(
                 cost["lvl"+level][4]["count"] + " " + cost["lvl"+level][4]["name"],
                 cost["lvl"+level][4]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         )
     } catch {}
 }
@@ -109,30 +104,26 @@ function renderAscMats(parameters, renderto, asc, name) {
         asLinkable(
             parameters[asc][0]["count"] + " " + parameters[asc][0]["name"],
             parameters[asc][0]["name"],
-            name
-            )
+            name.replaceAll("\"","")            )
     );
     $(renderto).find("#asc-crystal").append(
         asLinkable(
             parameters[asc][1]["count"] + " " + parameters[asc][1]["name"], 
             parameters[asc][1]["name"],
-            name
-            )
+            name.replaceAll("\"","")            )
     );
 
     $(renderto).find("#asc-mat-1").append(
         asLinkable(
             parameters[asc][2]["count"] + " " + parameters[asc][2]["name"],
             parameters[asc][2]["name"],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#asc-mat-2").append(
         asLinkable(
             parameters[asc][3]["count"] + " " + parameters[asc][3]["name"],
             parameters[asc][3]["name"],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     
     try{ // catches error if trying to render to asc-1
@@ -140,8 +131,7 @@ function renderAscMats(parameters, renderto, asc, name) {
             asLinkable(
                 parameters[asc][4]["count"] + " " + parameters[asc][4]["name"],
                 parameters[asc][4]["name"],
-                name
-            )
+                name.replaceAll("\"","")            )
         );
     } catch {}
 }
@@ -350,8 +340,7 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             mora + " " + names[0],
             names[0],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     // Crystals
@@ -359,29 +348,25 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             scrystal + " " + names[1],
             names[1],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#fragment").append(
         asLinkable(
             fcrystal + " " + names[4],
             names[4],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#chunk").append(
         asLinkable(
             ccrystal + " " + names[7],
             names[7],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#gemstone").append(
         asLinkable(
             gcrystal + " " + names[9],
             names[9],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     // World
@@ -389,29 +374,25 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             witem + " " + names[2],
             names[2],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#wdrops").append(
         asLinkable(
             wdrops + " " + names[3],
             names[3],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#wdropm").append(
         asLinkable(
             wdropm + " " + names[6],
             names[6],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#wdropl").append(
         asLinkable(
             wdropl + " " + names[8],
             names[8],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     // Boss
@@ -419,8 +400,7 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             bdrop + " " + names[5],
             names[5],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 }
 
@@ -592,68 +572,59 @@ function renderTotalSkillCost(costs, renderto, name) {
         asLinkable(
             mora + " " + names[0],
             names[0],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     $(renderto).find("#sb-1").append(
         asLinkable(
             books + " " + names[1],
             names[1],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#sb-2").append(
         asLinkable(
             bookm + " " + names[3],
             names[3],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#sb-3").append(
         asLinkable(
             bookl + " " + names[5],
             names[5],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     $(renderto).find("#wd-1").append(
         asLinkable(
             drops + " " + names[2],
             names[2],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#wd-2").append(
         asLinkable(
             dropm + " " + names[4],
             names[4],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
     $(renderto).find("#wd-3").append(
         asLinkable(
             dropl + " " + names[6],
             names[6],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     $(renderto).find("#bd").append(
         asLinkable(
             bdrop + " " + names[7],
             names[7],
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 
     $(renderto).find("#crown").append(
         asLinkable(
             1 + " Crown of Insight",
             "Crown of Insight",
-            name
-        )
+            name.replaceAll("\"","")        )
     );
 }
 
@@ -741,8 +712,7 @@ function rendercharwikipage(name) {
                 jsondata["costs"],
                 ["#asc-1", "#asc-2", "#asc-3", "#asc-4", "#asc-5", "#asc-6"],
                 ["ascend1", "ascend2", "ascend3", "ascend4", "ascend5", "ascend6"],
-                charname
-            );
+                charname.replaceAll("\"","")            );
 
             renderTotalAscensionCost(jsondata["costs"],"#total-ascension", charname);
         });
@@ -859,8 +829,7 @@ function rendercharwikipage(name) {
                 talentdata["costs"],
                 ["#sk-2","#sk-3","#sk-4","#sk-5","#sk-6","#sk-7","#sk-8","#sk-9","#sk-10"],
                 [2,3,4,5,6,7,8,9,10],
-                charname
-            );
+                charname.replaceAll("\"","")            );
 
         }); 
     
