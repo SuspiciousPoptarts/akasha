@@ -19,9 +19,7 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
-    "asarUnpack": [
-      "pages/*"
-    ]
+    "asar": false
   },
   "author": "SavedPoptarts",
   "license": "MIT",
