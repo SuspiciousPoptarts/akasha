@@ -1,5 +1,6 @@
 const { create } = require('domain');
 const { app, BrowserWindow, ipcMain, ipcRenderer, webFrame, BrowserView} = require('electron');
+const fs = require('fs');
 const path = require('path');
 
 const createWindow = () => {
@@ -38,29 +39,50 @@ const createWindow = () => {
     ipcMain.on("load", (event, msg) => {
       win.loadFile('pages/wikiwrapper.html', { query: { q: msg["q"], b: msg["b"] } })
     });
+
+    ipcMain.on("createChildWindow", (event, msg) => {
+      switch(msg) {
+        case 'theme':
+          createChildWindow("pages/themeeditor.html")
+          break;
+      }
+    });
+
+    ipcMain.on("theme", (event, msg) => {
+      win.webContents.reloadIgnoringCache();
+    })
 };
 
 const createChildWindow = (src) => {
   const win = new BrowserWindow({
     webPreferences: {
+      // nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
-    width: 1640,
+    width: 864,
     height: 960,
     minWidth: 800,
     minHeight: 600,
+    resizable: false,
     backgroundColor: '#000000',
     autoHideMenuBar: true,
     show: false
   })
-
   win.loadFile(src)
 
   win.once('ready-to-show', () => {
     win.show()
   })
+
+  ipcMain.on("theme", (event, msg) => {
+    win.webContents.reloadIgnoringCache();
+  })
 };
+
+ipcMain.on("theme", (event, msg) => {
+  fs.writeFileSync(path.join(__dirname, "pages", "theme.css"), msg);
+})
 
 app.whenReady().then(() => {
     mainWindow = createWindow()

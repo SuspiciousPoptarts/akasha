@@ -72,7 +72,7 @@ function renderfoodwikipage(name) {
                 $("#specialty").append(
                     `<table class="w100p">                        
                     <tr>
-                        <th>Specialty</th>
+                        <th class="half-width">Specialty</th>
                         <th>Info</th>
                     </tr>
                         <tr>
@@ -111,6 +111,9 @@ function renderfoodwikipage(name) {
             }
             attachCollapseToggle("#sources","#expand-sources")
         });
+
+    attachCollapseToggle("#effect","#expand-effects")
+    attachCollapseToggle("#recipe","#expand-recipe")
 }
 
 let paramString = document.URL.split('?')[1];

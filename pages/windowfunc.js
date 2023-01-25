@@ -121,6 +121,10 @@ $("#zoom-out").click(function() {
     window.electronAPI.sendZoom("out");
 });
 
+$("#theme").click(function() {
+    window.electronAPI.sendCreateChildWindow("theme");
+});
+
 $("#map").click(function() {
     $("#info-panel").attr("src", "https://act.hoyolab.com/ys/app/interactive-map/index.html");
 });
