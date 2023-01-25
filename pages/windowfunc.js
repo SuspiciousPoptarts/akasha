@@ -28,11 +28,39 @@ function search(list, query) {
     if (query == "") return [];
     if (query == "@styler") { return ["@componentcreator"];};
     let matches = []
+
     const q = new RegExp(query.toLowerCase());
     list.forEach(function(element, index) {
         if (element.toLowerCase().match(q)) matches.push([element, index]);
     });
+
     return matches;
+}
+
+function levDistance(comparator, comparatee) {
+    if (comparator == comparatee) return 0;
+    let tM = [];
+
+    let coL = comparator.length;
+    let ceL = comparatee.length;
+
+    // INIT 2D ARRAY
+    for(let i = 0; i < coL; ++i) { tM[i] = new Array(ceL)};
+
+    for (let i = 0; i < coL; ++i) tM[i][0] = i;
+    for (let j = 0; j < ceL; ++j) tM[0][j] = j;
+
+    for (let i = 1; i < coL; ++i) {
+        for (let j = 1; j < ceL; ++j) {
+          	tM[i][j] = Math.min(
+                tM[i - 1][j] + 1, // Element Above, +1
+                tM[i][j - 1] + 1, // Element Adjacent, +1
+                tM[i - 1][j - 1] + (comparator[i - 1] === comparatee[j - 1] ? 0 : 1), // Diagonal Element, +1 Whether or not char at indeces match.
+            );
+        }
+    }
+
+    return tM[coL-1][ceL-1];
 }
 
 function pushToHistory(element) {
@@ -45,28 +73,36 @@ function pushToWindow(href) {
 }
 
 function filterToPush(term) {
-    let matches = search(base, term);
-    console.log(matches);
+    try {
+        let matches = search(base, term);
 
-    if(matches == [] || matches == "") return;
-    if(matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
+        if(matches == [] || matches == "") return;
+        if(matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
 
-    // CHARACTERS
-    if(matches[0][1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + matches[0][0]); }
-    // WEAPONS
-    else if(matches[0][1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + matches[0][0]); }
-    // ARTIFACTS
-    else if(matches[0][1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + matches[0][0]); }
-    // MATERIALS
-    else if(matches[0][1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + matches[0][0]); }
-    // ENEMIES
-    else if(matches[0][1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + matches[0][0]); }
-    // FOOD
-    else if(matches[0][1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + matches[0][0]); }
-    // ANIMALS
-    else if(matches[0][1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + matches[0][0]); }
+        let closestMatch = matches[0];
 
-    pushToHistory(matches[0][0]);
+        matches.forEach(function(e) {
+            if(levDistance(closestMatch[0], term) > levDistance(e[0], term)) { closestMatch = e; }
+        });
+
+
+        // CHARACTERS
+        if(closestMatch[1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + closestMatch[0]); }
+        // WEAPONS
+        else if(closestMatch[1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + closestMatch[0]); }
+        // ARTIFACTS
+        else if(closestMatch[1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + closestMatch[0]); }
+        // MATERIALS
+        else if(closestMatch[1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + closestMatch[0]); }
+        // ENEMIES
+        else if(closestMatch[1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + closestMatch[0]); }
+        // FOOD
+        else if(closestMatch[1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + closestMatch[0]); }
+        // ANIMALS
+        else if(closestMatch[1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + closestMatch[0]); }
+
+        pushToHistory(closestMatch[0]);
+    } catch(e) {}
 }
 
 var base = compileSearchOptions();
@@ -96,3 +132,19 @@ $("#history").click(function() {
     filterToPush(history[history.length-1]);
     history.pop();
 });
+
+let paramString = document.URL.split('?')[1];
+let queryString = new URLSearchParams(paramString);
+
+for (let pair of queryString.entries()) {
+    switch(pair[0]) {
+        case 'q':
+            $("#info-panel").attr("src",filterToPush(pair[1]));
+            break;
+        case 'b':
+            let matches = search(base, pair[1]);
+            history.shift();
+            pushToHistory(matches[0][0]);
+            pushToHistory(matches[0][0]);
+    }
+}

@@ -30,6 +30,11 @@ function attachCollapseToggleMulti(list, button) {
         })   
     });
 }
+
+function asLinkable(string, link, src) {
+    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+}
+
 function renderEffect(jsondata, refinement, renderto) {
     $(renderto).text("");
     let t = jsondata["effect"];
@@ -46,19 +51,43 @@ function renderEffect(jsondata, refinement, renderto) {
     $(renderto).append(t);
 }
 
-function renderAscMats(costs, renderto, asc) {
+function renderAscMats(costs, renderto, asc, name) {
     try{
-        $(renderto).find("#upg-mora-cost").append(((costs[asc][0]["count"] == undefined)? 0:costs[asc][0]["count"]) + " " + costs[asc][0]["name"]);
-        $(renderto).find("#asc-mat-1").append(costs[asc][1]["count"] + " " + costs[asc][1]["name"]);
-        $(renderto).find("#asc-mat-2").append(costs[asc][2]["count"] + " " + costs[asc][2]["name"]);
-        $(renderto).find("#asc-mat-3").append(costs[asc][3]["count"] + " " + costs[asc][3]["name"]);
+        $(renderto).find("#upg-mora-cost").append(
+            asLinkable(
+                ((costs[asc][0]["count"] == undefined)? 0:costs[asc][0]["count"]) + " " + costs[asc][0]["name"],
+                costs[asc][0]["name"],
+                name
+            )
+        );
+        $(renderto).find("#asc-mat-1").append(
+            asLinkable(
+                costs[asc][1]["count"] + " " + costs[asc][1]["name"],
+                costs[asc][1]["name"],
+                name
+            )
+        );
+        $(renderto).find("#asc-mat-2").append(
+            asLinkable(
+                costs[asc][2]["count"] + " " + costs[asc][2]["name"],
+                costs[asc][2]["name"],
+                name
+            )
+        );
+        $(renderto).find("#asc-mat-3").append(
+            asLinkable(
+                costs[asc][3]["count"] + " " + costs[asc][3]["name"],
+                costs[asc][3]["name"],
+                name
+            )
+        );
     }
     catch {}
 }
 
-function renderAscMatsMulti(cost, rendermap, ascmap) {
+function renderAscMatsMulti(cost, rendermap, ascmap, name) {
     rendermap.forEach(function(renderto, index) {
-        renderAscMats(cost, renderto, ascmap[index])
+        renderAscMats(cost, renderto, ascmap[index], name)
     });
 }
 
@@ -225,6 +254,7 @@ function renderwepwikipage(name) {
     fetch(wepdata)
         .then(response => response.json())
         .then(jsondata => {
+            let wepname = jsondata["name"];
             $("#name").append(jsondata["name"]);
 
             switch(jsondata["rarity"]) {
@@ -268,7 +298,8 @@ function renderwepwikipage(name) {
             renderAscMatsMulti(
                 jsondata["costs"],
                 ["#asc-1","#asc-2","#asc-3","#asc-4","#asc-5","#asc-6"],
-                ["ascend1","ascend2","ascend3","ascend4","ascend5","ascend6"]
+                ["ascend1","ascend2","ascend3","ascend4","ascend5","ascend6"],
+                wepname
                 );
 
             $("#r-slider").change(function() {

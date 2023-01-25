@@ -39,6 +39,10 @@ function capitalize(word) {
     return t;
 }
 
+function asLinkable(string, link, src) {
+    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+}
+
 function renderfoodwikipage(name) {
     let fooddata = '../../data/food/';
     fooddata += name + '.json';
@@ -54,7 +58,13 @@ function renderfoodwikipage(name) {
             $("#effects").append(jsondata["effect"]);
 
             jsondata["ingredients"].forEach(function(self) {
-                $("#recipe").append("<tr><td>" + self.count + " " + self.name + ((self.count == 1)? "":"s") + "</td></tr>");
+                $("#recipe").append("<tr><td>" +
+                 asLinkable(
+                    self.count + " " + self.name,
+                    self.name,
+                    jsondata["name"]
+                 )
+                 + "</td></tr>");
             });
 
             if(jsondata["basedish"]) {

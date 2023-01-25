@@ -34,6 +34,10 @@ const createWindow = () => {
           break;
       }
     })
+
+    ipcMain.on("load", (event, msg) => {
+      win.loadFile('pages/wikiwrapper.html', { query: { q: msg["q"], b: msg["b"] } })
+    });
 };
 
 const createChildWindow = (src) => {
@@ -61,6 +65,3 @@ const createChildWindow = (src) => {
 app.whenReady().then(() => {
     mainWindow = createWindow()
 });
-
-ipcMain.on("createChildWindow", (event, msg) => {
-})

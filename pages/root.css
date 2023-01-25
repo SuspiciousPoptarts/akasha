@@ -594,3 +594,7 @@ button[variant="solid"]:focus {
     color: var(--background-color);
     filter: var(--click-brightness);
 }
+
+a {
+    color: var(--accent-color);
+}
