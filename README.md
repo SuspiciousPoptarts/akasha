@@ -3,7 +3,7 @@
 No-frills [Electron](https://github.com/electron/electron)-powered local database applet for [genshin-db](https://github.com/search?q=genshin-db).
 ======
 
-![electron_MpHvPjrRib](https://user-images.githubusercontent.com/98726245/213424256-416360e3-463f-4595-9c12-a5b4d15ca679.gif)
+![electron_9WyvZcfsBp](https://user-images.githubusercontent.com/98726245/214561115-dda8d677-af13-4f29-abcb-a6935dd35b1e.gif)
 
 ___
 
@@ -49,8 +49,3 @@ ___
 * Food Pages
 * Animal/Creature Pages
 ___
-
-# Screenshots
-
-![electron_T3HyP1Kl3M](https://user-images.githubusercontent.com/98726245/213595882-ccab3b46-8636-484f-b764-7a57ee38b2fd.png)
-![electron_UasfZEhi1p](https://user-images.githubusercontent.com/98726245/213595890-5836fb06-d239-4a48-9988-7c120d81cd18.png)
