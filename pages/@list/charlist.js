@@ -14,7 +14,7 @@ fetch("../../data/characters/meta.json")
                 $("#chartable").append(
                     `
                     <tr>
-                    <td><image src="${data["images"]["icon"]}" class="no-shadow no-margin w64 h64""></td>
+                    <td><image src="${data["images"]["icon"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64""></td>
                     <td>${asLinkable(data["name"],data["name"],"")}</td>
                     <td>${data["element"]}</td>
                     <td>${data["weapontype"]}</td>

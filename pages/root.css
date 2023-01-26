@@ -2,7 +2,6 @@
 
 .icon {
     font-family: 'Material Symbols Rounded';
-    color: var(--icon-color);
 }
 
 .accent-1 {
@@ -21,10 +20,6 @@
 
 .header {
     font-weight: 700;
-}
-
-.default-color {
-    color: var(--font-color);
 }
 
 .opacity-0p9 {
@@ -571,8 +566,23 @@ button[variant="solid"]:focus {
     filter: var(--click-brightness);
 }
 
+a::after {
+    content:"[?]";
+    font-size: 10px;
+    position: relative;
+    bottom: 8;
+    left: 2;
+    opacity: 0.5;
+}
+
 a {
     color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    filter: var(--hover-brightness);
 }
 
 ::-webkit-scrollbar {

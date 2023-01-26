@@ -79,6 +79,7 @@ function rendermatwikipage(name) {
                     $("#rarity").append("&#xE838;")
                     break;
             }
+            $(":root").get(0).style.setProperty("--accent-font-color", "var(--background-color)");
             attachCollapseToggle("#sources", "#expand-sources")
         });
 }

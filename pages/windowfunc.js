@@ -26,7 +26,6 @@ function compileSearchOptions() {
 
 function search(list, query) {
     if (query == "") return [];
-    if (query == "@styler") { return ["@componentcreator"]; };
     let matches = []
 
     const q = new RegExp(query.toLowerCase());

@@ -2,23 +2,30 @@ function asLinkable(string, link, src) {
     return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\" class="default-color">` + string + "</a>"
 }
 
-fetch("../../data/artifacts/@meta.json")
+function capitalize(word) {
+    let t = "";
+    word.split("_").forEach(function (e) {
+        t += e[0].toUpperCase() + e.slice(1) + " ";
+    });
+    return t;
+}
+
+fetch("../../data/enemies/@meta.json")
     .then(response => response.json())
     .then(jsondata => {
         
         jsondata.forEach((object) => {
 
-            fetch(`../../data/artifacts/${object}.json`)
+            fetch(`../../data/enemies/${object}.json`)
                 .then(r => r.json())
                 .then(data => {
                     $("#table").append(
                         `
                         <tr>
-                        <td><image src="${data["images"]["flower"]}" onerror="this.src='${data["images"]["circlet"]}'" class="no-shadow no-margin w64 h64""></td>
                         <td>${asLinkable(data["name"],data["name"],"")}</td>
-                        <td>${data["2pc"]}</td>
-                        <td>${data["4pc"]}</td>
-                        <td>${data["rarity"][data["rarity"].length-1]}</td>
+                        <td>${data["specialname"]}</td>
+                        <td>${data["category"]}</td>
+                        <td>${capitalize(data["enemytype"].toLowerCase())}</td>
                         </tr>
                         `
                     );

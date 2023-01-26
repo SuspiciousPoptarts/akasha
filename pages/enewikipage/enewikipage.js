@@ -61,7 +61,7 @@ function renderenewikipage(name) {
 
 
             jsondata["rewardpreview"].forEach(function (e) {
-                let r = (e["rarity"] != null || e["rarity"] != undefined) ? e["rarity"] + "<span class=\"default-color icon padding-8\">&#xe838;</span>" : "";
+                let r = (e["rarity"] != null || e["rarity"] != undefined) ? e["rarity"] + "<span class=\"icon padding-8\">&#xe838;</span>" : "";
                 $("#drops").append(`<tr><td>${asLinkable(e["name"], e["name"], jsondata["name"])} ${r}</td></tr>`);
             });
 

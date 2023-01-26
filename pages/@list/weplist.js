@@ -6,17 +6,17 @@ fetch("../../data/weapons/@meta.json")
     .then(response => response.json())
     .then(jsondata => {
         
-        jsondata.forEach((weapon) => {
+        jsondata.forEach((object) => {
 
-            fetch(`../../data/weapons/${weapon}.json`)
+            fetch(`../../data/weapons/${object}.json`)
                 .then(r => r.json())
                 .then(data => {
-                    $("#weptable").append(
+                    $("#table").append(
                         `
                         <tr>
-                        <td><image src="${data["images"]["icon"]}" class="no-shadow no-margin w64 h64""></td>
+                        <td><image src="${data["images"]["icon"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64""></td>
                         <td>${asLinkable(data["name"],data["name"],"")}</td>
-                        <td>${data["weapontype"]}</td>
+                        <td>${data["objecttype"]}</td>
                         <td>${data["substat"]}</td>
                         <td>${data["rarity"]}</td>
                         </tr>
