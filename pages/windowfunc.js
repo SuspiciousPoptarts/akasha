@@ -169,9 +169,11 @@ for (let pair of queryString.entries()) {
             $("#info-panel").attr("src", filterToPush(pair[1]));
             break;
         case 'b':
-            let matches = search(base, pair[1]);
-            history.shift();
-            pushToHistory(matches[0][0]);
-            pushToHistory(matches[0][0]);
+            try {
+                let matches = search(base, pair[1]);
+                history.shift();
+                pushToHistory(matches[0][0]);
+                pushToHistory(matches[0][0]);
+            } catch (e) {}
     }
 }
