@@ -1,60 +1,58 @@
-
-            :root {
-            /* MARGINS AND PADDINGS */
-                --body-margin: 16px;
-                --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
-                --component-margin: 16px; /* Chaning padding causes layouts to change significantly! */
-                --corner-radius: 8px;
-            
-                --universal-transition-time: all 0.25s;
-                --hover-brightness: brightness(110%);
-                --click-brightness: brightness(90%);
-                --highlight-color: #7381d1; /* Highlighted text is always white! */
-            
-                font-family: 'Roboto Flex';
-            
-                --background-color:24292e;
-                --border-color:#5d727d;
-                --shadow-color:#0f0f0f;
-                --accent-color:5d727d;
-                --accent-font-color: var(--background-color);
-                --font-color:#e1e4e8;
-                --icon-color: #E0E0E0;
-            
-                --border-style: solid;
-            
-                /* SLIDERS */
-                --slider-height: 6px;
-                --slider-knob-radius: 50%;
-                --slider-knob-height: 14px;
-            
-                /* ELEMENTAL ACCENTS */
-                --pyro-accent:#C62828;
-                --hydro-accent:#1565C0;
-                --electro-accent:#5E35B1;
-                --dendro-accent:#D4E157;
-                --cryo-accent:#E1F5FE;
-                --anemo-accent:#006064;
-                --geo-accent:#FBC02D;
-                /* RARITY ACCENTS */
-                --five-star-accent: #ffdc5f;
-                --four-star-accent: #7E57C2;
-                --three-star-accent: #1565C0;
-                --two-star-accent: #607D8B;
-                --one-star-accent: #BDBDBD;
-            
-                --card-shadow: var(--shadow-color) 0px 0px 6px;
-                --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
-            
-                background-color: var(--background-color);
-                color: var(--font-color);
-            
-                transition: var(--universal-transition-time);
-                overflow-x: hidden;
-        }
-            
-        ::selection {
-            background-color: var(--highlight-color);
-            color: white;
-        }
-    
+:root {
+        /* MARGINS AND PADDINGS */
+            --body-margin: 16px;
+            --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
+            --component-margin: 16px; /* Chaning padding causes layouts to change significantly! */
+            --corner-radius: 8px;
+        
+            --universal-transition-time: all 0.25s;
+            --hover-brightness: brightness(110%);
+            --click-brightness: brightness(90%);
+            --highlight-color: #7381d1; /* Highlighted text is always white! */
+        
+            font-family: 'Roboto Flex';
+        
+            --background-color: #212121;
+            --border-color: #424242;
+            --shadow-color: black;
+            --accent-color: #616161;
+            --accent-font-color: var(--background-color);
+            --font-color: #E0E0E0;
+            --icon-color: #E0E0E0;
+        
+            --border-style: solid;
+        
+            /* SLIDERS */
+            --slider-height: 6px;
+            --slider-knob-radius: 50%;
+            --slider-knob-height: 14px;
+        
+            /* ELEMENTAL ACCENTS */
+            --pyro-accent:#C62828;
+            --hydro-accent:#1565C0;
+            --electro-accent:#5E35B1;
+            --dendro-accent:#D4E157;
+            --cryo-accent:#E1F5FE;
+            --anemo-accent:#006064;
+            --geo-accent:#FBC02D;
+            /* RARITY ACCENTS */
+            --five-star-accent: #ffdc5f;
+            --four-star-accent: #7E57C2;
+            --three-star-accent: #1565C0;
+            --two-star-accent: #607D8B;
+            --one-star-accent: #BDBDBD;
+        
+            --card-shadow: var(--shadow-color) 0px 0px 6px;
+            --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
+        
+            background-color: var(--background-color);
+            color: var(--font-color);
+        
+            transition: var(--universal-transition-time);
+            overflow-x: hidden;
+    }
+        
+    ::selection {
+        background-color: var(--highlight-color);
+        color: white;
+    }
