@@ -230,12 +230,13 @@
             --one-star-accent: #BDBDBD;
         
             --card-shadow: var(--shadow-color) 0px 0px 6px;
+        
+            color: var(--font-color);
+            transition: var(--universal-transition-time);
+            background-color: var(--background-color);
+
             --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
         
-            background-color: var(--background-color);
-            color: var(--font-color);
-        
-            transition: var(--universal-transition-time);
     }
         
     ::selection {
@@ -296,12 +297,12 @@
                 --one-star-accent:${$("#1-accent").val()};
             
                 --card-shadow: var(--shadow-color) 0px 0px 6px;
-                --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
             
                 background-color: var(--background-color);
                 color: var(--font-color);
             
                 transition: var(--universal-transition-time);
+                --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
         }
             
         ::selection {

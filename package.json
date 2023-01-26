@@ -1,6 +1,6 @@
 {
   "name": "Akasha",
-  "version": "0.5.5",
+  "version": "0.8.0",
   "description": "local genshin knowledge base",
   "main": "serveelectron.js",
   "scripts": {
@@ -20,7 +20,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "asarUnpack": [
-      "pages/*"
+      "pages/*", "build/qm.png"
     ]
   },
   "author": "SavedPoptarts",
