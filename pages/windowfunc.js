@@ -37,8 +37,8 @@ function search(list, query) {
     if(matches.length == 0) {
         for(let i = 1; i <= query.length; ++i) {
             if(matches.length >= 1000) break;
-            let nReg = new RegExp(query.toLowerCase().replace(new RegExp(`.{${i},}?`),".".repeat(i)));
-            console.log(nReg);
+            let nReg = new RegExp(query.toLowerCase().replace(new RegExp(`.{${i},}?`),".".repeat(i)).replace(/./,query[0]).replaceAll("the ", ""));
+
             try {
                 list.forEach(function(element, index) {
                     if(matches.length >= 1000) throw(Error);
