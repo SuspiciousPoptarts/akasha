@@ -49,7 +49,6 @@
             color: var(--font-color);
         
             transition: var(--universal-transition-time);
-            overflow-x: hidden;
     }
         
     ::selection {

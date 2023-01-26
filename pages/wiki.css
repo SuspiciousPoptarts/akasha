@@ -3,13 +3,13 @@
 
 body {
     margin: 0;
-    overflow: hidden;
 }
 
 .wiki-window {
     margin-left: 288px;
     width: calc(100% - 288px);
     height: 100%;
+    overflow:scroll;
 }
 
 .wiki-wrapper-sidebar {
