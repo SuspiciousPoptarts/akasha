@@ -708,6 +708,11 @@ function rendercharwikipage(name) {
 
             $("#char-description").append(jsondata["description"]);
 
+            if(jsondata["name"] == "Aether" || jsondata["name"] == "Lumine") {
+                $("#title").append("<b>TRAVELER PAGES ARE BROKEN!</br>ONLY INFO-TABLE FUNCTIONS!</b>");
+                return;
+            }
+
             renderAscMatsMulti(
                 jsondata["costs"],
                 ["#asc-1", "#asc-2", "#asc-3", "#asc-4", "#asc-5", "#asc-6"],

@@ -65,10 +65,6 @@
     font-size: 48px;
 }
 
-.default-color {
-    color: var(--font-color);
-}
-
 
 /* SIZE/POSITION */
 .z-99 {
@@ -238,6 +234,10 @@
 
 .h256 {
     height: 256px;
+}
+
+.h194 {
+    height: 194px;
 }
 
 .h128 {

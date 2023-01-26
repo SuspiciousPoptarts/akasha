@@ -151,6 +151,14 @@ $("#history").click(function () {
     history.pop();
 });
 
+$("#char-list").click(function () {
+    $("#info-panel").attr("src", "@list/charlist.html");
+});
+
+$("#wep-list").click(function () {
+    $("#info-panel").attr("src", "@list/weplist.html");
+});
+
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 
