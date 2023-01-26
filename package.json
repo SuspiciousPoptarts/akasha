@@ -19,15 +19,14 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
-    "asar": false
+    "asarUnpack": [
+      "pages/*"
+    ]
   },
   "author": "SavedPoptarts",
   "license": "MIT",
   "devDependencies": {
     "electron": "^22.0.0",
     "genshin-db": "^4.3.5"
-  },
-  "dependencies": {
-    "jquery": "^3.6.3"
   }
 }
