@@ -13,12 +13,28 @@
             class="w100p margin-b32">
         <!-- SEARCH -->
         <input type="text" class="w100p" id="search" placeholder="Search...">
-        <!-- CHARACTER LIST -->
-        <button class="w100p margin-t16" id="char-list"><span
-            class="default-color icon padding-r8">&#xe241;</span>Character List</button>
-        <!-- WEAPON LIST -->
-        <button class="w100p" id="wep-list"><span
-            class="default-color icon padding-r8">&#xe241;</span>Weapon List</button>
+        <div class="w100p h128 margin-t16" style="margin-bottom: 124px; overflow-y:scroll; overflow-x:hidden;">
+            <!-- CHARACTER LIST -->
+            <a href="@list/charlist.html" target="iframe"><span
+                    class="default-color icon padding-r8">&#xe241;</span>Character List</a>
+            <br>
+            <!-- WEAPON LIST -->
+            <a href="@list/weplist.html" target="iframe"><span
+                    class="default-color icon padding-r8">&#xe241;</span>Weapon
+                List</a>
+            <br>
+            <!-- ARTIFACT LIST -->
+            <a href="@list/artilist.html" target="iframe"><span
+                    class="default-color icon padding-r8">&#xe241;</span>Artifact
+                List</a>
+            <br>
+            <!-- MATERIAL LIST -->
+            <a href="@list/matlist.html" target="iframe"><span
+                    class="default-color icon padding-r8">&#xe241;</span>Material
+                List</a>
+            <br>
+        </div>
+
 
         <!-- HOYOLAB MAP -->
         <button class="anchor no-left margin-l12p5 w75p" style="margin-bottom: 124px;" id="map"><span
@@ -41,8 +57,6 @@
             class="default-color icon padding-r8">&#xe889;</span>Back</button>
 </div>
 
-<div class="iframe-wrapper">
-    <iframe src="" frameborder="0" class="wiki-window" id="info-panel"></iframe>
-</div>
+<iframe src="" frameborder="0" class="wiki-window" id="info-panel" name="iframe"></iframe>
 
 <script src="windowfunc.js" type="module"></script>

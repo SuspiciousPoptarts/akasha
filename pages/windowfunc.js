@@ -151,13 +151,17 @@ $("#history").click(function () {
     history.pop();
 });
 
-$("#char-list").click(function () {
-    $("#info-panel").attr("src", "@list/charlist.html");
-});
+// $("#char-list").click(function () {
+//     $("#info-panel").attr("src", "@list/charlist.html");
+// });
 
-$("#wep-list").click(function () {
-    $("#info-panel").attr("src", "@list/weplist.html");
-});
+// $("#wep-list").click(function () {
+//     $("#info-panel").attr("src", "@list/weplist.html");
+// });
+
+// $("#arti-list").click(function () {
+//     $("#info-panel").attr("src", "@list/artilist.html");
+// });
 
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);

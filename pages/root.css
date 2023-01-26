@@ -67,6 +67,10 @@
 
 
 /* SIZE/POSITION */
+.t-left {
+    text-align: left !important;
+}
+
 .z-99 {
     z-index: 99;
 }
@@ -224,6 +228,14 @@
     height: 768px;
 }
 
+.h50p {
+    height: 50%;
+}
+
+.h25p {
+    height: 25%;
+}
+
 .h512 {
     height: 512px;
 }
@@ -291,6 +303,25 @@
 .padding-l8 {
     padding-left: 8px;
 }
+
+
+.padding-t8 {
+    padding-top: 8px;
+}
+
+.padding-t4 {
+    padding-top: 4px;
+}
+
+.padding-b8 {
+    padding-bottom: 8px;
+}
+
+.padding-b4 {
+    padding-bottom: 4px;
+}
+
+
 
 .margin-b8 {
     margin-bottom: 8px;
@@ -542,4 +573,28 @@ button[variant="solid"]:focus {
 
 a {
     color: var(--accent-color);
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+    transition: var(--universal-transition-time);
+}
+::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: var(--corner-radius);
+    border: 4px solid rgba(0,0,0,0);
+    background-clip: content-box;
+    min-height: 32px;
+}
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+}
+
+.inset-shadow {
+    box-shadow: var(--inset-shadow);
+    border-radius: var(--corner-radius);
+    overflow: hidden;
 }
