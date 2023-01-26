@@ -13,12 +13,12 @@
             
                 font-family: 'Roboto Flex';
             
-                --background-color: #212121;
-                --border-color: #424242;
-                --shadow-color:black;
-                --accent-color: #616161;
+                --background-color:24292e;
+                --border-color:#5d727d;
+                --shadow-color:#0f0f0f;
+                --accent-color:5d727d;
                 --accent-font-color: var(--background-color);
-                --font-color: #E0E0E0;
+                --font-color:#e1e4e8;
                 --icon-color: #E0E0E0;
             
                 --border-style: solid;

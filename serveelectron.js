@@ -14,13 +14,13 @@ const createWindow = () => {
     width: 1640,
     height: 960,
     minWidth: 800,
-    minHeight: 600,
+    minHeight: 742,
     backgroundColor: '#000000',
     autoHideMenuBar: true,
     show: false
   })
 
-  const createChildWindow = (src) => {
+  const createChildWindow = (src, name) => {
     const winChild = new BrowserWindow({
       parent: win,
       webPreferences: {
@@ -28,10 +28,9 @@ const createWindow = () => {
         contextIsolation: true,
         preload: path.join(__dirname, 'preload.js')
       },
+      title: name,
       width: 864,
-      height: 960,
-      minWidth: 800,
-      minHeight: 600,
+      height: 600,
       resizable: false,
       backgroundColor: '#000000',
       autoHideMenuBar: true,
@@ -81,7 +80,7 @@ const createWindow = () => {
   ipcMain.on("createChildWindow", (event, msg) => {
     switch (msg) {
       case 'theme':
-        createChildWindow("pages/themeeditor.html")
+        createChildWindow("pages/themeeditor.html", "Theme")
         break;
     }
   });

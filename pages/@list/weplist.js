@@ -16,7 +16,7 @@ fetch("../../data/weapons/@meta.json")
                         <tr>
                         <td><image src="${data["images"]["icon"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64""></td>
                         <td>${asLinkable(data["name"],data["name"],"")}</td>
-                        <td>${data["objecttype"]}</td>
+                        <td>${data["weapontype"]}</td>
                         <td>${data["substat"]}</td>
                         <td>${data["rarity"]}</td>
                         </tr>

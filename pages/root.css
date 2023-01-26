@@ -523,7 +523,7 @@ button {
     background-color: var(--background-color);
     color: var(--accent-color);
 
-    border-color: var(--border-color);
+    border-color: var(--accent-color);
     border-style: var(--border-style);
     border-radius: var(--corner-radius);
 
@@ -583,6 +583,10 @@ a {
 a:hover {
     text-decoration: underline;
     filter: var(--hover-brightness);
+}
+
+.no-after::after {
+    visibility: hidden;
 }
 
 ::-webkit-scrollbar {
