@@ -101,19 +101,19 @@ function filterToPush(term) {
 
 
         // CHARACTERS
-        if (closestMatch[1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + closestMatch[0]); }
+        if (closestMatch[1] < ranges[0]) { pushToWindow(`charwikipage/charwikipage.html?character=${closestMatch[0]}`); }
         // WEAPONS
-        else if (closestMatch[1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[1]) { pushToWindow(`wepwikipage/wepwikipage.html?weapon=${closestMatch[0]}`); }
         // ARTIFACTS
-        else if (closestMatch[1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[2]) { pushToWindow(`artiwikipage/artiwikipage.html?artifact=${closestMatch[0]}`); }
         // MATERIALS
-        else if (closestMatch[1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[3]) { pushToWindow(`matwikipage/matwikipage.html?mat=${closestMatch[0]}`); }
         // ENEMIES
-        else if (closestMatch[1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[4]) { pushToWindow(`enewikipage/enewikipage.html?enemy=${closestMatch[0]}`); }
         // FOOD
-        else if (closestMatch[1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[5]) { pushToWindow(`foodwikipage/foodwikipage.html?food=${closestMatch[0]}`); }
         // ANIMALS
-        else if (closestMatch[1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[6]) { pushToWindow(`aniwikipage/aniwikipage.html?animal=${closestMatch[0]}`); }
 
         pushToHistory(closestMatch[0]);
     } catch (e) { }
