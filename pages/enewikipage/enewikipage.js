@@ -1,33 +1,33 @@
 function attachCollapseToggle(collapseable, button) {
-    $(button).click(function() {
-        if($(collapseable).css("visibility") != "collapse") {
-            $(collapseable).css("visibility","collapse");
-            $(collapseable).css("position","absolute");
-            $(collapseable).css("left","-3000");
+    $(button).click(function () {
+        if ($(collapseable).css("visibility") != "collapse") {
+            $(collapseable).css("visibility", "collapse");
+            $(collapseable).css("position", "absolute");
+            $(collapseable).css("left", "-3000");
         }
         else {
-            $(collapseable).css("visibility","initial");
-            $(collapseable).css("position","initial");
-            $(collapseable).css("left","initial");
+            $(collapseable).css("visibility", "initial");
+            $(collapseable).css("position", "initial");
+            $(collapseable).css("left", "initial");
         }
     });
 }
 
 function attachCollapseToggleMulti(list, button) {
-    $(button).click(function() {
+    $(button).click(function () {
 
         list.forEach(collapseable => {
-            if($(collapseable).css("visibility") != "collapse") {
-                $(collapseable).css("visibility","collapse");
-                $(collapseable).css("position","absolute");
-                $(collapseable).css("left","-3000");
+            if ($(collapseable).css("visibility") != "collapse") {
+                $(collapseable).css("visibility", "collapse");
+                $(collapseable).css("position", "absolute");
+                $(collapseable).css("left", "-3000");
             }
             else {
-                $(collapseable).css("visibility","initial");
-                $(collapseable).css("position","initial");
-                $(collapseable).css("left","initial");
+                $(collapseable).css("visibility", "initial");
+                $(collapseable).css("position", "initial");
+                $(collapseable).css("left", "initial");
             }
-        })   
+        })
     });
 }
 
@@ -37,7 +37,7 @@ function asLinkable(string, link, src) {
 
 function capitalize(word) {
     let t = "";
-    word.split("_").forEach(function(e) {
+    word.split("_").forEach(function (e) {
         t += e[0].toUpperCase() + e.slice(1) + " ";
     });
     return t;
@@ -55,32 +55,32 @@ function renderenewikipage(name) {
             $("#info-tier").append(capitalize(jsondata["enemytype"].toLowerCase()));
             $("#info-categ").append(jsondata["category"]);
             $("#description").append(jsondata["description"]);
-            try{
-                $("#i-description").append(jsondata["investigation"]["description"].replaceAll("\\n"," "));
+            try {
+                $("#i-description").append(jsondata["investigation"]["description"].replaceAll("\\n", " "));
             } catch { $("#i-description").append("...") }
 
 
-            jsondata["rewardpreview"].forEach(function(e) {
-                let r = (e["rarity"] != null || e["rarity"] != undefined)? e["rarity"] + "<span class=\"default-color icon padding-8\">&#xe838;</span>":"";
+            jsondata["rewardpreview"].forEach(function (e) {
+                let r = (e["rarity"] != null || e["rarity"] != undefined) ? e["rarity"] + "<span class=\"default-color icon padding-8\">&#xe838;</span>" : "";
                 $("#drops").append(`<tr><td>${asLinkable(e["name"], e["name"], jsondata["name"])} ${r}</td></tr>`);
             });
 
-            switch(jsondata["enemytype"]) {
+            switch (jsondata["enemytype"]) {
                 case 'BOSS':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--five-star-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--five-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
                 case 'ELITE':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--four-star-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--four-star-accent)");
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
                 case 'COMMON':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--one-star-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--one-star-accent)");
                     $("#rarity").append("&#xE838;")
                     break;
             }
 
-            attachCollapseToggle("#drops","#expand-drops")
+            attachCollapseToggle("#drops", "#expand-drops")
         });
 }
 
@@ -88,7 +88,7 @@ let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 
 for (let pair of queryString.entries()) {
-    switch(pair[0]) {
+    switch (pair[0]) {
         case 'enemy':
             renderenewikipage(pair[1]);
             break;

@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="../@components.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
@@ -28,7 +29,8 @@
                 <td id="info-substat"></td>
             </tr>
             <tr>
-                <td class="half-width"><span class="default-color icon padding-r8">&#xf092;</span>Base Substat Value</td>
+                <td class="half-width"><span class="default-color icon padding-r8">&#xf092;</span>Base Substat Value
+                </td>
                 <td id="info-subval"></td>
             </tr>
         </table>
@@ -37,19 +39,23 @@
             <tr class="h64">
                 <th>Description</th>
             </tr>
-            <tr><td id="wep-description"></td></tr>
+            <tr>
+                <td id="wep-description"></td>
+            </tr>
         </table>
         <!-- INVERT COLLAPSE -->
-        <button class="default-color" id="invert-collapse"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Invert Collapse State</button>
+        <button class="default-color" id="invert-collapse"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Invert Collapse State</button>
         <!-- WEAPON EFFECT -->
-        <button class="default-color" id="expand-effect-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Effect</button>
+        <button class="default-color" id="expand-effect-table"><span
+                class="default-color icon padding-r8">&#xe5d7;</span>Effect</button>
         <table class="w1024" id="weapon-effect-table">
             <tr class="accent-1 h64">
                 <th class="w256">Name</th>
                 <th class="w1024">Effect</th>
                 <th class="w160">Refinement</th>
             </tr>
-            <tr class="h256"> 
+            <tr class="h256">
                 <td id="effect-name" class="text-top"></td>
                 <td class="text-top">
                     <span id="effect-description" class="ed-w"></span>
@@ -61,121 +67,130 @@
             </tr>
         </table>
         <!-- ASCENSION MATS -->
-        <button class="default-color" id="expand-ascension-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Ascension Materials</button>
+        <button class="default-color" id="expand-ascension-table"><span
+                class="default-color icon padding-r8">&#xe5d7;</span>Ascension Materials</button>
         <div class="no-padding no-shadow w1024 a-w32" id="weapon-ascension-table">
             <table class="float-left cost-card" id="asc-1">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 1</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 1</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
-        
+
             <table class="float-left cost-card" id="asc-2">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 2</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 2</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
-            
+
             <table class="float-left cost-card no-right-margin" id="asc-3">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 3</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 3</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
-            
+
             <table class="float-left cost-card" id="asc-4">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 4</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 4</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
-            
+
             <table class="float-left cost-card" id="asc-5">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 5</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 5</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
-            
+
             <table class="float-left cost-card no-right-margin" id="asc-6">
                 <tr class="h64">
-                    <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf092;</span>Ascension 6</th>
+                    <th class="accent-1 upg-table-header"><span
+                            class="default-color icon padding-r8">&#xf092;</span>Ascension 6</th>
                 </tr>
                 <tr>
-                <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
+                    <td id="upg-mora-cost"><span class="default-color icon padding-r8">&#xe57b;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
+                    <td id="asc-mat-1"><span class="default-color icon padding-r8">&#xe886;</span></td>
                 </tr>
                 <tr>
-                <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-2"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
                 <tr class="no-bottom">
-                <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
+                    <td id="asc-mat-3"><span class="default-color icon padding-r8">&#xe1a1;</span></td>
                 </tr>
             </table>
         </div>
         <!-- TOTALS -->
-        <button class="default-color" id="expand-total-table"><span class="default-color icon padding-r8">&#xe5d7;</span>Total Ascension Materials</button>
+        <button class="default-color" id="expand-total-table"><span
+                class="default-color icon padding-r8">&#xe5d7;</span>Total Ascension Materials</button>
         <table class="w100p" id="total-ascension">
             <tr class="h64">
-                <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf136;</span>Total Ascension Cost <span class="default-color icon padding-r8">&#xf0fb;</span>6</th>
+                <th class="accent-1 upg-table-header"><span class="default-color icon padding-r8">&#xf136;</span>Total
+                    Ascension Cost <span class="default-color icon padding-r8">&#xf0fb;</span>6</th>
             </tr>
             <tr>
                 <td id="mora"><span class="default-color icon padding-r8">&#xe57b;</span></td>

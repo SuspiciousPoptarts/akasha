@@ -3,5 +3,5 @@
     let paramString = document.URL.split('?')[1];
     let queryString = new URLSearchParams(paramString);
 
-    window.electronAPI.sendLoad(queryString.get("q"),queryString.get("b"));
+    window.electronAPI.sendLoad(queryString.get("q"), queryString.get("b"));
 </script>

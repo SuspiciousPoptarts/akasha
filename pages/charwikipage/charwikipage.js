@@ -7,7 +7,7 @@ function expandOperators(eq) {
 }
 
 function trimString(tstring) {
-    return tstring.replaceAll("\n"," </br>").replaceAll(/[*]{2}(.+?)[*]{2}/g,"<b>$1</b>").replaceAll("·"," • ");
+    return tstring.replaceAll("\n", " </br>").replaceAll(/[*]{2}(.+?)[*]{2}/g, "<b>$1</b>").replaceAll("·", " • ");
 }
 
 function renderTalents(talentdata) {
@@ -32,18 +32,18 @@ function renderTalents(talentdata) {
 
 function renderStats(labels, parameters, renderto, level) {
     $(renderto).text("");
-    if(level == undefined || level == 0) level = 1;
-    labels.map(function(self, i) {
+    if (level == undefined || level == 0) level = 1;
+    labels.map(function (self, i) {
         let sentence = self;
         let replacelets = self.match(/{(param[0-9]{0,}):.+?}/gi);
 
-        replacelets = replacelets.map(function(iself) {
-            let p = iself.replaceAll(/{(.+?):.{0,}P}/gmi,"$1");
+        replacelets = replacelets.map(function (iself) {
+            let p = iself.replaceAll(/{(.+?):.{0,}P}/gmi, "$1");
             try {
-                sentence = sentence.replaceAll(iself, Math.round(parameters[p][level-1] * 10000)/100 + "%");
+                sentence = sentence.replaceAll(iself, Math.round(parameters[p][level - 1] * 10000) / 100 + "%");
             } catch {
-                let d = iself.replaceAll(/{(.+?):.+?}/gmi,"$1");
-                sentence = sentence.replaceAll(iself, Math.round(parameters[d][level-1]*100)/100);
+                let d = iself.replaceAll(/{(.+?):.+?}/gmi, "$1");
+                sentence = sentence.replaceAll(iself, Math.round(parameters[d][level - 1] * 100) / 100);
             }
         });
 
@@ -55,42 +55,42 @@ function renderStats(labels, parameters, renderto, level) {
 
 function renderTalentCost(cost, renderto, level, name) {
     $(renderto).find("#upg-mora-cost").append(
-            asLinkable(
-                cost["lvl"+level][0]["count"] + " " + cost["lvl"+level][0]["name"],
-                cost["lvl"+level][0]["name"],
-                name.replaceAll("\"","")            )
-        );
+        asLinkable(
+            cost["lvl" + level][0]["count"] + " " + cost["lvl" + level][0]["name"],
+            cost["lvl" + level][0]["name"],
+            name.replaceAll("\"", ""))
+    );
     $(renderto).find("#sk-book").append(
         asLinkable(
-            cost["lvl"+level][1]["count"] + " " + cost["lvl"+level][1]["name"],
-            cost["lvl"+level][1]["name"],
-            name.replaceAll("\"","")        )
+            cost["lvl" + level][1]["count"] + " " + cost["lvl" + level][1]["name"],
+            cost["lvl" + level][1]["name"],
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#sk-mat").append(
         asLinkable(
-            cost["lvl"+level][2]["count"] + " " + cost["lvl"+level][2]["name"],
-            cost["lvl"+level][2]["name"],
-            name.replaceAll("\"","")        )
+            cost["lvl" + level][2]["count"] + " " + cost["lvl" + level][2]["name"],
+            cost["lvl" + level][2]["name"],
+            name.replaceAll("\"", ""))
     );
 
     try {
         $(renderto).find("#sk-dom").append(
             asLinkable(
-                cost["lvl"+level][3]["count"] + " " + cost["lvl"+level][3]["name"],
-                cost["lvl"+level][3]["name"],
-                name.replaceAll("\"","")            )
+                cost["lvl" + level][3]["count"] + " " + cost["lvl" + level][3]["name"],
+                cost["lvl" + level][3]["name"],
+                name.replaceAll("\"", ""))
         );
         $(renderto).find("#sk-crown").append(
             asLinkable(
-                cost["lvl"+level][4]["count"] + " " + cost["lvl"+level][4]["name"],
-                cost["lvl"+level][4]["name"],
-                name.replaceAll("\"","")            )
+                cost["lvl" + level][4]["count"] + " " + cost["lvl" + level][4]["name"],
+                cost["lvl" + level][4]["name"],
+                name.replaceAll("\"", ""))
         )
-    } catch {}
+    } catch { }
 }
 
 function renderTalentCostMulti(cost, rendermap, levelmap, name) {
-    rendermap.forEach(function(renderto, index) {
+    rendermap.forEach(function (renderto, index) {
         renderTalentCost(cost, renderto, levelmap[index], name)
     });
 }
@@ -104,74 +104,74 @@ function renderAscMats(parameters, renderto, asc, name) {
         asLinkable(
             parameters[asc][0]["count"] + " " + parameters[asc][0]["name"],
             parameters[asc][0]["name"],
-            name.replaceAll("\"","")            )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#asc-crystal").append(
         asLinkable(
-            parameters[asc][1]["count"] + " " + parameters[asc][1]["name"], 
+            parameters[asc][1]["count"] + " " + parameters[asc][1]["name"],
             parameters[asc][1]["name"],
-            name.replaceAll("\"","")            )
+            name.replaceAll("\"", ""))
     );
 
     $(renderto).find("#asc-mat-1").append(
         asLinkable(
             parameters[asc][2]["count"] + " " + parameters[asc][2]["name"],
             parameters[asc][2]["name"],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#asc-mat-2").append(
         asLinkable(
             parameters[asc][3]["count"] + " " + parameters[asc][3]["name"],
             parameters[asc][3]["name"],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
-    
-    try{ // catches error if trying to render to asc-1
+
+    try { // catches error if trying to render to asc-1
         $(renderto).find("#asc-mat-3").append(
             asLinkable(
                 parameters[asc][4]["count"] + " " + parameters[asc][4]["name"],
                 parameters[asc][4]["name"],
-                name.replaceAll("\"","")            )
+                name.replaceAll("\"", ""))
         );
-    } catch {}
+    } catch { }
 }
 
 function renderAscMatsMulti(parameters, rendermap, ascmap, name) {
-    rendermap.forEach(function(renderto, index) {
+    rendermap.forEach(function (renderto, index) {
         renderAscMats(parameters, renderto, ascmap[index], name)
     });
 }
 
 function attachCollapseToggle(collapseable, button) {
-    $(button).click(function() {
-        if($(collapseable).css("visibility") != "collapse") {
-            $(collapseable).css("visibility","collapse");
-            $(collapseable).css("position","absolute");
-            $(collapseable).css("left","-3000");
+    $(button).click(function () {
+        if ($(collapseable).css("visibility") != "collapse") {
+            $(collapseable).css("visibility", "collapse");
+            $(collapseable).css("position", "absolute");
+            $(collapseable).css("left", "-3000");
         }
         else {
-            $(collapseable).css("visibility","initial");
-            $(collapseable).css("position","initial");
-            $(collapseable).css("left","initial");
+            $(collapseable).css("visibility", "initial");
+            $(collapseable).css("position", "initial");
+            $(collapseable).css("left", "initial");
         }
     });
 }
 
 function attachCollapseToggleMulti(list, button) {
-    $(button).click(function() {
+    $(button).click(function () {
 
         list.forEach(collapseable => {
-            if($(collapseable).css("visibility") != "collapse") {
-                $(collapseable).css("visibility","collapse");
-                $(collapseable).css("position","absolute");
-                $(collapseable).css("left","-3000");
+            if ($(collapseable).css("visibility") != "collapse") {
+                $(collapseable).css("visibility", "collapse");
+                $(collapseable).css("position", "absolute");
+                $(collapseable).css("left", "-3000");
             }
             else {
-                $(collapseable).css("visibility","initial");
-                $(collapseable).css("position","initial");
-                $(collapseable).css("left","initial");
+                $(collapseable).css("visibility", "initial");
+                $(collapseable).css("position", "initial");
+                $(collapseable).css("left", "initial");
             }
-        })   
+        })
     });
 }
 
@@ -206,8 +206,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
     */
     let names = [];
 
-    costs["ascend1"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend1"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 names.push(self["name"]);
@@ -227,8 +227,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    costs["ascend2"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend2"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 break;
@@ -249,8 +249,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    costs["ascend3"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend3"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 break;
@@ -270,8 +270,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    costs["ascend4"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend4"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 break;
@@ -291,8 +291,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    costs["ascend5"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend5"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 break;
@@ -312,8 +312,8 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    costs["ascend6"].forEach(function(self, index) {
-        switch(index) {
+    costs["ascend6"].forEach(function (self, index) {
+        switch (index) {
             case 0:
                 mora += self["count"];
                 break;
@@ -333,14 +333,14 @@ function renderTotalAscensionCost(costs, renderto, name) {
         }
     });
 
-    
+
 
     // Mora
     $(renderto).find("#mora").append(
         asLinkable(
             mora + " " + names[0],
             names[0],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     // Crystals
@@ -348,25 +348,25 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             scrystal + " " + names[1],
             names[1],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#fragment").append(
         asLinkable(
             fcrystal + " " + names[4],
             names[4],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#chunk").append(
         asLinkable(
             ccrystal + " " + names[7],
             names[7],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#gemstone").append(
         asLinkable(
             gcrystal + " " + names[9],
             names[9],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     // World
@@ -374,25 +374,25 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             witem + " " + names[2],
             names[2],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#wdrops").append(
         asLinkable(
             wdrops + " " + names[3],
             names[3],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#wdropm").append(
         asLinkable(
             wdropm + " " + names[6],
             names[6],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#wdropl").append(
         asLinkable(
             wdropl + " " + names[8],
             names[8],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     // Boss
@@ -400,7 +400,7 @@ function renderTotalAscensionCost(costs, renderto, name) {
         asLinkable(
             bdrop + " " + names[5],
             names[5],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 }
 
@@ -430,9 +430,9 @@ function renderTotalSkillCost(costs, renderto, name) {
     */
     let names = [];
 
-    costs["lvl2"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl2"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 names.push(self["name"]);
                 break;
@@ -446,9 +446,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl3"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl3"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -461,9 +461,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl4"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl4"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -474,9 +474,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl5"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl5"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -487,9 +487,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl6"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl6"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -500,9 +500,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl7"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl7"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -519,9 +519,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl8"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl8"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -535,9 +535,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl9"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl9"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -551,9 +551,9 @@ function renderTotalSkillCost(costs, renderto, name) {
                 break;
         }
     });
-    costs["lvl10"].forEach(function(self, index) {
-        switch(index) {
-            case 0: 
+    costs["lvl10"].forEach(function (self, index) {
+        switch (index) {
+            case 0:
                 mora += self["count"];
                 break;
             case 1:
@@ -572,59 +572,59 @@ function renderTotalSkillCost(costs, renderto, name) {
         asLinkable(
             mora + " " + names[0],
             names[0],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     $(renderto).find("#sb-1").append(
         asLinkable(
             books + " " + names[1],
             names[1],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#sb-2").append(
         asLinkable(
             bookm + " " + names[3],
             names[3],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#sb-3").append(
         asLinkable(
             bookl + " " + names[5],
             names[5],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     $(renderto).find("#wd-1").append(
         asLinkable(
             drops + " " + names[2],
             names[2],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#wd-2").append(
         asLinkable(
             dropm + " " + names[4],
             names[4],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
     $(renderto).find("#wd-3").append(
         asLinkable(
             dropl + " " + names[6],
             names[6],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     $(renderto).find("#bd").append(
         asLinkable(
             bdrop + " " + names[7],
             names[7],
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 
     $(renderto).find("#crown").append(
         asLinkable(
             1 + " Crown of Insight",
             "Crown of Insight",
-            name.replaceAll("\"","")        )
+            name.replaceAll("\"", ""))
     );
 }
 
@@ -636,7 +636,7 @@ function rendercharwikipage(name) {
     let talentdata = '../../data/characters/';
     talentdata += name + '/';
     talentdata += 'talents.json';
-    
+
     let constdata = '../../data/characters/';
     constdata += name + '/';
     constdata += 'constellations.json';
@@ -646,33 +646,33 @@ function rendercharwikipage(name) {
         .then(jsondata => {
             let charname = jsondata["name"];
             // Element
-            switch(jsondata["element"]) {
+            switch (jsondata["element"]) {
                 case 'Pyro':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--pyro-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--pyro-accent)");
                     $("#element").append("&#xf16a;");
                     break;
                 case 'Hydro':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--hydro-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--hydro-accent)");
                     $("#element").append("&#xe798;");
                     break;
                 case 'Electro':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--electro-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--electro-accent)");
                     $("#element").append("&#xea0b;");
                     break;
                 case 'Dendro':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--dendro-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--dendro-accent)");
                     $("#element").append("&#xea35;");
                     break;
                 case 'Cryo':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--cryo-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--cryo-accent)");
                     $("#element").append("&#xeb3b;");
                     break;
                 case 'Anemo':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--anemo-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--anemo-accent)");
                     $("#element").append("&#xefd8;");
                     break;
                 case 'Geo':
-                    $(":root").get(0).style.setProperty("--accent-color","var(--geo-accent)");
+                    $(":root").get(0).style.setProperty("--accent-color", "var(--geo-accent)");
                     $("#element").append("&#xe3f7;");
                     break;
             }
@@ -682,7 +682,7 @@ function rendercharwikipage(name) {
             $("#fullname").append(jsondata["name"]);
 
             // Rarity
-            switch(jsondata["rarity"]) {
+            switch (jsondata["rarity"]) {
                 case '5':
                     $("#rarity").append("&#xE838;&#xE838;&#xE838;&#xE838;&#xE838;")
                     break;
@@ -712,14 +712,14 @@ function rendercharwikipage(name) {
                 jsondata["costs"],
                 ["#asc-1", "#asc-2", "#asc-3", "#asc-4", "#asc-5", "#asc-6"],
                 ["ascend1", "ascend2", "ascend3", "ascend4", "ascend5", "ascend6"],
-                charname.replaceAll("\"","")            );
+                charname.replaceAll("\"", ""));
 
-            renderTotalAscensionCost(jsondata["costs"],"#total-ascension", charname);
+            renderTotalAscensionCost(jsondata["costs"], "#total-ascension", charname);
         });
 
     fetch(talentdata)
         .then(response => response.json())
-        .then(talentdata => { 
+        .then(talentdata => {
 
             let charname = talentdata["name"]
 
@@ -745,10 +745,10 @@ function rendercharwikipage(name) {
                 "#eb-num",
                 1
             );
-            
+
             renderTotalSkillCost(talentdata["costs"], "#total-skills", charname)
 
-            $("#na-slider").change(function() {
+            $("#na-slider").change(function () {
                 $("#na-level").val(this.value);
                 renderStats(
                     talentdata["combat1"]["attributes"]["labels"],
@@ -758,7 +758,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#na-level").change(function() {
+            $("#na-level").change(function () {
                 $("#na-slider").val(this.value);
                 renderStats(
                     talentdata["combat1"]["attributes"]["labels"],
@@ -768,7 +768,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#es-slider").change(function() {
+            $("#es-slider").change(function () {
                 $("#es-level").val(this.value);
                 renderStats(
                     talentdata["combat2"]["attributes"]["labels"],
@@ -778,7 +778,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#es-level").change(function() {
+            $("#es-level").change(function () {
                 $("#es-slider").val(this.value);
                 renderStats(
                     talentdata["combat2"]["attributes"]["labels"],
@@ -788,7 +788,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#eb-slider").change(function() {
+            $("#eb-slider").change(function () {
                 $("#eb-level").val(this.value);
                 renderStats(
                     talentdata["combat3"]["attributes"]["labels"],
@@ -798,7 +798,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#eb-level").change(function() {
+            $("#eb-level").change(function () {
                 $("#eb-slider").val(this.value);
                 renderStats(
                     talentdata["combat3"]["attributes"]["labels"],
@@ -808,7 +808,7 @@ function rendercharwikipage(name) {
                 );
             });
 
-            $("#invert-collapse").click(function() {
+            $("#invert-collapse").click(function () {
                 $("#expand-skill-table").click();
                 $("#expand-passive-table").click();
                 $("#expand-constellation-table").click();
@@ -818,21 +818,21 @@ function rendercharwikipage(name) {
                 $("#expand-total-table").click();
             });
 
-            attachCollapseToggle("#character-skill-table","#expand-skill-table");
-            attachCollapseToggle("#character-passive-table","#expand-passive-table");
-            attachCollapseToggle("#character-constellation-table","#expand-constellation-table");
+            attachCollapseToggle("#character-skill-table", "#expand-skill-table");
+            attachCollapseToggle("#character-passive-table", "#expand-passive-table");
+            attachCollapseToggle("#character-constellation-table", "#expand-constellation-table");
             attachCollapseToggle("#character-ascension-mats", "#expand-ascension-table");
             attachCollapseToggle("#character-skill-upgrade-table", "#expand-skill-upgrade-table");
             attachCollapseToggle("#character-total-table", "#expand-total-table");
 
             renderTalentCostMulti(
                 talentdata["costs"],
-                ["#sk-2","#sk-3","#sk-4","#sk-5","#sk-6","#sk-7","#sk-8","#sk-9","#sk-10"],
-                [2,3,4,5,6,7,8,9,10],
-                charname.replaceAll("\"","")            );
+                ["#sk-2", "#sk-3", "#sk-4", "#sk-5", "#sk-6", "#sk-7", "#sk-8", "#sk-9", "#sk-10"],
+                [2, 3, 4, 5, 6, 7, 8, 9, 10],
+                charname.replaceAll("\"", ""));
 
-        }); 
-    
+        });
+
     fetch(constdata)
         .then(response => response.json())
         .then(constdata => {
@@ -843,7 +843,7 @@ function rendercharwikipage(name) {
             $("#const-name-5").append(constdata["c5"]["name"]);
             $("#const-name-6").append(constdata["c6"]["name"]);
 
-            
+
             $("#const-desc-1").append(trimString(constdata["c1"]["effect"]));
             $("#const-desc-2").append(trimString(constdata["c2"]["effect"]));
             $("#const-desc-3").append(trimString(constdata["c3"]["effect"]));
@@ -857,7 +857,7 @@ let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 
 for (let pair of queryString.entries()) {
-    switch(pair[0]) {
+    switch (pair[0]) {
         case 'character':
             rendercharwikipage(pair[1]);
             break;

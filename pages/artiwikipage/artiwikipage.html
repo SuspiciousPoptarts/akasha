@@ -1,167 +1,195 @@
 <head>
     <link rel="stylesheet" href="../@components.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"/>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="float-container w768 no-shadow s-w32 s-w16">
         <!-- WEAPON HEADER -->
-    <div class="flex-container h64 accent-1 no-right-margin">
-        <div class="flex-1 header f24" id="name"></div>
-        <div class="flex-1 icon f24 accent-1" id="rarity"></div>
-    </div>
+        <div class="flex-container h64 accent-1 no-right-margin">
+            <div class="flex-1 header f24" id="name"></div>
+            <div class="flex-1 icon f24 accent-1" id="rarity"></div>
+        </div>
 
-    <!-- IMAGES -->
-    <image id="flower" class="h128 w128"></image>
-    <image id="plume" class="h128 w128"></image>
-    <image id="sands" class="h128 w128"></image>
-    <image id="goblet" class="h128 w128"></image>
-    <image id="circlet" class="h128 w128 no-right-margin"></image>
+        <!-- IMAGES -->
+        <image id="flower" class="h128 w128"></image>
+        <image id="plume" class="h128 w128"></image>
+        <image id="sands" class="h128 w128"></image>
+        <image id="goblet" class="h128 w128"></image>
+        <image id="circlet" class="h128 w128 no-right-margin"></image>
 
-    <!-- INVERT COLLAPSE -->
-    <button class="default-color" id="invert-collapse"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Invert Collapse State</button>
-        
-    <!-- SET BONUSES -->
-    <button class="default-color" id="expand-set-bonus"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Set Bonus</button>
+        <!-- INVERT COLLAPSE -->
+        <button class="default-color" id="invert-collapse"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Invert Collapse State</button>
 
-    <table class="w768 s-w32 s-w16" id="set-bonus">
-        <tr class="accent-1">
-            <th class="w64">Pieces</th>
-            <th>Set Bonus</th>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td id="arti-2pc"></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td id="arti-4pc"></td>
-        </tr>
-    </table>
+        <!-- SET BONUSES -->
+        <button class="default-color" id="expand-set-bonus"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Set Bonus</button>
 
-    
-    <!-- FLOWER -->
-    <button class="default-color" id="expand-flower"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Flower of Life</button>
+        <table class="w768 s-w32 s-w16" id="set-bonus">
+            <tr class="accent-1">
+                <th class="w64">Pieces</th>
+                <th>Set Bonus</th>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td id="arti-2pc"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td id="arti-4pc"></td>
+            </tr>
+        </table>
 
-    <div class="accent-1 h32 flex-container w100p s-w32 " id="flower-dn">
-        <div class="no-shadow no-padding flex-1 header" id="flower-detail-name"></div>
-    </div>
 
-    <table class="w768 s-w32 s-w16" id="flower-dd">
-        <tr>
-            <th class="accent-1">
-                Description
-            </th>
-        </tr>
-        <tr> <td id="flower-description"></td> </tr>
-    </table>
+        <!-- FLOWER -->
+        <button class="default-color" id="expand-flower"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Flower of Life</button>
 
-    <table class="w768 s-w32 s-w16" id="flower-ds">
-        <tr>
-            <th class="accent-1">
-                Story
-            </th>
-        </tr>
-        <tr> <td id="flower-story"></td> </tr>
-    </table>
+        <div class="accent-1 h32 flex-container w100p s-w32 " id="flower-dn">
+            <div class="no-shadow no-padding flex-1 header" id="flower-detail-name"></div>
+        </div>
 
-    <!-- FEATHER -->
-    <button class="default-color" id="expand-feather"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Plume of Death</button>
+        <table class="w768 s-w32 s-w16" id="flower-dd">
+            <tr>
+                <th class="accent-1">
+                    Description
+                </th>
+            </tr>
+            <tr>
+                <td id="flower-description"></td>
+            </tr>
+        </table>
 
-    <div class="accent-1 h32 flex-container w100p s-w32" id="feather-dn">
-        <div class="no-shadow no-padding flex-1 header" id="feather-detail-name"></div>
-    </div>
+        <table class="w768 s-w32 s-w16" id="flower-ds">
+            <tr>
+                <th class="accent-1">
+                    Story
+                </th>
+            </tr>
+            <tr>
+                <td id="flower-story"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="feather-dd">
-        <tr>
-            <th class="accent-1">
-                Description
-            </th>
-        </tr>
-        <tr> <td id="feather-description"></td> </tr>
-    </table>
+        <!-- FEATHER -->
+        <button class="default-color" id="expand-feather"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Plume of Death</button>
 
-    <table class="w768 s-w32 s-w16" id="feather-ds">
-        <tr>
-            <th class="accent-1">
-                Story
-            </th>
-        </tr>
-        <tr> <td id="feather-story"></td> </tr>
-    </table>
+        <div class="accent-1 h32 flex-container w100p s-w32" id="feather-dn">
+            <div class="no-shadow no-padding flex-1 header" id="feather-detail-name"></div>
+        </div>
 
-    <!-- SANDS  -->
-    <button class="default-color" id="expand-sands"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Sands of Eon</button>
-    <div class="accent-1 h32 flex-container w100p s-w32" id="sands-dn">
-        <div class="no-shadow no-padding flex-1 header" id="sands-detail-name"></div>
-    </div>
+        <table class="w768 s-w32 s-w16" id="feather-dd">
+            <tr>
+                <th class="accent-1">
+                    Description
+                </th>
+            </tr>
+            <tr>
+                <td id="feather-description"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="sands-dd">
-        <tr>
-            <th class="accent-1">
-                Description
-            </th>
-        </tr>
-        <tr> <td id="sands-description"></td> </tr>
-    </table>
+        <table class="w768 s-w32 s-w16" id="feather-ds">
+            <tr>
+                <th class="accent-1">
+                    Story
+                </th>
+            </tr>
+            <tr>
+                <td id="feather-story"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="sands-ds">
-        <tr>
-            <th class="accent-1">
-                Story
-            </th>
-        </tr>
-        <tr> <td id="sands-story"></td> </tr>
-    </table>
+        <!-- SANDS  -->
+        <button class="default-color" id="expand-sands"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Sands of Eon</button>
+        <div class="accent-1 h32 flex-container w100p s-w32" id="sands-dn">
+            <div class="no-shadow no-padding flex-1 header" id="sands-detail-name"></div>
+        </div>
 
-    <!-- GOBLET -->
-    <button class="default-color" id="expand-goblet"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Goblet of Eonothem</button>
-    <div class="accent-1 h32 flex-container w100p s-w32" id="goblet-dn">
-        <div class="no-shadow no-padding flex-1 header" id="goblet-detail-name"></div>
-    </div>
+        <table class="w768 s-w32 s-w16" id="sands-dd">
+            <tr>
+                <th class="accent-1">
+                    Description
+                </th>
+            </tr>
+            <tr>
+                <td id="sands-description"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="goblet-dd">
-        <tr>
-            <th class="accent-1">
-                Description
-            </th>
-        </tr>
-        <tr> <td id="goblet-description"></td> </tr>
-    </table>
+        <table class="w768 s-w32 s-w16" id="sands-ds">
+            <tr>
+                <th class="accent-1">
+                    Story
+                </th>
+            </tr>
+            <tr>
+                <td id="sands-story"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="goblet-ds">
-        <tr>
-            <th class="accent-1">
-                Story
-            </th>
-        </tr>
-        <tr> <td id="goblet-story"></td> </tr>
-    </table>
+        <!-- GOBLET -->
+        <button class="default-color" id="expand-goblet"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Goblet of Eonothem</button>
+        <div class="accent-1 h32 flex-container w100p s-w32" id="goblet-dn">
+            <div class="no-shadow no-padding flex-1 header" id="goblet-detail-name"></div>
+        </div>
 
-    <!-- CIRCLET -->
-    <button class="default-color" id="expand-circlet"><span class="default-color icon padding-r8 float-left">&#xe5d7;</span>Circlet of Logos</button>
-    <div class="accent-1 h32 flex-container w100p s-w32 header" id="circlet-dn">
-        <div class="no-shadow no-padding flex-1" id="circlet-detail-name"></div>
-    </div>
+        <table class="w768 s-w32 s-w16" id="goblet-dd">
+            <tr>
+                <th class="accent-1">
+                    Description
+                </th>
+            </tr>
+            <tr>
+                <td id="goblet-description"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="circlet-dd">
-        <tr>
-            <th class="accent-1">
-                Description
-            </th>
-        </tr>
-        <tr> <td id="circlet-description"></td> </tr>
-    </table>
+        <table class="w768 s-w32 s-w16" id="goblet-ds">
+            <tr>
+                <th class="accent-1">
+                    Story
+                </th>
+            </tr>
+            <tr>
+                <td id="goblet-story"></td>
+            </tr>
+        </table>
 
-    <table class="w768 s-w32 s-w16" id="circlet-ds">
-        <tr>
-            <th class="accent-1">
-                Story
-            </th>
-        </tr>
-        <tr> <td id="circlet-story"></td> </tr>
-    </table>
+        <!-- CIRCLET -->
+        <button class="default-color" id="expand-circlet"><span
+                class="default-color icon padding-r8 float-left">&#xe5d7;</span>Circlet of Logos</button>
+        <div class="accent-1 h32 flex-container w100p s-w32 header" id="circlet-dn">
+            <div class="no-shadow no-padding flex-1" id="circlet-detail-name"></div>
+        </div>
+
+        <table class="w768 s-w32 s-w16" id="circlet-dd">
+            <tr>
+                <th class="accent-1">
+                    Description
+                </th>
+            </tr>
+            <tr>
+                <td id="circlet-description"></td>
+            </tr>
+        </table>
+
+        <table class="w768 s-w32 s-w16" id="circlet-ds">
+            <tr>
+                <th class="accent-1">
+                    Story
+                </th>
+            </tr>
+            <tr>
+                <td id="circlet-story"></td>
+            </tr>
+        </table>
 
     </div>
 </body>

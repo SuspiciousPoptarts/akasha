@@ -20,17 +20,17 @@ var history = [];
 
 function compileSearchOptions() {
     let options = [].concat(charlist, weplist, artilist, matlist, enelist, foodlist, anilist);
-    
+
     return options;
 }
 
 function search(list, query) {
     if (query == "") return [];
-    if (query == "@styler") { return ["@componentcreator"];};
+    if (query == "@styler") { return ["@componentcreator"]; };
     let matches = []
 
     const q = new RegExp(query.toLowerCase());
-    list.forEach(function(element, index) {
+    list.forEach(function (element, index) {
         if (element.toLowerCase().match(q)) matches.push([element, index]);
     });
 
@@ -45,14 +45,14 @@ function levDistance(comparator, comparatee) {
     let ceL = comparatee.length;
 
     // INIT 2D ARRAY
-    for(let i = 0; i < coL; ++i) { tM[i] = new Array(ceL)};
+    for (let i = 0; i < coL; ++i) { tM[i] = new Array(ceL) };
 
     for (let i = 0; i < coL; ++i) tM[i][0] = i;
     for (let j = 0; j < ceL; ++j) tM[0][j] = j;
 
     for (let i = 1; i < coL; ++i) {
         for (let j = 1; j < ceL; ++j) {
-          	tM[i][j] = Math.min(
+            tM[i][j] = Math.min(
                 tM[i - 1][j] + 1, // Element Above, +1
                 tM[i][j - 1] + 1, // Element Adjacent, +1
                 tM[i - 1][j - 1] + (comparator[i - 1] === comparatee[j - 1] ? 0 : 1), // Diagonal Element, +1 Whether or not char at indeces match.
@@ -60,11 +60,11 @@ function levDistance(comparator, comparatee) {
         }
     }
 
-    return tM[coL-1][ceL-1];
+    return tM[coL - 1][ceL - 1];
 }
 
 function pushToHistory(element) {
-    if(history.length >= 50) history.shift();
+    if (history.length >= 50) history.shift();
     history.push(element);
 }
 
@@ -76,75 +76,76 @@ function filterToPush(term) {
     try {
         let matches = search(base, term);
 
-        if(matches == [] || matches == "") return;
-        if(matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
+        if (matches == [] || matches == "") return;
+        if (matches[0] == "@componentcreator") { pushToWindow("styler/componentcreator.html"); }
 
         let closestMatch = matches[0];
 
-        matches.forEach(function(e) {
-            if(levDistance(closestMatch[0], term) > levDistance(e[0], term)) { closestMatch = e; }
+        matches.forEach(function (e) {
+            if (levDistance(closestMatch[0], term) > levDistance(e[0], term)) { closestMatch = e; }
         });
 
 
         // CHARACTERS
-        if(closestMatch[1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + closestMatch[0]); }
+        if (closestMatch[1] < ranges[0]) { pushToWindow("charwikipage/charwikipage.html?character=" + closestMatch[0]); }
         // WEAPONS
-        else if(closestMatch[1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[1]) { pushToWindow("wepwikipage/wepwikipage.html?weapon=" + closestMatch[0]); }
         // ARTIFACTS
-        else if(closestMatch[1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[2]) { pushToWindow("artiwikipage/artiwikipage.html?artifact=" + closestMatch[0]); }
         // MATERIALS
-        else if(closestMatch[1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[3]) { pushToWindow("matwikipage/matwikipage.html?mat=" + closestMatch[0]); }
         // ENEMIES
-        else if(closestMatch[1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[4]) { pushToWindow("enewikipage/enewikipage.html?enemy=" + closestMatch[0]); }
         // FOOD
-        else if(closestMatch[1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[5]) { pushToWindow("foodwikipage/foodwikipage.html?food=" + closestMatch[0]); }
         // ANIMALS
-        else if(closestMatch[1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + closestMatch[0]); }
+        else if (closestMatch[1] < ranges[6]) { pushToWindow("aniwikipage/aniwikipage.html?animal=" + closestMatch[0]); }
 
         pushToHistory(closestMatch[0]);
-    } catch(e) {}
+    } catch (e) { }
 }
 
 var base = compileSearchOptions();
 
-$("#search").keypress(function(e) {
-    if(e.which == 13) {
+$("#search").keypress(function (e) {
+    if (e.which == 13) {
         filterToPush(this.value);
     }
 });
 
-$("#zoom-in").click(function() {
+$("#zoom-in").click(function () {
     window.electronAPI.sendZoom("in");
 });
 
-$("#zoom-out").click(function() {
+$("#zoom-out").click(function () {
     window.electronAPI.sendZoom("out");
 });
 
-$("#theme").click(function() {
+$("#theme").click(function () {
     window.electronAPI.sendCreateChildWindow("theme");
 });
 
-$("#map").click(function() {
+$("#map").click(function () {
     $("#info-panel").attr("src", "https://act.hoyolab.com/ys/app/interactive-map/index.html");
 });
 
-$("#history").click(function() {
+$("#history").click(function () {
     console.log(history);
-    if(history.length <= 1) return;
+    if (history.length <= 1) return;
 
     history.pop();
-    filterToPush(history[history.length-1]);
+    filterToPush(history[history.length - 1]);
     history.pop();
 });
 
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
 
-for (let pair of queryString.entries()) {;
-    switch(pair[0]) {
+for (let pair of queryString.entries()) {
+    ;
+    switch (pair[0]) {
         case 'q':
-            $("#info-panel").attr("src",filterToPush(pair[1]));
+            $("#info-panel").attr("src", filterToPush(pair[1]));
             break;
         case 'b':
             let matches = search(base, pair[1]);
