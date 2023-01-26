@@ -709,7 +709,7 @@ function rendercharwikipage(name) {
             $("#char-description").append(jsondata["description"]);
 
             if(jsondata["name"] == "Aether" || jsondata["name"] == "Lumine") {
-                $("#title").append("<b>TRAVELER PAGES ARE BROKEN!</br>ONLY INFO-TABLE FUNCTIONS!</b>");
+                $("#title").append("<b>TRAVELER PAGES ARE BROKEN!ONLY INFO-TABLE FUNCTIONS!</b>");
                 return;
             }
 
