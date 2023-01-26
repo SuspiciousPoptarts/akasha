@@ -585,6 +585,10 @@ a:hover {
     filter: var(--hover-brightness);
 }
 
+.font-color {
+    color: var(--font-color) !important;
+}
+
 .no-after::after {
     visibility: hidden;
 }
