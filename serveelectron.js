@@ -90,7 +90,6 @@ const createWindow = () => {
   })
 
   ipcMain.on("historyPop", (event, msg) => {
-    console.log(history);
     history.pop();
     win.webContents.send("receiveHistory", history);
   })
@@ -105,7 +104,6 @@ ipcMain.on("theme", (event, msg) => {
 ipcMain.on("historyPush", (event, msg) => {
   if(history.length >= 50) history.shift();
   if(history[history.length-1] != msg) history.push(msg);
-  console.log(history);
 }) 
 
 app.whenReady().then(() => {
