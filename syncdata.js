@@ -24,6 +24,8 @@ function makeRoot() {
     rmkdirSync("./data/outfits/");
     rmkdirSync("./data/weapons/");
     rmkdirSync("./data/windgliders/");
+    rmkdirSync("./data/elements/");
+    rmkdirSync("./data/crafts/");
 
     makeCharacterFolders();
 }
@@ -245,6 +247,40 @@ function updateAnimalList() {
     });
 }
 
+// ELEMENTS
+function updateElementList() {
+    var elements = genshindb.elements("names", { matchCategories: true });
+    fs.writeFileSync("./data/elements/@meta.json", JSON.stringify(elements.map(
+        name => {
+            return name.toLowerCase().replaceAll(/[":]/g, "");
+        })));
+
+    elements.forEach((name) => {
+        try {
+            fs.writeFileSync('./data/elements/' + name.toLowerCase().replaceAll(/[":]/g, "") + '.json',
+                JSON.stringify(genshindb.elements(name)),
+                (error) => { if (error) throw error; });
+        }
+        catch (e) { }
+    });
+}
+
+function updateCrafts() {
+    var crafts = genshindb.crafts("names", { matchCategories: true });
+    fs.writeFileSync("./data/crafts/@meta.json", JSON.stringify(crafts.map(
+        name => {
+            return name.toLowerCase().replaceAll(/[":]/g, "");
+        })));
+
+    crafts.forEach((name) => {
+        try {
+            fs.writeFileSync('./data/crafts/' + name.toLowerCase().replaceAll(/[":]/g, "") + '.json',
+                JSON.stringify(genshindb.crafts(name)),
+                (error) => { if (error) throw error; });
+        }
+        catch (e) { }
+    });    
+}
 /*
     MASTER
 */
@@ -268,8 +304,11 @@ function updateMaster() {
         updateWindgliderList(),
         updateAnimalList(),
 
+        updateElementList();
+
         fs.writeFileSync("./data/ready", "");
 }
 
 makeRoot();
-updateMaster();
+// updateMaster();
+updateCrafts();

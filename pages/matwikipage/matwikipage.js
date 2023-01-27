@@ -31,6 +31,10 @@ function attachCollapseToggleMulti(list, button) {
     });
 }
 
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\">` + string + "</a>"
+}
+
 function capitalize(word) {
     let t = "";
     word.split("_").forEach(function (e) {
@@ -42,6 +46,8 @@ function capitalize(word) {
 function rendermatwikipage(name) {
     let matdata = '../../data/materials/';
     matdata += name + '.json';
+
+    let craftdata = `../../data/crafts/${name}.json`;
 
     fetch(matdata)
         .then(response => response.json())
@@ -81,7 +87,35 @@ function rendermatwikipage(name) {
             }
             $(":root").get(0).style.setProperty("--accent-font-color", "var(--background-color)");
             attachCollapseToggle("#sources", "#expand-sources")
+            attachCollapseToggle("#crafts","#expand-crafts")
         });
+
+    // fetch crafting data if exists...
+    try {
+        fetch(craftdata)
+            .then(response => response.json())
+            .then(jsondata => {
+                $("#crafts").append(
+                    `
+                    <table class="w100p no-right-margin" id="craft">
+                        <tr class="h64">
+                            <td class="accent-1"><span class="icon padding-r8">&#xea3c;</span>Crafting Recipe</td>
+                        </tr>
+                    </table>
+                    `
+                );
+                jsondata["recipe"].forEach((material) => {
+                    $("#craft").append(
+                        `
+                        <tr><td>${asLinkable(
+                            material["count"] + " " + material["name"],
+                            material["name"]
+                        )}</td></tr>
+                        `
+                    )
+                });
+            });
+    } catch (e) { }
 }
 
 let paramString = document.URL.split('?')[1];
