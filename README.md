@@ -3,7 +3,7 @@
 No-frills [Electron](https://github.com/electron/electron)-powered local database applet for [genshin-db](https://github.com/search?q=genshin-db).
 ======
 
-![electron_9WyvZcfsBp](https://user-images.githubusercontent.com/98726245/214561115-dda8d677-af13-4f29-abcb-a6935dd35b1e.gif)
+![Akasha_AvPuzorgRR](https://user-images.githubusercontent.com/98726245/215025411-3502b2db-1865-4d9b-9495-14a1112382d8.gif)
 
 ___
 
