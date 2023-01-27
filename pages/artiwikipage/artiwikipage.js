@@ -32,8 +32,7 @@ function attachCollapseToggleMulti(list, button) {
 }
 
 function renderartiwikipage(name) {
-    let artidata = '../../data/artifacts/';
-    artidata += name + '.json';
+    let artidata = `../../data/artifacts/${name}.json`;
 
     fetch(artidata)
         .then(response => response.json())

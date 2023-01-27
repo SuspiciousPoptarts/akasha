@@ -44,8 +44,7 @@ function capitalize(word) {
 }
 
 function renderenewikipage(name) {
-    let enedata = '../../data/enemies/';
-    enedata += name + '.json';
+    let enedata = `../../data/enemies/${name}.json`;
 
     fetch(enedata)
         .then(response => response.json())

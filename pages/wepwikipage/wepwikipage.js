@@ -295,8 +295,7 @@ function renderTotalAscensionCost(costs, renderto, name) {
 }
 
 function renderwepwikipage(name) {
-    let wepdata = '../../data/weapons/';
-    wepdata += name + '.json';
+    let wepdata = `../../data/weapons/${name}.json`;
 
     fetch(wepdata)
         .then(response => response.json())

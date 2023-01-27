@@ -40,8 +40,7 @@ function capitalize(word) {
 }
 
 function renderaniwikipage(name) {
-    let anidata = '../../data/animals/';
-    anidata += name + '.json';
+    let anidata = `../../data/animals/${name}.json`;
 
     fetch(anidata)
         .then(response => response.json())

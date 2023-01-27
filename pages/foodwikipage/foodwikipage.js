@@ -44,8 +44,7 @@ function asLinkable(string, link) {
 }
 
 function renderfoodwikipage(name) {
-    let fooddata = '../../data/food/';
-    fooddata += name + '.json';
+    let fooddata = `../../data/food/${name}.json`;
 
     fetch(fooddata)
         .then(response => response.json())

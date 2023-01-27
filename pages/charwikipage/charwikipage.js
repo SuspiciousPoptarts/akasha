@@ -600,17 +600,11 @@ function renderTotalSkillCost(costs, renderto, name) {
 }
 
 function rendercharwikipage(name) {
-    let chardata = '../../data/characters/';
-    chardata += name + '/';
-    chardata += name + '.json';
+    let chardata = `../../data/characters/${name}/${name}.json`;
 
-    let talentdata = '../../data/characters/';
-    talentdata += name + '/';
-    talentdata += 'talents.json';
+    let talentdata = `../../data/characters/${name}/talents.json`;
 
-    let constdata = '../../data/characters/';
-    constdata += name + '/';
-    constdata += 'constellations.json';
+    let constdata = `../../data/characters/${name}/constellations.json`;
 
     fetch(chardata)
         .then(response => response.json())

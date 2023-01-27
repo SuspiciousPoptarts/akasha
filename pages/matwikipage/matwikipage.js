@@ -44,8 +44,7 @@ function capitalize(word) {
 }
 
 function rendermatwikipage(name) {
-    let matdata = '../../data/materials/';
-    matdata += name + '.json';
+    let matdata = `../../data/materials/${name}.json`;
 
     let craftdata = `../../data/crafts/${name}.json`;
 
