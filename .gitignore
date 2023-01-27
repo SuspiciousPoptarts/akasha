@@ -2,3 +2,4 @@ data/*
 node_modules/*
 dist/*
 package-lock.json
+# also run git update-index --skip-worktree pages/theme.css
