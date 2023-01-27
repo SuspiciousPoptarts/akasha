@@ -20,7 +20,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "asarUnpack": [
-      "pages/*", "build/qm.png"
+      "pages/*"
     ]
   },
   "author": "SavedPoptarts",

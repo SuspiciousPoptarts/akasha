@@ -22,7 +22,7 @@ fetch("../../data/materials/@meta.json")
                     $("#table").append(
                         `
                         <tr>
-                        <td><image src="${data["images"]["fandom"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64"></td>
+                        <td><image src="${data["images"]["fandom"]}" onerror="this.src='../../pages/qm.png'" class="no-shadow no-margin w64 h64"></td>
                         <td>${asLinkable(data["name"],data["name"])}</td>
                         <td>${data["materialtype"]}</td>
                         <td>${capitalize(data["category"].toLowerCase())}</td>
