@@ -1,58 +1,61 @@
-:root {
-        /* MARGINS AND PADDINGS */
-            --body-margin: 16px;
-            --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
-            --component-margin: 16px; /* Chaning padding causes layouts to change significantly! */
-            --corner-radius: 8px;
-        
-            --universal-transition-time: all 0.25s;
-            --hover-brightness: brightness(110%);
-            --click-brightness: brightness(90%);
-            --highlight-color: #7381d1; /* Highlighted text is always white! */
-        
-            font-family: 'Roboto Flex';
-        
-            --background-color: #212121;
-            --border-color: #424242;
-            --shadow-color: black;
-            --accent-color: #616161;
-            --accent-font-color: var(--background-color);
-            --font-color: #E0E0E0;
-            --icon-color: #E0E0E0;
-        
-            --border-style: solid;
-        
-            /* SLIDERS */
-            --slider-height: 6px;
-            --slider-knob-radius: 50%;
-            --slider-knob-height: 14px;
-        
-            /* ELEMENTAL ACCENTS */
-            --pyro-accent:#C62828;
-            --hydro-accent:#1565C0;
-            --electro-accent:#5E35B1;
-            --dendro-accent:#D4E157;
-            --cryo-accent:#E1F5FE;
-            --anemo-accent:#006064;
-            --geo-accent:#FBC02D;
-            /* RARITY ACCENTS */
-            --five-star-accent: #ffdc5f;
-            --four-star-accent: #7E57C2;
-            --three-star-accent: #1565C0;
-            --two-star-accent: #607D8B;
-            --one-star-accent: #BDBDBD;
-        
-            --card-shadow: var(--shadow-color) 0px 0px 6px;
-        
-            color: var(--font-color);
-            transition: var(--universal-transition-time);
-            background-color: var(--background-color);
 
-            --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
-        
-    }
-        
-    ::selection {
-        background-color: var(--highlight-color);
-        color: white;
-    }
+        :root {
+                --badge: url(https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001);
+                --badge-radius:  32px;
+            /* MARGINS AND PADDINGS */
+                --body-margin: 16px;
+                --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
+                --component-margin: 16px; /* Chaning padding causes layouts to change significantly! */
+                --corner-radius: 8px;
+            
+                --universal-transition-time: all 0.25s;
+                --hover-brightness: brightness(110%);
+                --click-brightness: brightness(90%);
+                --highlight-color: #7381d1; /* Highlighted text is always white! */
+            
+                font-family: 'Roboto Flex';
+            
+                --background-color:#3b4255;
+                --border-color:#5c6284;
+                --shadow-color:#242632;
+                --accent-color:#ede5d8;
+                --accent-font-color: var(--background-color);
+                --font-color:#f6f3ec;
+                --icon-color:#e0e0e0;
+            
+                --border-style: solid;
+            
+                /* SLIDERS */
+                --slider-height: 6px;
+                --slider-knob-radius: 50%;
+                --slider-knob-height: 14px;
+            
+                /* ELEMENTAL ACCENTS */
+                --pyro-accent:#d24646;
+                --hydro-accent:#4487d5;
+                --electro-accent:#9f79d7;
+                --dendro-accent:#cfda72;
+                --cryo-accent:#a1cee2;
+                --anemo-accent:#79cda9;
+                --geo-accent:#e4ca86;
+                /* RARITY ACCENTS */
+                --five-star-accent:#d3a15a;
+                --four-star-accent:#a083d2;
+                --three-star-accent:#5594dd;
+                --two-star-accent:#98aab3;
+                --one-star-accent:#ababab;
+            
+                --card-shadow: var(--shadow-color) 0px 0px 6px;
+            
+                background-color: var(--background-color);
+                color: var(--font-color);
+            
+                transition: var(--universal-transition-time);
+                --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
+        }
+            
+        ::selection {
+            background-color: var(--highlight-color);
+            color: white;
+        }
+    
