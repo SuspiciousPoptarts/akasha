@@ -39,8 +39,8 @@ function capitalize(word) {
     return t;
 }
 
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\">` + string + "</a>"
 }
 
 function renderfoodwikipage(name) {
@@ -61,8 +61,7 @@ function renderfoodwikipage(name) {
                 $("#recipe").append("<tr><td>" +
                     asLinkable(
                         self.count + " " + self.name,
-                        self.name,
-                        jsondata["name"].replaceAll("\"", "")
+                        self.name
                     )
                     + "</td></tr>");
             });

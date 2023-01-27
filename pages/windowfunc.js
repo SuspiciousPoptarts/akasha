@@ -16,8 +16,6 @@ const ranges = [
     charlist.length + weplist.length + artilist.length + matlist.length + enelist.length + foodlist.length + anilist.length,
 ];
 
-var history = [];
-
 function compileSearchOptions() {
     let options = [].concat(charlist, weplist, artilist, matlist, enelist, foodlist, anilist);
 
@@ -76,11 +74,6 @@ function levDistance(comparator, comparatee) {
     return tM[coL - 1][ceL - 1];
 }
 
-function pushToHistory(element) {
-    if (history.length >= 50) history.shift();
-    history.push(element);
-}
-
 function pushToWindow(href) {
     $("#info-panel").attr("src", href);
 }
@@ -114,7 +107,6 @@ function filterToPush(term) {
         // ANIMALS
         else if (closestMatch[1] < ranges[6]) { pushToWindow(`aniwikipage/aniwikipage.html?animal=${closestMatch[0]}`); }
 
-        pushToHistory(closestMatch[0]);
     } catch (e) { }
 }
 
@@ -143,24 +135,8 @@ $("#map").click(function () {
 });
 
 $("#history").click(function () {
-    if (history.length <= 1) return;
-
-    history.pop();
-    filterToPush(history[history.length - 1]);
-    history.pop();
+    window.electronAPI.popFromHistory();
 });
-
-// $("#char-list").click(function () {
-//     $("#info-panel").attr("src", "@list/charlist.html");
-// });
-
-// $("#wep-list").click(function () {
-//     $("#info-panel").attr("src", "@list/weplist.html");
-// });
-
-// $("#arti-list").click(function () {
-//     $("#info-panel").attr("src", "@list/artilist.html");
-// });
 
 let paramString = document.URL.split('?')[1];
 let queryString = new URLSearchParams(paramString);
@@ -171,12 +147,5 @@ for (let pair of queryString.entries()) {
         case 'q':
             $("#info-panel").attr("src", filterToPush(pair[1]));
             break;
-        case 'b':
-            try {
-                let matches = search(base, pair[1]);
-                history.shift();
-                pushToHistory(matches[0][0]);
-                pushToHistory(matches[0][0]);
-            } catch (e) {}
     }
 }

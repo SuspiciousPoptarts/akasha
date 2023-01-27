@@ -88,11 +88,25 @@ const createWindow = () => {
   ipcMain.on("theme", (event, msg) => {
     win.webContents.reloadIgnoringCache();
   })
+
+  ipcMain.on("historyPop", (event, msg) => {
+    console.log(history);
+    history.pop();
+    win.webContents.send("receiveHistory", history);
+  })
 };
+
+var history = [];
 
 ipcMain.on("theme", (event, msg) => {
   fs.writeFileSync(path.join(__dirname, "pages", "theme.css"), msg);
 })
+
+ipcMain.on("historyPush", (event, msg) => {
+  if(history.length >= 50) history.shift();
+  if(history[history.length-1] != msg) history.push(msg);
+  console.log(history);
+}) 
 
 app.whenReady().then(() => {
   mainWindow = createWindow()

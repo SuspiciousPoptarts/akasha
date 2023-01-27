@@ -57,35 +57,30 @@ function renderTalentCost(cost, renderto, level, name) {
     $(renderto).find("#upg-mora-cost").append(
         asLinkable(
             cost["lvl" + level][0]["count"] + " " + cost["lvl" + level][0]["name"],
-            cost["lvl" + level][0]["name"],
-            name.replaceAll("\"", ""))
-    );
+            cost["lvl" + level][0]["name"]
+)    );
     $(renderto).find("#sk-book").append(
         asLinkable(
             cost["lvl" + level][1]["count"] + " " + cost["lvl" + level][1]["name"],
-            cost["lvl" + level][1]["name"],
-            name.replaceAll("\"", ""))
-    );
+            cost["lvl" + level][1]["name"]
+)    );
     $(renderto).find("#sk-mat").append(
         asLinkable(
             cost["lvl" + level][2]["count"] + " " + cost["lvl" + level][2]["name"],
-            cost["lvl" + level][2]["name"],
-            name.replaceAll("\"", ""))
-    );
+            cost["lvl" + level][2]["name"]
+)    );
 
     try {
         $(renderto).find("#sk-dom").append(
             asLinkable(
                 cost["lvl" + level][3]["count"] + " " + cost["lvl" + level][3]["name"],
-                cost["lvl" + level][3]["name"],
-                name.replaceAll("\"", ""))
-        );
+                cost["lvl" + level][3]["name"]
+)        );
         $(renderto).find("#sk-crown").append(
             asLinkable(
                 cost["lvl" + level][4]["count"] + " " + cost["lvl" + level][4]["name"],
-                cost["lvl" + level][4]["name"],
-                name.replaceAll("\"", ""))
-        )
+                cost["lvl" + level][4]["name"]
+)        )
     } catch { }
 }
 
@@ -95,44 +90,39 @@ function renderTalentCostMulti(cost, rendermap, levelmap, name) {
     });
 }
 
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\">` + string + "</a>"
 }
 
 function renderAscMats(parameters, renderto, asc, name) {
     $(renderto).find("#upg-mora-cost").append(
         asLinkable(
             parameters[asc][0]["count"] + " " + parameters[asc][0]["name"],
-            parameters[asc][0]["name"],
-            name.replaceAll("\"", ""))
-    );
+            parameters[asc][0]["name"]
+)    );
     $(renderto).find("#asc-crystal").append(
         asLinkable(
             parameters[asc][1]["count"] + " " + parameters[asc][1]["name"],
-            parameters[asc][1]["name"],
-            name.replaceAll("\"", ""))
-    );
+            parameters[asc][1]["name"]
+)    );
 
     $(renderto).find("#asc-mat-1").append(
         asLinkable(
             parameters[asc][2]["count"] + " " + parameters[asc][2]["name"],
-            parameters[asc][2]["name"],
-            name.replaceAll("\"", ""))
-    );
+            parameters[asc][2]["name"]
+)    );
     $(renderto).find("#asc-mat-2").append(
         asLinkable(
             parameters[asc][3]["count"] + " " + parameters[asc][3]["name"],
-            parameters[asc][3]["name"],
-            name.replaceAll("\"", ""))
-    );
+            parameters[asc][3]["name"]
+)    );
 
     try { // catches error if trying to render to asc-1
         $(renderto).find("#asc-mat-3").append(
             asLinkable(
                 parameters[asc][4]["count"] + " " + parameters[asc][4]["name"],
-                parameters[asc][4]["name"],
-                name.replaceAll("\"", ""))
-        );
+                parameters[asc][4]["name"]
+)        );
     } catch { }
 }
 
@@ -339,69 +329,59 @@ function renderTotalAscensionCost(costs, renderto, name) {
     $(renderto).find("#mora").append(
         asLinkable(
             mora + " " + names[0],
-            names[0],
-            name.replaceAll("\"", ""))
-    );
+            names[0]
+)    );
 
     // Crystals
     $(renderto).find("#sliver").append(
         asLinkable(
             scrystal + " " + names[1],
-            names[1],
-            name.replaceAll("\"", ""))
-    );
+            names[1]
+)    );
     $(renderto).find("#fragment").append(
         asLinkable(
             fcrystal + " " + names[4],
-            names[4],
-            name.replaceAll("\"", ""))
-    );
+            names[4]
+)    );
     $(renderto).find("#chunk").append(
         asLinkable(
             ccrystal + " " + names[7],
-            names[7],
-            name.replaceAll("\"", ""))
-    );
+            names[7]
+)    );
     $(renderto).find("#gemstone").append(
         asLinkable(
             gcrystal + " " + names[9],
-            names[9],
-            name.replaceAll("\"", ""))
-    );
+            names[9]
+)    );
 
     // World
     $(renderto).find("#witem").append(
         asLinkable(
             witem + " " + names[2],
-            names[2],
-            name.replaceAll("\"", ""))
-    );
+            names[2]
+)    );
     $(renderto).find("#wdrops").append(
         asLinkable(
             wdrops + " " + names[3],
-            names[3],
-            name.replaceAll("\"", ""))
-    );
+            names[3]
+)    );
     $(renderto).find("#wdropm").append(
         asLinkable(
             wdropm + " " + names[6],
-            names[6],
-            name.replaceAll("\"", ""))
-    );
+            names[6]
+)    );
     $(renderto).find("#wdropl").append(
         asLinkable(
             wdropl + " " + names[8],
-            names[8],
-            name.replaceAll("\"", ""))
-    );
+            names[8]
+)    );
 
     // Boss
     $(renderto).find("#bdrop").append(
         asLinkable(
             bdrop + " " + names[5],
-            names[5],
-            name.replaceAll("\"", ""))
-    );
+            names[5]
+)    );
 }
 
 function renderTotalSkillCost(costs, renderto, name) {
@@ -571,61 +551,52 @@ function renderTotalSkillCost(costs, renderto, name) {
     $(renderto).find("#mora").append(
         asLinkable(
             mora + " " + names[0],
-            names[0],
-            name.replaceAll("\"", ""))
-    );
+            names[0]
+)    );
 
     $(renderto).find("#sb-1").append(
         asLinkable(
             books + " " + names[1],
-            names[1],
-            name.replaceAll("\"", ""))
-    );
+            names[1]
+)    );
     $(renderto).find("#sb-2").append(
         asLinkable(
             bookm + " " + names[3],
-            names[3],
-            name.replaceAll("\"", ""))
-    );
+            names[3]
+)    );
     $(renderto).find("#sb-3").append(
         asLinkable(
             bookl + " " + names[5],
-            names[5],
-            name.replaceAll("\"", ""))
-    );
+            names[5]
+)    );
 
     $(renderto).find("#wd-1").append(
         asLinkable(
             drops + " " + names[2],
-            names[2],
-            name.replaceAll("\"", ""))
-    );
+            names[2]
+)    );
     $(renderto).find("#wd-2").append(
         asLinkable(
             dropm + " " + names[4],
-            names[4],
-            name.replaceAll("\"", ""))
-    );
+            names[4]
+)    );
     $(renderto).find("#wd-3").append(
         asLinkable(
             dropl + " " + names[6],
-            names[6],
-            name.replaceAll("\"", ""))
-    );
+            names[6]
+)    );
 
     $(renderto).find("#bd").append(
         asLinkable(
             bdrop + " " + names[7],
-            names[7],
-            name.replaceAll("\"", ""))
-    );
+            names[7]
+)    );
 
     $(renderto).find("#crown").append(
         asLinkable(
             1 + " Crown of Insight",
-            "Crown of Insight",
-            name.replaceAll("\"", ""))
-    );
+            "Crown of Insight"
+)    );
 }
 
 function rendercharwikipage(name) {

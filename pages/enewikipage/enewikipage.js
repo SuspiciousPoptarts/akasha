@@ -31,8 +31,8 @@ function attachCollapseToggleMulti(list, button) {
     });
 }
 
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\">` + string + "</a>"
 }
 
 function capitalize(word) {
@@ -62,7 +62,7 @@ function renderenewikipage(name) {
 
             jsondata["rewardpreview"].forEach(function (e) {
                 let r = (e["rarity"] != null || e["rarity"] != undefined) ? e["rarity"] + "<span class=\"icon padding-8\">&#xe838;</span>" : "";
-                $("#drops").append(`<tr><td>${asLinkable(e["name"], e["name"], jsondata["name"])} ${r}</td></tr>`);
+                $("#drops").append(`<tr><td>${asLinkable(e["name"], e["name"])} ${r}</td></tr>`);
             });
 
             switch (jsondata["enemytype"]) {

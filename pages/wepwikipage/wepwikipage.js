@@ -31,8 +31,8 @@ function attachCollapseToggleMulti(list, button) {
     });
 }
 
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\">` + string + "</a>"
 }
 
 function renderEffect(jsondata, refinement, renderto) {
@@ -56,27 +56,23 @@ function renderAscMats(costs, renderto, asc, name) {
         $(renderto).find("#upg-mora-cost").append(
             asLinkable(
                 ((costs[asc][0]["count"] == undefined) ? 0 : costs[asc][0]["count"]) + " " + costs[asc][0]["name"],
-                costs[asc][0]["name"],
-                name.replaceAll("\"", ""))
-        );
+                costs[asc][0]["name"]
+)        );
         $(renderto).find("#asc-mat-1").append(
             asLinkable(
                 costs[asc][1]["count"] + " " + costs[asc][1]["name"],
-                costs[asc][1]["name"],
-                name.replaceAll("\"", ""))
-        );
+                costs[asc][1]["name"]
+)        );
         $(renderto).find("#asc-mat-2").append(
             asLinkable(
                 costs[asc][2]["count"] + " " + costs[asc][2]["name"],
-                costs[asc][2]["name"],
-                name.replaceAll("\"", ""))
-        );
+                costs[asc][2]["name"]
+)        );
         $(renderto).find("#asc-mat-3").append(
             asLinkable(
                 costs[asc][3]["count"] + " " + costs[asc][3]["name"],
-                costs[asc][3]["name"],
-                name.replaceAll("\"", ""))
-        );
+                costs[asc][3]["name"]
+)        );
     }
     catch { }
 }
@@ -231,80 +227,69 @@ function renderTotalAscensionCost(costs, renderto, name) {
     $(renderto).find("#mora").append(
         asLinkable(
             mora + " " + names[0],
-            names[0],
-            name
+            names[0]
         )
     );
     // Domain Drops
     $(renderto).find("#ddrop1").append(
         asLinkable(
             ddrop1 + " " + names[1],
-            names[1],
-            name
+            names[1]
         )
     );
     $(renderto).find("#ddrop2").append(
         asLinkable(
             ddrop2 + " " + names[4],
-            names[4],
-            name
+            names[4]
         )
     );
     $(renderto).find("#ddrop3").append(
         asLinkable(
             ddrop3 + " " + names[7],
-            names[7],
-            name
+            names[7]
         )
     );
     if (ddrop4 != 0) $(renderto).find("#ddrop4").append(
         asLinkable(
             ddrop4 + " " + names[10],
-            names[10],
-            name
+            names[10]
         )
     );
     // World Drops
     $(renderto).find("#wdrop1").append(
         asLinkable(
             wdrop1 + " " + names[2],
-            names[2],
-            name
+            names[2]
         )
     );
     $(renderto).find("#wdrop2").append(
         asLinkable(
             wdrop2 + " " + names[5],
-            names[5],
-            name
+            names[5]
         )
     );
     if (wdrop3 != 0) $(renderto).find("#wdrop3").append(
         asLinkable(
             wdrop3 + " " + names[8],
-            names[8],
-            name
+            names[8]
         )
     );
     $(renderto).find("#edrop1").append(
         asLinkable(
             edrop1 + " " + names[3],
-            names[3],
-            name
+            names[3]
         )
     );
     $(renderto).find("#edrop2").append(
         asLinkable(
             edrop2 + " " + names[6],
-            names[6],
-            name
+            names[6]
         )
     );
     if (edrop3 != 0) $(renderto).find("#edrop3").append(
         asLinkable(
             edrop3 + " " + names[9],
-            names[9],
-            name
+            names[9]
         )
     );
 }

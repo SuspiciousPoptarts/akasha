@@ -1,5 +1,5 @@
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\" class="font-color">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\" class="font-color">` + string + "</a>"
 }
 
 function capitalize(word) {
@@ -23,10 +23,10 @@ fetch("../../data/materials/@meta.json")
                         `
                         <tr>
                         <td><image src="${data["images"]["fandom"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64"></td>
-                        <td>${asLinkable(data["name"],data["name"],"")}</td>
+                        <td>${asLinkable(data["name"],data["name"])}</td>
                         <td>${data["materialtype"]}</td>
                         <td>${capitalize(data["category"].toLowerCase())}</td>
-                        <td>${data["rarity"][data["rarity"].length-1]}</td>
+                        <td>${(data["rarity"] == undefined)? "":data["rarity"]}</td>
                         </tr>
                         `
                     );

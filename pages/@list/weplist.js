@@ -1,5 +1,5 @@
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\" class="font-color">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\" class="font-color">` + string + "</a>"
 }
 
 fetch("../../data/weapons/@meta.json")
@@ -15,7 +15,7 @@ fetch("../../data/weapons/@meta.json")
                         `
                         <tr>
                         <td><image src="${data["images"]["icon"]}" onerror="this.src='../../build/qm.png'" class="no-shadow no-margin w64 h64""></td>
-                        <td>${asLinkable(data["name"],data["name"],"")}</td>
+                        <td>${asLinkable(data["name"],data["name"])}</td>
                         <td>${data["weapontype"]}</td>
                         <td>${data["substat"]}</td>
                         <td>${data["rarity"]}</td>

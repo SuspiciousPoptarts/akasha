@@ -6,6 +6,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
+<script>
+    function updateHistory() {
+        if($("#info-panel").attr("src") != '') window.electronAPI.pushToHistory($("#info-panel").attr("src"));
+    }
+</script>
+
 <div class="wiki-wrapper-sidebar">
     <div class="sidebar-wrapper">
         <!-- BADGE -->
@@ -75,6 +81,6 @@
             class="icon padding-r8">&#xe889;</span>Back</button>
 </div>
 
-<iframe src="" frameborder="0" class="wiki-window" id="info-panel" name="iframe"></iframe>
+<iframe src="" frameborder="0" class="wiki-window" id="info-panel" onLoad="updateHistory()" name="iframe"></iframe>
 
 <script src="windowfunc.js" type="module"></script>

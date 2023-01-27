@@ -1,5 +1,5 @@
-function asLinkable(string, link, src) {
-    return `<a href=\"../qcb.html?q=${link}&b=${src}\" target=\"_parent\" class="font-color">` + string + "</a>"
+function asLinkable(string, link) {
+    return `<a href=\"../qcb.html?q=${link}\" target=\"_parent\" class="font-color">` + string + "</a>"
 }
 
 function capitalize(word) {
@@ -22,7 +22,7 @@ fetch("../../data/enemies/@meta.json")
                     $("#table").append(
                         `
                         <tr>
-                        <td>${asLinkable(data["name"],data["name"],"")}</td>
+                        <td>${asLinkable(data["name"],data["name"])}</td>
                         <td>${data["specialname"]}</td>
                         <td>${data["category"]}</td>
                         <td>${capitalize(data["enemytype"].toLowerCase())}</td>

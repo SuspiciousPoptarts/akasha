@@ -467,6 +467,7 @@ input:hover {
 }
 
 input[type="text"] {
+    font-family: inherit;
     border-radius: var(--corner-radius);
     border-style: var(--border-style);
     border-color: var(--border-color);
@@ -520,6 +521,7 @@ input[type="range"][variant="vertical"]::-webkit-slider-thumb {
 /* BUTTONS */
 
 button {
+    font-family: inherit;
     background-color: var(--background-color);
     color: var(--accent-color);
 
