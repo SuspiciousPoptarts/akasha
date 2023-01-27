@@ -11,7 +11,7 @@ const createWindow = () => {
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
-    width: 1640,
+    width: 1648,
     height: 960,
     minWidth: 800,
     minHeight: 742,
@@ -29,7 +29,7 @@ const createWindow = () => {
         preload: path.join(__dirname, 'preload.js')
       },
       title: name,
-      width: 864,
+      width: 848,
       height: 600,
       resizable: false,
       backgroundColor: '#000000',

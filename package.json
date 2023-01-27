@@ -1,6 +1,6 @@
 {
   "name": "Akasha",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "local genshin knowledge base",
   "main": "serveelectron.js",
   "scripts": {
