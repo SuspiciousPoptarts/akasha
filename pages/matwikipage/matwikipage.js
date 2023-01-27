@@ -91,7 +91,6 @@ function rendermatwikipage(name) {
         });
 
     // fetch crafting data if exists...
-    try {
         fetch(craftdata)
             .then(response => response.json())
             .then(jsondata => {
@@ -114,8 +113,10 @@ function rendermatwikipage(name) {
                         `
                     )
                 });
-            });
-    } catch (e) { }
+            })
+            .catch(() => {
+                $("#expand-crafts").css("visibility","hidden")
+            })
 }
 
 let paramString = document.URL.split('?')[1];
