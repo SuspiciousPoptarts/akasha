@@ -1,7 +1,7 @@
 
-        :root {
+            :root {
                 --badge: url(https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001);
-                --badge-radius:  32px;
+                --badge-radius:   32px;
             /* MARGINS AND PADDINGS */
                 --body-margin: 16px;
                 --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
@@ -13,7 +13,7 @@
                 --click-brightness: brightness(90%);
                 --highlight-color: #7381d1; /* Highlighted text is always white! */
             
-                font-family: 'Roboto Flex';
+                font-family: 'Consolas';
             
                 --background-color:#3b4255;
                 --border-color:#5c6284;

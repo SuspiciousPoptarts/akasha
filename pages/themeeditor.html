@@ -280,7 +280,7 @@
                 --click-brightness: brightness(90%);
                 --highlight-color: #7381d1; /* Highlighted text is always white! */
             
-                font-family:${$("#font").val()};
+                font-family: '${$("#font").val()}';
             
                 --background-color:${$("#bg-color").val()};
                 --border-color:${$("#b-color").val()};
@@ -339,7 +339,8 @@
             $("#c-radius").val(/(--corner-radius):(.+?);/g.exec(text)[2]);
             $("#utt").val(/(--universal-transition-time):(.+?);/g.exec(text)[2]);
 
-            $("#font").val(/(font-family):(.+?);/g.exec(text)[2]);
+            $("#font").val(/(font-family):(.+?);/g.exec(text)[2].replaceAll("'",""));
+
             $("#bg-color").val(/(--background-color):(.+?);/g.exec(text)[2].replaceAll(" ",""));
             $("#b-color").val(/(--border-color):(.+?);/g.exec(text)[2].replaceAll(" ",""));
             $("#s-color").val(/(--shadow-color):(.+?);/g.exec(text)[2].replaceAll(" ",""));
