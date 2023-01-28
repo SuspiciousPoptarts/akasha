@@ -2,4 +2,5 @@ data/*
 node_modules/*
 dist/*
 package-lock.json
+neo/*
 # also run git update-index --skip-worktree pages/theme.css
