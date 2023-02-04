@@ -7,6 +7,7 @@ No-frills [Electron](https://github.com/electron/electron)-powered local databas
 
 ___
 
+* Rewrite In-Progress
 * ⚠️ Versions <= 1.0.0 are very early initial builds
 * ⚠️ Fuzzy-search only kicks in if your query returns zero initial matches, and makes the assumption that [as a human you are more likely to accurately remember the first (and last) letter of a term](https://en.wikipedia.org/wiki/Recency_bias), so fuzzy-search results almost always match *at least* the first letter of your search query (But it can, though unlikely, match with some substring later into the matched result)
 ___
