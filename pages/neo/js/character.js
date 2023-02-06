@@ -116,6 +116,7 @@ class CharacterPage {
             <div class="margin-16">
                 ${this.header()}
                 ${this.coverInfo()}
+                <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="hide-all"><span class="icon padding-r8">&#xe5d7;</span>Toggle</button>
                 ${this.description()}
                 ${this.skills()}
                 ${this.passives()}
@@ -123,6 +124,7 @@ class CharacterPage {
                 ${this.ascension()}
                 ${this.skillUpgrade()}
                 ${this.total()}
+                <div class="clear-float"></div>
             </div>
         `;
         return total;
@@ -199,7 +201,8 @@ class CharacterPage {
 
     description() {
         let description = `
-            <table class="w100p margin-t16">
+            <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="desc-button"><span class="icon padding-r8">&#xe5d7;</span>Description</button>
+            <table class="w100p" id="description">
                 <tr class="h64"><th>Description</th></tr>
                 <tr><td>${this["character"]["description"]}</td></tr>
             </table>
@@ -209,7 +212,8 @@ class CharacterPage {
     
     skills() {
         let talents = `
-        <table class="w100p margin-t16">
+        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="skill-button"><span class="icon padding-r8">&#xe5d7;</span>Talents</button>
+        <table class="w100p margin-t16" id="skill">
             <tr class="h64"><th>Talent</th><th>Details</th><th class="w25p">Multipliers</th><th class="w128">Skill Level</th></tr>
             <tr class="h256">
                 <td class="t-left t-top">${asIcon("attack")}${this["talents"]["attack"]["name"]}</td>
@@ -245,7 +249,8 @@ class CharacterPage {
 
     passives() {
         let passives = `
-        <table class="w100p margin-t16">
+        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="passive-button"><span class="icon padding-r8">&#xe5d7;</span>Passives</button>
+        <table class="w100p margin-t16" id="passive">
             <tr class="h64"><th class="w25p">Passive</th><th>Description</th></tr>
             <tr>
                 <td>${this["talents"]["passives"]["1"]["name"]}</td>
@@ -266,7 +271,8 @@ class CharacterPage {
 
     constellationList() {
         let constellations = `
-        <table class="w100p margin-t16">
+        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="constellation-button"><span class="icon padding-r8">&#xe5d7;</span>Constellation</button>
+        <table class="w100p margin-t16" id="constellation">
             <tr><th class="w25p">Constellation</th><th>Description</th></tr>
             <tr>
                 <td>${this["constellations"]["1"]["name"]}</td>
@@ -298,7 +304,10 @@ class CharacterPage {
     }
 
     ascension() {
-        let ascensionCards = `<div class="flex-container w100 margin-t16">`;
+        let ascensionCards = `
+        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="asc-button"><span class="icon padding-r8">&#xe5d7;</span>Ascension</button>
+        <div class="w100p" id="asc"><div class="flex-container w100p margin-t16">
+        `;
 
         // ? ascension -> 1,2,3,4,5,6
         for(let ascension in this["character"]["ascensionCosts"]) {
@@ -311,16 +320,19 @@ class CharacterPage {
             }
             ascensionCards += `</table>`
             // * Div Created @ Iter 3
-            if(ascension == 3) ascensionCards += `</div><div class="flex-container w100 margin-t16">`;
+            if(ascension == 3) ascensionCards += `</div><div class="flex-container w100p margin-t16">`;
 
         }
 
-        ascensionCards += `</div>`
+        ascensionCards += `</div></div>`
         return ascensionCards;
     }
     
     skillUpgrade() {
-        let skillCards = `<div class="flex-container w100 margin-t16">`;
+        let skillCards = `
+        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="skill-upgrade-button"><span class="icon padding-r8">&#xe5d7;</span>Skill</button>
+        <div id="skill-upgrade"><div class="flex-container w100p margin-t16">
+        `;
 
         // ? level -> 2,3,4,5,6,7,8,9,10
         for(let level in this["talents"]["costs"]) {
@@ -334,11 +346,11 @@ class CharacterPage {
             skillCards += `</table>`
 
             // * Div Created @ Iter 3, 6
-            if(level == 4 || level == 7) skillCards += `</div><div class="flex-container w100 margin-t16">`;
+            if(level == 4 || level == 7) skillCards += `</div><div class="flex-container w100p margin-t16">`;
 
         }
 
-        skillCards += `</div>`
+        skillCards += `</div></div>`
         return skillCards;
     }
 
@@ -363,7 +375,9 @@ class CharacterPage {
             }
         }
         // ! HTML
-        let totalCards = `<div class="flex-container w100 margin-t16">`;
+        let totalCards = `
+        <div class="margin-b16"><button class="default-color float-left margin-t16 margin-b16 margin-r16" id="total-button"><span class="icon padding-r8">&#xe5d7;</span>Total</button></div>
+        <div class="flex-container w100p margin-t16 margin-b16" id="total">`;
         // * Table Created
         totalCards += `<table class="flex-1 h640"><tr class="h64"><th>Total Ascension Cost</th</tr>`
 
@@ -428,29 +442,60 @@ class CharacterPage {
         $("#content-window").append(this.HTML()).hide();
         $("#content-window").fadeIn(125);
         // SUBSECTION Event Listeners
-        $("#attack-input").change(function() {
+        $("#attack-input").change(() => {
             $("#attack").html(formatSkill(skillAttributes[0], this.value-1));
             $("#attack-slider").val(this.value);
         })
-        $("#attack-slider").change(function() {
+        $("#attack-slider").change(() => {
             $("#attack").html(formatSkill(skillAttributes[0], this.value-1));
             $("#attack-input").val(this.value);
         })
-        $("#skill-input").change(function() {
+        $("#skill-input").change(() => {
             $("#skill").html(formatSkill(skillAttributes[1], this.value-1));
             $("#skill-slider").val(this.value);
         })
-        $("#skill-slider").change(function() {
+        $("#skill-slider").change(() => {
             $("#skill").html(formatSkill(skillAttributes[1], this.value-1));
             $("#skill-input").val(this.value);
         })
-        $("#burst-input").change(function() {
+        $("#burst-input").change(() => {
             $("#burst").html(formatSkill(skillAttributes[2], this.value-1));
             $("#burst-slider").val(this.value);
         })
-        $("#burst-slider").change(function() {
+        $("#burst-slider").change(() => {
             $("#burst").html(formatSkill(skillAttributes[2], this.value-1));
             $("#burst-input").val(this.value);
+        })
+        // SUBSECTION Collapse Buttons
+        $("#hide-all").click(() => {
+            $("#description").hide();
+            $("#skill").hide();
+            $("#passive").hide();
+            $("#constellation").hide();
+            $("#asc").hide();
+            $("#skill-upgrade").hide();
+            $("#total").hide();
+        })
+        $("#desc-button").click(() => {
+            $("#description").toggle();
+        })
+        $("#skill-button").click(() => {
+            $("#skill").toggle();
+        })
+        $("#passive-button").click(() => {
+            $("#passive").toggle();
+        })
+        $("#constellation-button").click(() => {
+            $("#constellation").toggle();
+        })
+        $("#asc-button").click(() => {
+            $("#asc").toggle();
+        })
+        $("#skill-upgrade-button").click(() => {
+            $("#skill-upgrade").toggle();
+        })
+        $("#total-button").click(() => {
+            $("#total").toggle();
         })
         // SUBSECTION Accent
         this.setAccent();

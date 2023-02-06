@@ -102,6 +102,14 @@
 
 
 /* SIZE/POSITION */
+.clear-float {
+    clear: both;
+}
+
+.align-left {
+    align-items: left;
+}
+
 .relative {
     position: relative;
 }
@@ -321,6 +329,10 @@
     height: 48px;
 }
 
+.h16 {
+    height: 16px;
+}
+
 .no-margin {
     margin: 0;
 }
@@ -368,6 +380,10 @@
 
 .padding-t4 {
     padding-top: 4px;
+}
+
+.padding-b16 {
+    padding-bottom: 8px;
 }
 
 .padding-b8 {
