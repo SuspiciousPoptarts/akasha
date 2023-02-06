@@ -20,10 +20,18 @@ $("#search").keypress(function (e) {
 // SECTION IPC
 
 window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
-
+    
     $("#content-window").fadeOut(125, function () {
-        let character = new CharacterPage(msg[1],msg[2],msg[3]);
-        character.render();
+    switch(msg[0]) {
+        case 'character':
+            let character = new CharacterPage(msg[1],msg[2],msg[3]);
+            character.render();
+            break;
+        default:
+            console.log(msg);
+            break;
+            
+    }
     });
 
 
