@@ -1,10 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0");
 @import "theme.css";
+
+.sidebar-wrapper {
+    position: absolute;
+    width: 256px;
+    height: 100%;
+}
+
+.sidebar {
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-top: 32px;
+}
+
+.shadow {
+    box-shadow: var(--card-shadow);
+}
 
 .badge {
     background-image: var(--badge);
     background-size: contain;
     border-radius: var(--badge-radius);
     overflow: hidden;
+
+    width: 192px;
+    height: 192px;
 }
 
 .icon {
@@ -19,6 +39,10 @@
 .accent-2 {
     border-color: var(--accent-color);
     color: var(--accent-color);
+}
+
+.rounded {
+    border-radius: var(--corner-radius);
 }
 
 .no-shadow {
@@ -41,6 +65,10 @@
     opacity: 0.5;
 }
 
+.scrollable {
+    overflow-y: scroll;
+}
+
 /* TEXT */
 
 .f8 {
@@ -53,6 +81,10 @@
 
 .f16 {
     font-size: 16px;
+}
+
+.f20 {
+    font-size: 20px;
 }
 
 .f24 {
@@ -69,8 +101,20 @@
 
 
 /* SIZE/POSITION */
+.bfc {
+    overflow: hidden;
+}
+
+.relative {
+    position: relative;
+}
+
 .t-left {
     text-align: left !important;
+}
+
+.t-top {
+    vertical-align: top;
 }
 
 .z-99 {
@@ -101,17 +145,7 @@
     display: flex;
     text-align: center;
     align-items: center;
-}
-
-.flex-container>div {
-    margin: 0;
-    box-shadow: none;
-}
-
-.flex-container>div>div {
-    margin: 0;
-    box-shadow: none;
-    padding: 0;
+    column-gap: var(--component-margin);
 }
 
 .flex-1 {
@@ -198,8 +232,8 @@
     width: 256px;
 }
 
-.w194 {
-    width: 194px;
+.w192 {
+    width: 192px;
 }
 
 .w160 {
@@ -226,6 +260,10 @@
     height: 1024px;
 }
 
+.h800 {
+    height: 800px;
+}
+
 .h768 {
     height: 768px;
 }
@@ -236,6 +274,18 @@
 
 .h25p {
     height: 25%;
+}
+
+.h960 {
+    height: 960px;
+}
+
+.h768 {
+    height: 640px;
+}
+
+.h640 {
+    height: 640px;
 }
 
 .h512 {
@@ -256,6 +306,10 @@
 
 .h128 {
     height: 128px;
+}
+
+.h96 {
+    height: 96px;
 }
 
 .h64 {
@@ -323,7 +377,13 @@
     padding-bottom: 4px;
 }
 
+.padding-16 {
+    padding: 16px;
+}
 
+.padding-32 {
+    padding: 32px;
+}
 
 .margin-b8 {
     margin-bottom: 8px;
@@ -355,6 +415,10 @@
 
 .margin-t16 {
     margin-top: 16px;
+}
+
+.margin-t32 {
+    margin-top: 32px;
 }
 
 .margin-t64 {
@@ -421,6 +485,10 @@
     margin-left: 12.5%;
 }
 
+.margin-16 {
+    margin: 16px;
+}
+
 .left-16 {
     left: 16px;
 }
@@ -472,6 +540,7 @@
 
 input {
     transition: var(--universal-transition-time);
+    box-sizing: border-box;
 }
 
 input:hover {
@@ -523,7 +592,7 @@ input[type="range"]:active {
 }
 
 input[type="range"][variant="vertical"] {
-    transform: rotate(-90deg) translate(-112px, -3px);
+    transform: rotate(-90deg) translate(0px, -3px);
 }
 
 input[type="range"][variant="vertical"]::-webkit-slider-thumb {
@@ -565,9 +634,6 @@ button {
 
     user-select: none;
     cursor: pointer;
-
-    margin-bottom: var(--component-margin);
-    margin-right: var(--component-margin);
 
     transition: var(--universal-transition-time);
 }
@@ -649,4 +715,57 @@ a:hover {
     box-shadow: var(--inset-shadow);
     border-radius: var(--corner-radius);
     overflow: hidden;
+}
+
+img {
+    object-fit: cover;
+    border-radius: var(--corner-radius);
+    box-shadow: var(--card-shadow);
+}
+
+table {
+    box-shadow: var(--card-shadow);
+    border-radius: var(--corner-radius);
+
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+table tr:nth-of-type(1)>th {
+    background-color: var(--accent-color);
+    color: var(--accent-font-color);
+    padding: var(--universal-padding);
+}
+
+table th {
+    position: relative;
+    background-color: var(--border-color);
+    border-color: var(--background-color);
+    padding: var(--universal-padding);
+}
+
+table th span {
+    color: var(--accent-font-color) !important;
+}
+
+table td {
+    position: relative;
+    border-right: var(--border-color) solid 2px;
+    border-bottom: var(--border-color) solid 2px;
+    padding: var(--universal-padding);
+}
+
+th:hover {
+    transition: var(--universal-transition-time);
+    filter: var(--hover-brightness);
+}
+
+table td:last-child,
+th:last-child {
+    border-right: none;
+    border-right: none;
+}
+
+table tr:last-child>td {
+    border-bottom: none;
 }

@@ -1,61 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
 
-        :root {
-                --badge: url(https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001);
-                --badge-radius:  32px;
-            /* MARGINS AND PADDINGS */
-                --body-margin: 16px;
-                --universal-padding: 16px; /* Changing padding also makes flex widths incosistent! */
-                --component-margin: 16px; /* Chaning padding causes layouts to change significantly! */
-                --corner-radius: 8px;
-            
-                --universal-transition-time: all 0.25s;
-                --hover-brightness: brightness(110%);
-                --click-brightness: brightness(90%);
-                --highlight-color: #7381d1; /* Highlighted text is always white! */
-            
-                font-family: 'Roboto Flex';
-            
-                --background-color:#3b4255;
-                --border-color:#5c6284;
-                --shadow-color:#242632;
-                --accent-color:#ede5d8;
-                --accent-font-color: var(--background-color);
-                --font-color:#f6f3ec;
-                --icon-color:#e0e0e0;
-            
-                --border-style: solid;
-            
-                /* SLIDERS */
-                --slider-height: 6px;
-                --slider-knob-radius: 50%;
-                --slider-knob-height: 14px;
-            
-                /* ELEMENTAL ACCENTS */
-                --pyro-accent:#d24646;
-                --hydro-accent:#4487d5;
-                --electro-accent:#9f79d7;
-                --dendro-accent:#cfda72;
-                --cryo-accent:#a1cee2;
-                --anemo-accent:#79cda9;
-                --geo-accent:#e4ca86;
-                /* RARITY ACCENTS */
-                --five-star-accent:#d3a15a;
-                --four-star-accent:#a083d2;
-                --three-star-accent:#5594dd;
-                --two-star-accent:#98aab3;
-                --one-star-accent:#ababab;
-            
-                --card-shadow: var(--shadow-color) 0px 0px 6px;
-            
-                background-color: var(--background-color);
-                color: var(--font-color);
-            
-                transition: var(--universal-transition-time);
-                --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
-        }
-            
-        ::selection {
-            background-color: var(--highlight-color);
-            color: white;
-        }
-    
+:root {
+    --badge: url(https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001);
+    --badge-radius: 32px;
+    /* MARGINS AND PADDINGS */
+    --body-margin: 16px;
+    --universal-padding: 16px;
+    /* Changing padding also makes flex widths incosistent! */
+    --component-margin: 16px;
+    /* Chaning padding causes layouts to change significantly! */
+    --corner-radius: 8px;
+
+    --universal-transition-time: all 0.5s;
+    --hover-brightness: brightness(110%);
+    --click-brightness: brightness(90%);
+    --highlight-color: #7381d1;
+    /* Highlighted text is always white! */
+
+    font-family: 'Roboto Flex';
+    --font-size: 16px;
+
+    --background-color: #3b4255;
+    --border-color: #5c6284;
+    --shadow-color: #242632;
+    --accent-color: #ede5d8;
+    --accent-font-color: var(--background-color);
+    --font-color: #f6f3ec;
+    --icon-color: #e0e0e0;
+
+    --border-style: solid;
+
+    /* SLIDERS */
+    --slider-height: 6px;
+    --slider-knob-radius: 50%;
+    --slider-knob-height: 14px;
+
+    /* ELEMENTAL ACCENTS */
+    --pyro-accent: #d24646;
+    --hydro-accent: #4487d5;
+    --electro-accent: #9f79d7;
+    --dendro-accent: #cfda72;
+    --cryo-accent: #a1cee2;
+    --anemo-accent: #79cda9;
+    --geo-accent: #e4ca86;
+    /* RARITY ACCENTS */
+    --five-star-accent: #d3a15a;
+    --four-star-accent: #a083d2;
+    --three-star-accent: #5594dd;
+    --two-star-accent: #98aab3;
+    --one-star-accent: #ababab;
+
+    --card-shadow: var(--shadow-color) 0px 0px 6px;
+
+    background-color: var(--background-color);
+    color: var(--font-color);
+    font-size: var(--font-size);
+    transition: var(--universal-transition-time);
+    --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
+}
+
+::selection {
+    background-color: var(--highlight-color);
+    color: white;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
