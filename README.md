@@ -3,6 +3,7 @@
 Why? A rewrite was required to correct some serious project issues that made it extremely unwieldy to call ipc functions from inside a "page" due to being inside an <iframe>
 ---
 ## Parity Checklist
+* Search ✅ (Exact Match, RegEx, Fuzzy Search!)
 * Characters 🏗️ (90%)
 * Weapons
 * Artifacts
