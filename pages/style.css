@@ -67,6 +67,7 @@
 
 .scrollable {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* TEXT */
@@ -101,10 +102,6 @@
 
 
 /* SIZE/POSITION */
-.bfc {
-    overflow: hidden;
-}
-
 .relative {
     position: relative;
 }
@@ -194,6 +191,10 @@
 
 .w25p {
     width: 25%;
+}
+
+.w5p {
+    width: 5%;
 }
 
 .w1280 {
@@ -515,6 +516,10 @@
     top: var(--component-margin);
 }
 
+.min-w256 {
+    min-width: 256px;
+}
+
 .min-h256 {
     min-height: 256px;
 }
@@ -616,7 +621,7 @@ input[type=color] {
 }
 
 ::-webkit-color-swatch-wrapper {
-	padding: none;
+    padding: none;
 }
 
 /* BUTTONS */
@@ -667,7 +672,7 @@ button[variant="solid"]:focus {
 }
 
 a::after {
-    content:"[?]";
+    content: "[?]";
     font-size: 10px;
     position: relative;
     bottom: 8;
@@ -697,18 +702,21 @@ a:hover {
     width: 16px;
     transition: var(--universal-transition-time);
 }
+
 ::-webkit-scrollbar-corner {
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
 }
+
 ::-webkit-scrollbar-thumb {
     background-color: var(--accent-color);
     border-radius: var(--corner-radius);
-    border: 4px solid rgba(0,0,0,0);
+    border: 4px solid rgba(0, 0, 0, 0);
     background-clip: content-box;
     min-height: 32px;
 }
+
 ::-webkit-scrollbar-track {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .inset-shadow {
