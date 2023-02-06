@@ -21,6 +21,7 @@ Why? A rewrite was required to correct some serious project issues that made it 
 ## Differences
 
 * "Page"-accents now apply to the sidebar
+* "Page" fade-out now functions correctly
 * "Pages" resize along with the viewport
 * "Pages" are JS files that append to the viewport, not an iframe, which means IPC calls are actually possible
 * Future-HoyoLab map implementation will either open a BrowserView overlay or just a new window
