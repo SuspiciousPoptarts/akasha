@@ -144,7 +144,7 @@ class CharacterPage {
 
     coverInfo() {
         let coverInfo = `
-            <div class="flex-container w100p h800 margin-t16">
+            <div class="flex-container w100p h512 margin-t16">
                 <image class="float-left w50p h100p" src="${this["character"]["coverWide"]}" onerror="this.src='data/qm.png'"></image>
                 <table class="flex-1 h100p">
                     <tr>
