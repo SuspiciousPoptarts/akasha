@@ -4,8 +4,8 @@ Why? A rewrite was required to correct some serious project issues that made it 
 ---
 ## Parity Checklist
 * Search ✅ (Exact Match, RegEx, Fuzzy Search!)
-* Characters 🏗️ (90%)
-* Weapons
+* Characters ✅
+* Weapons 🏗️ (0%)
 * Artifacts
 * Materials
 * Food
