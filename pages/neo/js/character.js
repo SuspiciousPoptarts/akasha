@@ -104,6 +104,11 @@ class CharacterPage {
     ** ===
     */
     constructor(charjson, talentsjson, constellatonsjson) {
+        // ? Query response was a Traveler (Aether, Lumine)
+        if(talentsjson == undefined) {
+            return;
+        };
+
         this["character"] = new Character(charjson);
         this["talents"] = new TalentList(talentsjson);
         this["constellations"] = new ConstellationList(constellatonsjson);

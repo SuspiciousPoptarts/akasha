@@ -116,4 +116,18 @@ function formatSkill(attributes, level = 0) {
     }
     return sentence;
 }
+
+function formatEffect(effect, level = 1) {
+    let effectDesc = effect["description"];
+    const paramLabel = /(\{[0-9]{1,2}\})/g;
+    let params = effect["description"].match(paramLabel);
+
+    if(params == null) return effectDesc;
+
+    for(let param of params) {
+        effectDesc = effectDesc.replace(param, effect[level][param.replaceAll(/[\{\}]/g,"")]);
+        //-> ${effect[level][param.replaceAll(/[\{\}]/g,"")]}
+    }
+    return effectDesc;
+}
 // !SECTION

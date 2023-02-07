@@ -63,8 +63,9 @@ function levDistance(comparator, comparatee) {
 
 function gdbQuery(query) {
   let lowerQuery = aliasForQuery(query.toLowerCase());
-
+  
   // EXACT MATCHES
+
   if (charList.includes(lowerQuery)) { return ["character", JSON.stringify(genshindb.characters(lowerQuery)), JSON.stringify(genshindb.talents(lowerQuery)), JSON.stringify(genshindb.constellations(lowerQuery))] }
   else if (weaponList.includes(lowerQuery)) { return ["weapon", JSON.stringify(genshindb.weapons(lowerQuery))] }
   else if (foodList.includes(lowerQuery)) { return ["food", JSON.stringify(genshindb.foodList(lowerQuery))] }

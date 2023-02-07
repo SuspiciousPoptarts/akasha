@@ -19,11 +19,11 @@ class WeaponPage {
         this["effect"] = {
             name: json["effectname"],
             description: json["effect"],
-            mult1: json["r1"],
-            mult2: json["r2"],
-            mult3: json["r3"],
-            mult4: json["r4"],
-            mult5: json["r5"],
+            1: json["r1"],
+            2: json["r2"],
+            3: json["r3"],
+            4: json["r4"],
+            5: json["r5"],
         };
 
         this["ascensionCosts"] = {
@@ -46,6 +46,11 @@ class WeaponPage {
         <div class="margin-16">
             ${this.header()}
             ${this.coverInfo()}
+            ${this.descriptionBlock()}
+            ${this.storyBlock()}
+            ${(this["effect"]["name"] == "")? "":this.effects()}
+            ${this.ascension()}
+            ${this.total()}
             <div class="clear-float w100p h16"></div>
         </div>
         `;
@@ -85,12 +90,102 @@ class WeaponPage {
                     </tr>
                     <tr>
                         <td class="t-left w50p">${asIcon("baseSubstat")}Base Substat Value</td>
-                        <td class="t-left">${this["baseSubstat"]}${(this["substat"] == "Elemental Mastery")? "":"%"}</td>
+                        <td class="t-left">${this["baseSubstat"]}${(this["substat"] == "Elemental Mastery" || this["substat"] == "")? "":"%"}</td>
                     </tr>
                 </table>
             </div>
         `;
         return coverInfo;
+    }
+
+    descriptionBlock() {
+        let description = `
+            <table class="float-left w100p margin-t16" id="description">
+                <tr class="h64"><th>Description</th></tr>
+                <tr><td>${this["description"]}</td></tr>
+            </table>
+        `;
+        return description;
+    }
+
+    storyBlock() {
+        let description = `
+            <table class="float-left w100p margin-t16" id="story">
+                <tr class="h64"><th>Story</th></tr>
+                <tr class="t-left"><td>${this["story"]}</td></tr>
+            </table>
+        `;
+        return description;
+    }
+
+    effects() {
+        let effect = `
+        <table class="float-left w100p margin-t16" id="effect">
+        <tr class="h64"><th>Effect</th><th class="w50p">Description</th><th class="w128">Refinement</th></tr>
+        <tr class="h256">
+            <td class="t-left t-top">${asIcon("skill")}${this["effect"]["name"]}</td>
+            <td class="t-left t-top" id="stat-effect">${formatEffect(this["effect"])}</td>
+            <td class="t-left t-top">
+                <input type="text" value="1" class="w128 buoy" id="effect-input"></input>
+                <input type="range" variant="vertical" class="buoy margin-t112" value="1" min="1" max="5" id="effect-slider">
+            </td>
+        </tr>
+        </table>
+        `
+        return effect;
+    }
+
+    ascension() {
+        let ascensionCards = `
+        <div class="float-left w100p margin-t16" id="asc"><div class="flex-container w100p">
+        `;
+
+        // ? ascension -> 1,2,3,4,5,6
+        for(let ascension in this["ascensionCosts"]) {
+            // ? (i.e, 1* weapons have no asc5)
+            if(this["ascensionCosts"][ascension] == undefined) break; 
+            // * Table Created
+            ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th>Ascension ${ascension}</th></tr>`
+
+            for(let material of this["ascensionCosts"][ascension]) {
+                ascensionCards += `<tr class="t-left"><td>${material["count"]} ${material["name"]}</td></tr>`;
+            }
+            ascensionCards += `</table>`
+            // * Div Created @ Iter 3
+            if(ascension == 3) ascensionCards += `</div><div class="flex-container w100p margin-t16">`;
+
+        }
+
+        ascensionCards += `</div></div>`
+        return ascensionCards;
+    }
+
+    total() {
+        // ! Tally
+        let asccount = {};
+
+        for(let ascension in this["ascensionCosts"]) {
+            // ? (i.e, 1* weapons have no asc5)
+            if(this["ascensionCosts"][ascension] == undefined) break; 
+            for(let material of this["ascensionCosts"][ascension]) {
+                // ? asccount["Mora"] exists? -> 
+                if(!asccount[material["name"]]) { asccount[material["name"]] = material["count"]; }
+                else { asccount[material["name"]] += material["count"]; }
+            }
+        }
+
+        // ! HTML
+
+        // * Table Created
+        let totalCards = `<table class="float-left margin-t16 h640 w100p"><tr class="h64"><th>Total Ascension Cost</th</tr>`
+
+        // ? material -> "Mora", asccount["Mora"] -> 425,000
+        for(let material in asccount) {
+            totalCards += `<tr class="t-left"><td>${asccount[material]} ${material}</td></tr>`
+        }
+
+        totalCards += `</table>`;
+        return totalCards;
     }
 
     // !SECTION Returns HTML
@@ -120,8 +215,21 @@ class WeaponPage {
         $("#content-window").html(this.HTML()).hide();
         $("#content-window").fadeIn(125);
 
+        if(this["effect"]["name"] != "") this.attachRefinementListener(this["effect"]);
+
         this.setAccent();
 
+    }
+
+    attachRefinementListener(effect) {
+        $("#effect-input").change(function() {
+            $("#stat-effect").html(formatEffect(effect, this.value));
+            $("#effect-slider").val(this.value);
+        })
+        $("#effect-slider").change(function() {
+            $("#stat-effect").html(formatEffect(effect, this.value));
+            $("#effect-input").val(this.value);
+        })
     }
     // !SECTION Render-Related Members
 }

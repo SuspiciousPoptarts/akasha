@@ -25,7 +25,8 @@ window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
     switch(msg[0]) {
         case 'character':
             let character = new CharacterPage(msg[1],msg[2],msg[3]);
-            character.render();
+            if(!character["character"]) { console.warn(`Query responded with Traveler (Aether, Lumine), not defined!`) }
+            else { character.render(); }
             break;
         case 'weapon':
             let weapon = new WeaponPage(msg[1]);
