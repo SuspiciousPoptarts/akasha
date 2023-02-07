@@ -18,7 +18,7 @@
     /* Highlighted text is always white! */
 
     font-family: 'Roboto Flex';
-    --font-size: 13px;
+    --font-size: 14px;
 
     --background-color: #3b4255;
     --border-color: #5c6284;
@@ -67,5 +67,5 @@
 html {
     height: 100%;
     width: 100%;
-    /* overflow: hidden; */
+    overflow: hidden;
 }

@@ -116,7 +116,7 @@ class CharacterPage {
             <div class="margin-16">
                 ${this.header()}
                 ${this.coverInfo()}
-                <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="hide-all"><span class="icon padding-r8">&#xe5d7;</span>Toggle</button>
+                <button class="default-color float-left margin-t16 margin-r16" id="hide-all"><span class="icon padding-r8">&#xe5d7;</span>Toggle</button>
                 ${this.description()}
                 ${this.skills()}
                 ${this.passives()}
@@ -124,7 +124,7 @@ class CharacterPage {
                 ${this.ascension()}
                 ${this.skillUpgrade()}
                 ${this.total()}
-                <div class="clear-float"></div>
+                <div class="clear-float w100p h16"></div>
             </div>
         `;
         return total;
@@ -146,7 +146,7 @@ class CharacterPage {
 
     coverInfo() {
         let coverInfo = `
-            <div class="flex-container w100p h512 margin-t16">
+            <div class="flex-container w100p h640 margin-t16">
                 <image class="float-left w50p h100p" src="${this["character"]["coverWide"]}" onerror="this.src='data/qm.png'"></image>
                 <table class="flex-1 h100p">
                     <tr>
@@ -201,8 +201,8 @@ class CharacterPage {
 
     description() {
         let description = `
-            <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="desc-button"><span class="icon padding-r8">&#xe5d7;</span>Description</button>
-            <table class="w100p" id="description">
+            <button class="default-color float-left margin-t16 margin-r16" id="desc-button"><span class="icon padding-r8">&#xe5d7;</span>Description</button>
+            <table class="float-left w100p margin-t16" id="description">
                 <tr class="h64"><th>Description</th></tr>
                 <tr><td>${this["character"]["description"]}</td></tr>
             </table>
@@ -212,8 +212,8 @@ class CharacterPage {
     
     skills() {
         let talents = `
-        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="skill-button"><span class="icon padding-r8">&#xe5d7;</span>Talents</button>
-        <table class="w100p margin-t16" id="skill">
+        <button class="default-color float-left margin-t16 margin-r16" id="skill-button"><span class="icon padding-r8">&#xe5d7;</span>Talents</button>
+        <table class="float-left w100p margin-t16" id="skill">
             <tr class="h64"><th>Talent</th><th>Details</th><th class="w25p">Multipliers</th><th class="w128">Skill Level</th></tr>
             <tr class="h256">
                 <td class="t-left t-top">${asIcon("attack")}${this["talents"]["attack"]["name"]}</td>
@@ -249,8 +249,8 @@ class CharacterPage {
 
     passives() {
         let passives = `
-        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="passive-button"><span class="icon padding-r8">&#xe5d7;</span>Passives</button>
-        <table class="w100p margin-t16" id="passive">
+        <button class="default-color float-left margin-t16 margin-r16" id="passive-button"><span class="icon padding-r8">&#xe5d7;</span>Passives</button>
+        <table class="float-left w100p margin-t16" id="passive">
             <tr class="h64"><th class="w25p">Passive</th><th>Description</th></tr>
             <tr>
                 <td>${this["talents"]["passives"]["1"]["name"]}</td>
@@ -271,9 +271,9 @@ class CharacterPage {
 
     constellationList() {
         let constellations = `
-        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="constellation-button"><span class="icon padding-r8">&#xe5d7;</span>Constellation</button>
-        <table class="w100p margin-t16" id="constellation">
-            <tr><th class="w25p">Constellation</th><th>Description</th></tr>
+        <button class="default-color float-left margin-t16 margin-r16" id="constellation-button"><span class="icon padding-r8">&#xe5d7;</span>Constellation</button>
+        <table class="float-left w100p margin-t16" id="constellation">
+            <tr class="h64"><th class="w25p">Constellation</th><th>Description</th></tr>
             <tr>
                 <td>${this["constellations"]["1"]["name"]}</td>
                 <td class="t-left">${formatParagraph(this["constellations"]["1"]["effect"])}</td>
@@ -305,8 +305,8 @@ class CharacterPage {
 
     ascension() {
         let ascensionCards = `
-        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="asc-button"><span class="icon padding-r8">&#xe5d7;</span>Ascension</button>
-        <div class="w100p" id="asc"><div class="flex-container w100p margin-t16">
+        <button class="default-color float-left margin-t16 margin-r16" id="asc-button"><span class="icon padding-r8">&#xe5d7;</span>Ascension</button>
+        <div class="float-left w100p margin-t16" id="asc"><div class="flex-container w100p">
         `;
 
         // ? ascension -> 1,2,3,4,5,6
@@ -330,8 +330,8 @@ class CharacterPage {
     
     skillUpgrade() {
         let skillCards = `
-        <button class="default-color float-left margin-t16 margin-b16 margin-r16" id="skill-upgrade-button"><span class="icon padding-r8">&#xe5d7;</span>Skill</button>
-        <div id="skill-upgrade"><div class="flex-container w100p margin-t16">
+        <button class="default-color float-left margin-t16 margin-r16" id="skill-upgrade-button"><span class="icon padding-r8">&#xe5d7;</span>Skill</button>
+        <div class="float-left w100p margin-t16" id="skill-upgrade"><div class="flex-container w100p">
         `;
 
         // ? level -> 2,3,4,5,6,7,8,9,10
@@ -376,8 +376,8 @@ class CharacterPage {
         }
         // ! HTML
         let totalCards = `
-        <div class="margin-b16"><button class="default-color float-left margin-t16 margin-b16 margin-r16" id="total-button"><span class="icon padding-r8">&#xe5d7;</span>Total</button></div>
-        <div class="flex-container w100p margin-t16 margin-b16" id="total">`;
+        <button class="default-color float-left margin-t16 margin-r16" id="total-button"><span class="icon padding-r8">&#xe5d7;</span>Total</button>
+        <div class="float-left flex-container w100p margin-t16" id="total">`;
         // * Table Created
         totalCards += `<table class="flex-1 h640"><tr class="h64"><th>Total Ascension Cost</th</tr>`
 
