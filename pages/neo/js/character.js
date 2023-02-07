@@ -116,13 +116,36 @@ class CharacterPage {
             <div class="margin-16">
                 ${this.header()}
                 ${this.coverInfo()}
-                <button class="default-color float-left margin-t16 margin-r16" id="hide-all"><span class="icon padding-r8">&#xe5d7;</span>Toggle</button>
+
+                ${button("&#xe5d7;", "Hide All", `
+                    $("#description").hide();
+                    $("#skill-list").hide();
+                    $("#passive").hide();
+                    $("#constellation").hide();
+                    $("#asc").hide();
+                    $("#skill-upgrade").hide();
+                    $("#total").hide();
+                `)}
+
+                ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
                 ${this.description()}
+
+                ${button("&#xe5d7;", "Talents", `$("#skill-list").toggle();`)}
                 ${this.skills()}
+
+                ${button("&#xe5d7;", "Passives", `$("#passive").toggle();`)}
                 ${this.passives()}
+
+                ${button("&#xe5d7;", "Constellation", `$("#constellation").toggle();`)}
                 ${this.constellationList()}
+
+                ${button("&#xe5d7;", "Ascension", `$("#asc").toggle();`)}
                 ${this.ascension()}
+
+                ${button("&#xe5d7;", "Skill", `$("#skill-upgrade").toggle();`)}
                 ${this.skillUpgrade()}
+
+                ${button("&#xe5d7;", "Total", `$("#total").toggle();`)}
                 ${this.total()}
                 <div class="clear-float w100p h16"></div>
             </div>
@@ -201,7 +224,6 @@ class CharacterPage {
 
     description() {
         let description = `
-            <button class="default-color float-left margin-t16 margin-r16" id="desc-button"><span class="icon padding-r8">&#xe5d7;</span>Description</button>
             <table class="float-left w100p margin-t16" id="description">
                 <tr class="h64"><th>Description</th></tr>
                 <tr><td>${this["character"]["description"]}</td></tr>
@@ -212,13 +234,12 @@ class CharacterPage {
     
     skills() {
         let talents = `
-        <button class="default-color float-left margin-t16 margin-r16" id="skill-button"><span class="icon padding-r8">&#xe5d7;</span>Talents</button>
-        <table class="float-left w100p margin-t16" id="skill">
+        <table class="float-left w100p margin-t16" id="skill-list">
             <tr class="h64"><th>Talent</th><th>Details</th><th class="w25p">Multipliers</th><th class="w128">Skill Level</th></tr>
             <tr class="h256">
                 <td class="t-left t-top">${asIcon("attack")}${this["talents"]["attack"]["name"]}</td>
                 <td class="t-left t-top">${formatParagraph(this["talents"]["attack"]["info"])}</td>
-                <td class="t-left t-top" id="attack">${formatSkill(this["talents"]["attack"]["attributes"])}</td>
+                <td class="t-left t-top" id="talent-attack">${formatSkill(this["talents"]["attack"]["attributes"])}</td>
                 <td class="t-left t-top">
                     <input type="text" value="1" class="w128 buoy" id="attack-input"></input>
                     <input type="range" variant="vertical" class="buoy margin-t112" value="1" min="1" max="15" id="attack-slider">
@@ -227,7 +248,7 @@ class CharacterPage {
             <tr class="h256">
                 <td class="t-left t-top">${asIcon("skill")}${this["talents"]["skill"]["name"]}</td>
                 <td class="t-left t-top">${formatParagraph(this["talents"]["skill"]["info"])}</td>
-                <td class="t-left t-top" id="skill">${formatSkill(this["talents"]["skill"]["attributes"])}</td>
+                <td class="t-left t-top" id="talent-skill">${formatSkill(this["talents"]["skill"]["attributes"])}</td>
                 <td class="t-left t-top">
                     <input type="text" value="1" class="w128 buoy" id="skill-input"></input>
                     <input type="range" variant="vertical" class="buoy margin-t112" value="1" min="1" max="15" id="skill-slider">
@@ -236,7 +257,7 @@ class CharacterPage {
             <tr class="h256">
                 <td class="t-left t-top">${asIcon("burst")}${this["talents"]["burst"]["name"]}</td>
                 <td class="t-left t-top">${formatParagraph(this["talents"]["burst"]["info"])}</td>
-                <td class="t-left t-top" id="burst">${formatSkill(this["talents"]["burst"]["attributes"])}</td>
+                <td class="t-left t-top" id="talent-burst">${formatSkill(this["talents"]["burst"]["attributes"])}</td>
                 <td class="t-left t-top">
                     <input type="text" value="1" class="w128 buoy" id="burst-input"></input>
                     <input type="range" variant="vertical" class="buoy margin-t112" value="1" min="1" max="15" id="burst-slider">
@@ -249,7 +270,6 @@ class CharacterPage {
 
     passives() {
         let passives = `
-        <button class="default-color float-left margin-t16 margin-r16" id="passive-button"><span class="icon padding-r8">&#xe5d7;</span>Passives</button>
         <table class="float-left w100p margin-t16" id="passive">
             <tr class="h64"><th class="w25p">Passive</th><th>Description</th></tr>
             <tr>
@@ -271,7 +291,6 @@ class CharacterPage {
 
     constellationList() {
         let constellations = `
-        <button class="default-color float-left margin-t16 margin-r16" id="constellation-button"><span class="icon padding-r8">&#xe5d7;</span>Constellation</button>
         <table class="float-left w100p margin-t16" id="constellation">
             <tr class="h64"><th class="w25p">Constellation</th><th>Description</th></tr>
             <tr>
@@ -305,7 +324,6 @@ class CharacterPage {
 
     ascension() {
         let ascensionCards = `
-        <button class="default-color float-left margin-t16 margin-r16" id="asc-button"><span class="icon padding-r8">&#xe5d7;</span>Ascension</button>
         <div class="float-left w100p margin-t16" id="asc"><div class="flex-container w100p">
         `;
 
@@ -330,7 +348,6 @@ class CharacterPage {
     
     skillUpgrade() {
         let skillCards = `
-        <button class="default-color float-left margin-t16 margin-r16" id="skill-upgrade-button"><span class="icon padding-r8">&#xe5d7;</span>Skill</button>
         <div class="float-left w100p margin-t16" id="skill-upgrade"><div class="flex-container w100p">
         `;
 
@@ -376,7 +393,6 @@ class CharacterPage {
         }
         // ! HTML
         let totalCards = `
-        <button class="default-color float-left margin-t16 margin-r16" id="total-button"><span class="icon padding-r8">&#xe5d7;</span>Total</button>
         <div class="float-left flex-container w100p margin-t16" id="total">`;
         // * Table Created
         totalCards += `<table class="flex-1 h640"><tr class="h64"><th>Total Ascension Cost</th</tr>`
@@ -436,70 +452,34 @@ class CharacterPage {
     }
 
     render() {
-        // TODO Collapse Buttons!
-        let skillAttributes = this.getSkillAttributes();
-        $("#content-window").empty();
-        $("#content-window").append(this.HTML()).hide();
+        $("#content-window").fadeOut(125);
+        $("#content-window").html(this.HTML()).hide();
         $("#content-window").fadeIn(125);
+
         // SUBSECTION Event Listeners
-        $("#attack-input").change(() => {
-            $("#attack").html(formatSkill(skillAttributes[0], this.value-1));
-            $("#attack-slider").val(this.value);
-        })
-        $("#attack-slider").change(() => {
-            $("#attack").html(formatSkill(skillAttributes[0], this.value-1));
-            $("#attack-input").val(this.value);
-        })
-        $("#skill-input").change(() => {
-            $("#skill").html(formatSkill(skillAttributes[1], this.value-1));
-            $("#skill-slider").val(this.value);
-        })
-        $("#skill-slider").change(() => {
-            $("#skill").html(formatSkill(skillAttributes[1], this.value-1));
-            $("#skill-input").val(this.value);
-        })
-        $("#burst-input").change(() => {
-            $("#burst").html(formatSkill(skillAttributes[2], this.value-1));
-            $("#burst-slider").val(this.value);
-        })
-        $("#burst-slider").change(() => {
-            $("#burst").html(formatSkill(skillAttributes[2], this.value-1));
-            $("#burst-input").val(this.value);
-        })
-        // SUBSECTION Collapse Buttons
-        $("#hide-all").click(() => {
-            $("#description").hide();
-            $("#skill").hide();
-            $("#passive").hide();
-            $("#constellation").hide();
-            $("#asc").hide();
-            $("#skill-upgrade").hide();
-            $("#total").hide();
-        })
-        $("#desc-button").click(() => {
-            $("#description").toggle();
-        })
-        $("#skill-button").click(() => {
-            $("#skill").toggle();
-        })
-        $("#passive-button").click(() => {
-            $("#passive").toggle();
-        })
-        $("#constellation-button").click(() => {
-            $("#constellation").toggle();
-        })
-        $("#asc-button").click(() => {
-            $("#asc").toggle();
-        })
-        $("#skill-upgrade-button").click(() => {
-            $("#skill-upgrade").toggle();
-        })
-        $("#total-button").click(() => {
-            $("#total").toggle();
-        })
+        let skillAttributes = this.getSkillAttributes();
+        this.attachTalentListener("attack", skillAttributes[0]);
+        this.attachTalentListener("skill", skillAttributes[1]);
+        this.attachTalentListener("burst", skillAttributes[2]);
+        
         // SUBSECTION Accent
         this.setAccent();
     }
+    // SECTION Event Listeners/Wrapeprs
+    attachTalentListener(name, skillAttributes) {
+        $(`#${name}-input`).change(function() {
+            $(`#talent-${name}`).html(formatSkill(skillAttributes, this.value-1));
+            $(`#${name}-slider`).val(this.value);
+        });
+        $(`#${name}-slider`).change(function() {
+            $(`#talent-${name}`).html(formatSkill(skillAttributes, this.value-1));
+            $(`#${name}-input`).val(this.value);
+        });
+    }
+    descriptionToggle() {
+        
+    }
+    // !SECTION
     // !SECTION
     // !SECTION
 }

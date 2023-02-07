@@ -1,4 +1,11 @@
-// SECTION Icon-Related
+// SECTION HTML
+function button(icon = '', text, onclick, variant = '') {
+    return `
+    <button class="default-color float-left margin-t16 margin-r16" onclick="${onclick.replaceAll(/["`']/g,"'")}" variant="${variant}">
+        ${(icon == '')? ``:`<span class="icon padding-r8">${icon}</span>`}${text}
+    </button>`;
+}
+
 function asStars(num) {
     return `<span class="icon padding-r8">${"&#xE838;".repeat(num)}</span>`
 }
@@ -53,7 +60,7 @@ function asIcon(string) {
     return "";
 }
 // !SECTION
-// SECTION Text
+// SECTION Text as HTML
 function formatParagraph(string) {
     return string
     .replaceAll("\n", "</br>")
