@@ -1,4 +1,4 @@
-// SECTION JSON Data
+// SECTION Sectioned JSON Data
 
 class Character {
     // SECTION Character
@@ -91,7 +91,7 @@ class ConstellationList {
     // !SECTION
 }
 
-// !SECTION
+// !SECTION Sectioned JSON Data
 
 // SECTION Web/Render
 
@@ -112,7 +112,7 @@ class CharacterPage {
     // SECTION Returns HTML
     // NOTE HTML -> String-formatted HTML
     HTML() {
-        let total = `
+        let html = `
             <div class="margin-16">
                 ${this.header()}
                 ${this.coverInfo()}
@@ -150,18 +150,18 @@ class CharacterPage {
                 <div class="clear-float w100p h16"></div>
             </div>
         `;
-        return total;
+        return html;
     }
     
     header() {
         let header = `
             <div class="h96 w100p accent-1 rounded relative flex-container">
-                <div class="flex-1 f20">${asElement(this["character"]["element"])}</div>
+                <div class="flex-1 f24">${asElement(this["character"]["element"])}</div>
                 <div class="flex-1">
                     <div>${this["character"]["title"]}</div>
                     <div class="f24 header">${this["character"]["name"]}</div>
                 </div>
-                <div class="flex-1 f20">${asStars(this["character"]["rarity"])}</div>
+                <div class="flex-1 f24">${asStars(this["character"]["rarity"])}</div>
             </div>
         `;
         return header;
@@ -411,10 +411,9 @@ class CharacterPage {
         }
         totalCards += `</table></div>`;
         return totalCards;
-        // !SECTION
     }
 
-    // !SECTION
+    // !SECTION Returns HTML
 
     getSkillAttributes() {
         return [
@@ -461,7 +460,7 @@ class CharacterPage {
         this.attachTalentListener("attack", skillAttributes[0]);
         this.attachTalentListener("skill", skillAttributes[1]);
         this.attachTalentListener("burst", skillAttributes[2]);
-        
+
         // SUBSECTION Accent
         this.setAccent();
     }
@@ -479,9 +478,8 @@ class CharacterPage {
     descriptionToggle() {
         
     }
-    // !SECTION
-    // !SECTION
-    // !SECTION
+    // !SECTION Event Listeners
+    // !SECTION Render-related
+    // !SECTION CharacterPage
 }
-
-// !SECTION
+// !SECTION Web/Render

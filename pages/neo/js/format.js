@@ -1,4 +1,5 @@
 // SECTION HTML
+
 function button(icon = '', text, onclick, variant = '') {
     return `
     <button class="default-color float-left margin-t16 margin-r16" onclick="${onclick.replaceAll(/["`']/g,"'")}" variant="${variant}">
@@ -6,56 +7,65 @@ function button(icon = '', text, onclick, variant = '') {
     </button>`;
 }
 
+function iconTemplate(icons) {
+    return `<span class="icon padding-r8">${icons}</span>`;
+}
+
 function asStars(num) {
-    return `<span class="icon padding-r8">${"&#xE838;".repeat(num)}</span>`
+    return iconTemplate("&#xE838".repeat(num));
 }
 
 function asElement(element) {
     let elementLower = element.toLowerCase();
     switch(elementLower) {
         case 'pyro':
-            return `<span class="icon padding-r8">&#xf16a;</span>`
+            return iconTemplate("&#xf16a");
         case 'hydro':
-            return `<span class="icon padding-r8">"&#xe798;</span>`
+            return iconTemplate("&#xe798");
         case 'electro':
-            return `<span class="icon padding-r8">&#xea0b;</span>`
+            return iconTemplate("&#xea0b");
         case 'dendro':
-            return `<span class="icon padding-r8">&#xea35;</span>`
+            return iconTemplate("&#xea35");
         case 'cryo':
-            return `<span class="icon padding-r8">"&#xeb3b;</span>`
+            return iconTemplate("&#xeb3b");
         case 'anemo':
-            return `<span class="icon padding-r8">&#xefd8;</span>`
+            return iconTemplate("&#xefd8");
         case 'geo':
-            return `<span class="icon padding-r8">&#xe3f7;</span>`
+            return iconTemplate("&#xe3f7");
     }
     return "";
 }
 
 function asIcon(string) {
     let stringLower = string.toLowerCase();
+    let icon = `<span class="icon padding-r8"><icon></span>`
     switch(stringLower) {
         case 'element':
-            return `<span class="icon padding-r8">&#xf16b;</span>`;
+            return iconTemplate("&#xf16b");
         case 'weapon':
-            return `<span class="icon padding-r8">&#xf889;</span>`;
+            return iconTemplate("&#xf889");
         case 'substat':
-            return `<span class="icon padding-r8">&#xe4fc;</span>`;
+            return iconTemplate("&#xe4fc");
         case 'region':
-            return `<span class="icon padding-r8">&#xe56a;</span>`;
+            return iconTemplate("&#xe56a");
         case 'constellation':
-            return `<span class="icon padding-r8">&#xe65f;</span>`;
+            return iconTemplate("&#xe65f");
         case 'gender':
-            return `<span class="icon padding-r8">&#xe63d;</span>`;
+            return iconTemplate("&#xe63d");
         case 'birthday':
-            return `<span class="icon padding-r8">&#xe7e9;</span>`;
+            return iconTemplate("&#xe7e9");
         case 'voice':
-            return `<span class="icon padding-r8">&#xef49;</span>`;
+            return iconTemplate("&#xef49");
         case 'attack':
-            return `<span class="icon padding-r8">&#xf84b;</span>`;
+            return iconTemplate("&#xf84b");
         case 'skill':
-            return `<span class="icon padding-r8">&#xe1ad;</span>`;
+            return iconTemplate("&#xe1ad");
         case 'burst':
-            return `<span class="icon padding-r8">&#xe1ac;</span>`;
+            return iconTemplate("&#xe1ac");
+        case 'baseattack':
+            return iconTemplate("&#xf092");
+        case 'basesubstat':
+            return iconTemplate("&#xe4fb");
     }
     return "";
 }
