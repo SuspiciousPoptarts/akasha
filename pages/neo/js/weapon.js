@@ -46,10 +46,30 @@ class WeaponPage {
         <div class="margin-16">
             ${this.header()}
             ${this.coverInfo()}
+
+            ${button("&#xe5d7;", "Hide All", `
+                    $("#description").hide();
+                    $("#story").hide();
+                    $("#effect").hide();
+                    $("#asc").hide();
+                    $("#total").hide();
+            `)}
+
+            ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.descriptionBlock()}
+
+            ${button("&#xe5d7;", "Story", `$("#story").toggle();`)}
             ${this.storyBlock()}
+
+            ${(this["effect"]["name"] == "")? "":`
+            ${button("&#xe5d7;", "Effect", `$("#effect").toggle();`)}`
+            }
             ${(this["effect"]["name"] == "")? "":this.effects()}
+
+            ${button("&#xe5d7;", "Ascension", `$("#asc").toggle();`)}
             ${this.ascension()}
+
+            ${button("&#xe5d7;", "Total", `$("#total").toggle();`)}
             ${this.total()}
             <div class="clear-float w100p h16"></div>
         </div>
@@ -177,7 +197,7 @@ class WeaponPage {
         // ! HTML
 
         // * Table Created
-        let totalCards = `<table class="float-left margin-t16 h640 w100p"><tr class="h64"><th>Total Ascension Cost</th</tr>`
+        let totalCards = `<table class="float-left margin-t16 h640 w100p" id="total"><tr class="h64"><th>Total Ascension Cost</th</tr>`
 
         // ? material -> "Mora", asccount["Mora"] -> 425,000
         for(let material in asccount) {
