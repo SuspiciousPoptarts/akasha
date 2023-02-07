@@ -32,6 +32,10 @@ window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
             let weapon = new WeaponPage(msg[1]);
             weapon.render()
             break;
+        case 'artifact':
+            let artifact = new ArtifactPage(msg[1]);
+            artifact.render()
+            break;
         default:
             console.warn(`Unknown query response:\n[\n\ttype: {${msg[0]}}\n\tdata: {${msg[1]}}\n]`)
             break;

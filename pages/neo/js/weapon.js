@@ -1,8 +1,7 @@
-// SECTION Web/Render
-class WeaponPage {
-
-    constructor(wepjson) {
-        let json = JSON.parse(wepjson);
+// SECTION Sectioned JSON Data
+class Weapon {
+    constructor(data) {
+        let json = JSON.parse(data);
 
         // NOTE Info
         this["name"] = json["name"];
@@ -38,9 +37,18 @@ class WeaponPage {
         // NOTE Images
         this["icon"] = json["images"]["icon"];
         this["iconAwakened"] = json["images"]["awakenicon"];
+    }
+}
+// !SECTION Sectioned JSON Data
+// SECTION Web/Render
+class WeaponPage {
 
+    constructor(wepjson) {
+        this["weapon"] = new Weapon(wepjson);
     }
 
+    // SECTION Returns HTML
+    // NOTE HTML -> String-formatted HTML
     HTML() {
         let html = `
         <div class="margin-16">
@@ -61,10 +69,10 @@ class WeaponPage {
             ${button("&#xe5d7;", "Story", `$("#story").toggle();`)}
             ${this.storyBlock()}
 
-            ${(this["effect"]["name"] == "")? "":`
+            ${(this["weapon"]["effect"]["name"] == "")? "":`
             ${button("&#xe5d7;", "Effect", `$("#effect").toggle();`)}`
             }
-            ${(this["effect"]["name"] == "")? "":this.effects()}
+            ${(this["weapon"]["effect"]["name"] == "")? "":this.effects()}
 
             ${button("&#xe5d7;", "Ascension", `$("#asc").toggle();`)}
             ${this.ascension()}
@@ -77,12 +85,11 @@ class WeaponPage {
         return html;
     }
 
-    // SECTION Returns HTML
     header() {
         let header = `
             <div class="h96 w100p accent-1 rounded relative flex-container">
-                <div class="flex-1 f24 header">${this["name"]}</div>
-                <div class="flex-1 f20">${asStars(this["rarity"])}</div>
+                <div class="flex-1 f24 header">${this["weapon"]["name"]}</div>
+                <div class="flex-1 f20">${asStars(this["weapon"]["rarity"])}</div>
             </div>
         `;
         return header;
@@ -92,25 +99,25 @@ class WeaponPage {
         let coverInfo = `
             <div class="flex-container w100p h528 margin-t16">
                 <div>
-                <image class="w256 h256 block margin-b16" src="${this["icon"]}" onerror="this.src='data/qm.png'"></image>
-                <image class="w256 h256 block" src="${this["iconAwakened"]}" onerror="this.src='data/qm.png'"></image>
+                <image class="w256 h256 block margin-b16" src="${this["weapon"]["icon"]}" onerror="this.src='data/qm.png'"></image>
+                <image class="w256 h256 block" src="${this["weapon"]["iconAwakened"]}" onerror="this.src='data/qm.png'"></image>
                 </div>
                 <table class="flex-1 h100p">
                     <tr>
                         <td class="t-left w50p">${asIcon("weapon")}Weapon</td>
-                        <td class="t-left">${this["weaponType"]}</td>
+                        <td class="t-left">${this["weapon"]["weaponType"]}</td>
                     </tr>
                     <tr>
                         <td class="t-left w50p">${asIcon("baseAttack")}Base Attack Value</td>
-                        <td class="t-left">${this["baseAttack"]}</td>
+                        <td class="t-left">${this["weapon"]["baseAttack"]}</td>
                     </tr>
                     <tr>
                         <td class="t-left w50p">${asIcon("substat")}Substat</td>
-                        <td class="t-left">${this["substat"]}</td>
+                        <td class="t-left">${this["weapon"]["substat"]}</td>
                     </tr>
                     <tr>
                         <td class="t-left w50p">${asIcon("baseSubstat")}Base Substat Value</td>
-                        <td class="t-left">${this["baseSubstat"]}${(this["substat"] == "Elemental Mastery" || this["substat"] == "")? "":"%"}</td>
+                        <td class="t-left">${this["weapon"]["baseSubstat"]}${(this["weapon"]["substat"] == "Elemental Mastery" || this["weapon"]["substat"] == "")? "":"%"}</td>
                     </tr>
                 </table>
             </div>
@@ -122,7 +129,7 @@ class WeaponPage {
         let description = `
             <table class="float-left w100p margin-t16" id="description">
                 <tr class="h64"><th>Description</th></tr>
-                <tr><td>${this["description"]}</td></tr>
+                <tr><td>${this["weapon"]["description"]}</td></tr>
             </table>
         `;
         return description;
@@ -132,7 +139,7 @@ class WeaponPage {
         let description = `
             <table class="float-left w100p margin-t16" id="story">
                 <tr class="h64"><th>Story</th></tr>
-                <tr class="t-left"><td>${this["story"]}</td></tr>
+                <tr class="t-left"><td>${this["weapon"]["story"]}</td></tr>
             </table>
         `;
         return description;
@@ -143,8 +150,8 @@ class WeaponPage {
         <table class="float-left w100p margin-t16" id="effect">
         <tr class="h64"><th>Effect</th><th class="w50p">Description</th><th class="w128">Refinement</th></tr>
         <tr class="h256">
-            <td class="t-left t-top">${asIcon("skill")}${this["effect"]["name"]}</td>
-            <td class="t-left t-top" id="stat-effect">${formatEffect(this["effect"])}</td>
+            <td class="t-left t-top">${asIcon("skill")}${this["weapon"]["effect"]["name"]}</td>
+            <td class="t-left t-top" id="stat-effect">${formatEffect(this["weapon"]["effect"])}</td>
             <td class="t-left t-top">
                 <input type="text" value="1" class="w128 buoy" id="effect-input"></input>
                 <input type="range" variant="vertical" class="buoy margin-t112" value="1" min="1" max="5" id="effect-slider">
@@ -161,13 +168,13 @@ class WeaponPage {
         `;
 
         // ? ascension -> 1,2,3,4,5,6
-        for(let ascension in this["ascensionCosts"]) {
+        for(let ascension in this["weapon"]["ascensionCosts"]) {
             // ? (i.e, 1* weapons have no asc5)
-            if(this["ascensionCosts"][ascension] == undefined) break; 
+            if(this["weapon"]["ascensionCosts"][ascension] == undefined) break; 
             // * Table Created
             ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th>Ascension ${ascension}</th></tr>`
 
-            for(let material of this["ascensionCosts"][ascension]) {
+            for(let material of this["weapon"]["ascensionCosts"][ascension]) {
                 ascensionCards += `<tr class="t-left"><td>${material["count"]} ${material["name"]}</td></tr>`;
             }
             ascensionCards += `</table>`
@@ -184,10 +191,10 @@ class WeaponPage {
         // ! Tally
         let asccount = {};
 
-        for(let ascension in this["ascensionCosts"]) {
+        for(let ascension in this["weapon"]["ascensionCosts"]) {
             // ? (i.e, 1* weapons have no asc5)
-            if(this["ascensionCosts"][ascension] == undefined) break; 
-            for(let material of this["ascensionCosts"][ascension]) {
+            if(this["weapon"]["ascensionCosts"][ascension] == undefined) break; 
+            for(let material of this["weapon"]["ascensionCosts"][ascension]) {
                 // ? asccount["Mora"] exists? -> 
                 if(!asccount[material["name"]]) { asccount[material["name"]] = material["count"]; }
                 else { asccount[material["name"]] += material["count"]; }
@@ -211,7 +218,7 @@ class WeaponPage {
     // !SECTION Returns HTML
     // SECTION Render-related Members
     setAccent() {
-        switch(this["rarity"]) {
+        switch(this["weapon"]["rarity"]) {
             case '5':
                 $(":root").get(0).style.setProperty("--accent-color", "var(--five-star-accent)");
                 break;
@@ -235,7 +242,7 @@ class WeaponPage {
         $("#content-window").html(this.HTML()).hide();
         $("#content-window").fadeIn(125);
 
-        if(this["effect"]["name"] != "") this.attachRefinementListener(this["effect"]);
+        if(this["weapon"]["effect"]["name"] != "") this.attachRefinementListener(this["weapon"]["effect"]);
 
         this.setAccent();
 
