@@ -5,14 +5,15 @@ Why? A rewrite was required to correct some serious project issues that made it 
 ## Parity Checklist
 * Search ✅ (Exact Match, RegEx, Fuzzy Search!)
 * Characters ✅
-* Weapons 🏗️ (0%)
-* Artifacts
+* Weapons ✅
+* Artifacts 🏗️ (0%)
 * Materials
 * Food
 * Animals
 * Enemies
 * Theme-ing
 * Linkables
+* Lists
 
 ## Goals
 * [Genshin Optimizer](https://frzyc.github.io/genshin-optimizer/)-like G.O.O.D. db & management
