@@ -64,10 +64,10 @@ class WeaponPage {
             `)}
 
             ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
-            ${this.descriptionBlock()}
+            ${this.description()}
 
             ${button("&#xe5d7;", "Story", `$("#story").toggle();`)}
-            ${this.storyBlock()}
+            ${this.story()}
 
             ${(this["weapon"]["effect"]["name"] == "")? "":`
             ${button("&#xe5d7;", "Effect", `$("#effect").toggle();`)}`
@@ -125,7 +125,7 @@ class WeaponPage {
         return coverInfo;
     }
 
-    descriptionBlock() {
+    description() {
         let description = `
             <table class="float-left w100p margin-t16" id="description">
                 <tr class="h64"><th>Description</th></tr>
@@ -135,7 +135,7 @@ class WeaponPage {
         return description;
     }
 
-    storyBlock() {
+    story() {
         let description = `
             <table class="float-left w100p margin-t16" id="story">
                 <tr class="h64"><th>Story</th></tr>
