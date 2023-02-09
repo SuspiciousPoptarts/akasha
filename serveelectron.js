@@ -15,12 +15,9 @@ const artifactList = genshindb.artifacts("names", { matchCategories: true }).map
 
 const foodList = genshindb.foods("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
 const materialList = genshindb.materials("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
-const recipeList = genshindb.crafts("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
 
 const animalList = genshindb.animals("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
 const enemyList = genshindb.enemies("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
-
-const elementList = genshindb.elements("names", { matchCategories: true }).map((element) => { return element.replaceAll(filter, "").toLowerCase(); });
 
 const searchableList = [].concat(charList, weaponList, artifactList, foodList, materialList, animalList, enemyList);
 
@@ -63,28 +60,50 @@ function levDistance(comparator, comparatee) {
 
 function gdbQuery(query) {
   let lowerQuery = aliasForQuery(query.toLowerCase());
-  
-  // EXACT MATCHES
 
-  if (charList.includes(lowerQuery)) { return ["character", JSON.stringify(genshindb.characters(lowerQuery)), JSON.stringify(genshindb.talents(lowerQuery)), JSON.stringify(genshindb.constellations(lowerQuery))] }
-  else if (weaponList.includes(lowerQuery)) { return ["weapon", JSON.stringify(genshindb.weapons(lowerQuery))] }
-  else if (foodList.includes(lowerQuery)) { return ["food", JSON.stringify(genshindb.foodList(lowerQuery))] }
-  else if (artifactList.includes(lowerQuery)) { return ["artifact", JSON.stringify(genshindb.artifacts(lowerQuery))] }
-  else if (materialList.includes(lowerQuery)) { return ["material", JSON.stringify(genshindb.materials(lowerQuery))] }
-  else if (animalList.includes(lowerQuery)) { return ["animal", JSON.stringify(genshindb.animals(lowerQuery))] }
-  else if (enemyList.includes(lowerQuery)) { return ["enemy", JSON.stringify(genshindb.enemies(lowerQuery))] }
+  // ? EXACT MATCHES
+  if (charList.includes(lowerQuery)) {
+    return [
+      "character",
+      JSON.stringify(genshindb.characters(lowerQuery)),
+      JSON.stringify(genshindb.talents(lowerQuery)),
+      JSON.stringify(genshindb.constellations(lowerQuery))
+    ];
+  }
+  else if (weaponList.includes(lowerQuery)) {
+    return ["weapon", JSON.stringify(genshindb.weapons(lowerQuery))]
+  }
+  else if (foodList.includes(lowerQuery)) {
+    return ["food", JSON.stringify(genshindb.foodList(lowerQuery))]
+  }
+  else if (artifactList.includes(lowerQuery)) {
+    return ["artifact", JSON.stringify(genshindb.artifacts(lowerQuery))]
+  }
+  else if (materialList.includes(lowerQuery)) {
+    return [
+      "material",
+      JSON.stringify(genshindb.materials(lowerQuery)),
+      JSON.stringify(genshindb.crafts(lowerQuery))
+    ]
+  }
+  else if (animalList.includes(lowerQuery)) {
+    return ["animal", JSON.stringify(genshindb.animals(lowerQuery))]
+  }
+  else if (enemyList.includes(lowerQuery)) {
+    return ["enemy", JSON.stringify(genshindb.enemies(lowerQuery))]
+  }
 
-  // NON-EXACT MATCHES
+  // ? NON-EXACT MATCHES
   let matches = [];
 
-  // REGEX LAYER
+  // ? REGEX LAYER
   const regEx = new RegExp(lowerQuery);
 
   searchableList.forEach((term) => {
     if (term.match(regEx)) matches.push([term, levDistance(term, lowerQuery)]);
   })
 
-  // FUZZY SEARCH LAYER (ONLY ACTIVE IF 0 REGEX MATCHES, ASSUMES FIRST CHARACTER CORRECT)
+  // ? FUZZY SEARCH LAYER (ONLY ACTIVE IF 0 REGEX MATCHES, ASSUMES FIRST CHARACTER CORRECT)
   if (matches.length == 0) {
     searchableList.forEach((term) => {
       if (lowerQuery[0] == term[0]) matches.push([term, levDistance(term, lowerQuery)]);
@@ -122,13 +141,17 @@ const createWindow = () => {
   });
 
   // LISTENERS
-  ipcMain.on("gdb-query", (event, msg) => {
+  ipcMain.on("gdb-query-render", (event, msg) => {
 
     win.webContents.send(
-      "gdb-receiveResponse",
+      "gdb-receiveResponse-render",
       gdbQuery(msg)
     );
 
+  })
+
+  ipcMain.handle("gdb-query", async (event, msg) => {
+    return gdbQuery(msg);
   })
 
 };

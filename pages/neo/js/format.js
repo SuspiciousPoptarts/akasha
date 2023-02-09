@@ -66,6 +66,10 @@ function asIcon(string) {
             return iconTemplate("&#xf092");
         case 'basesubstat':
             return iconTemplate("&#xe4fb");
+        case 'type':
+            return iconTemplate("&#xead3");
+        case 'category':
+            return iconTemplate("&#xe574");
     }
     return "";
 }

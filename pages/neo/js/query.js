@@ -9,7 +9,7 @@ $("#search").keypress(function (e) {
             `${this.value[0].toUpperCase()}${this.value.slice(1)}`
             .replaceAll(filter,"")
         
-            window.electronAPI.queryGenshinDB(queryValue);
+            window.electronAPI.queryGenshinDBRender(queryValue);
 
         this.value = "";
     }
@@ -19,7 +19,7 @@ $("#search").keypress(function (e) {
 
 // SECTION IPC
 
-window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
+window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
     
     $("#content-window").fadeOut(125, function () {
     switch(msg[0]) {
@@ -36,6 +36,10 @@ window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
             let artifact = new ArtifactPage(msg[1]);
             artifact.render()
             break;
+        case 'material':
+            let material = new MaterialPage(msg[1],msg[2]);
+            material.render()
+            break;
         default:
             console.warn(`Unknown query response:\n[\n\ttype: {${msg[0]}}\n\tdata: {${msg[1]}}\n]`)
             break;
@@ -47,3 +51,9 @@ window.electronAPI.on("gdb-receiveResponse", async(event, msg) => {
 });
 
 // !SECTION
+
+// SECTION asLinkable (HTML)
+    function asLinkable(display, query) {
+        return `<a onclick="window.electronAPI.queryGenshinDBRender('${query.replaceAll(filter,'')}')">${display}</a>`;
+    }
+// !SECTION asLinkable

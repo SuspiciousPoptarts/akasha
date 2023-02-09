@@ -1298,6 +1298,10 @@
     padding-bottom: 4px;
 }
 
+.padding-4 {
+    padding: 4px;
+}
+
 .padding-16 {
     padding: 16px;
 }
@@ -1606,6 +1610,7 @@ a {
 }
 
 a:hover {
+    cursor: pointer;
     text-decoration: underline;
     filter: var(--hover-brightness);
 }

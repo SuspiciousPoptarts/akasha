@@ -116,7 +116,7 @@ class CharacterPage {
 
     // SECTION Returns HTML
     // NOTE HTML -> String-formatted HTML
-    HTML() {
+    async HTML() {
         let html = `
             <div class="margin-16">
                 ${this.header()}
@@ -145,13 +145,13 @@ class CharacterPage {
                 ${this.constellationList()}
 
                 ${button("&#xe5d7;", "Ascension", `$("#asc").toggle();`)}
-                ${this.ascension()}
+                ${await this.ascension()}
 
                 ${button("&#xe5d7;", "Skill", `$("#skill-upgrade").toggle();`)}
-                ${this.skillUpgrade()}
+                ${await this.skillUpgrade()}
 
                 ${button("&#xe5d7;", "Total", `$("#total").toggle();`)}
-                ${this.total()}
+                ${await this.total()}
                 <div class="clear-float w100p h16"></div>
             </div>
         `;
@@ -327,7 +327,7 @@ class CharacterPage {
         return constellations;
     }
 
-    ascension() {
+    async ascension() {
         let ascensionCards = `
         <div class="float-left w100p margin-t16" id="asc"><div class="flex-container w100p">
         `;
@@ -336,10 +336,25 @@ class CharacterPage {
         for(let ascension in this["character"]["ascensionCosts"]) {
 
             // * Table Created
-            ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th>Ascension ${ascension}</th></tr>`
+            ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th colspan="2">Ascension ${ascension}</th></tr>`
 
             for(let material of this["character"]["ascensionCosts"][ascension]) {
-                ascensionCards += `<tr class="t-left"><td>${material["count"]} ${material["name"]}</td></tr>`;
+
+                let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+                let image = JSON.parse(matQuery[1])["images"]["fandom"];
+
+                ascensionCards += `
+                <tr class="t-left">
+                    <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                    <td>
+                        ${
+                            asLinkable(
+                                `${material["count"]} ${material["name"]}`,
+                                material["name"]
+                            )
+                        }
+                    </td>
+                </tr>`;
             }
             ascensionCards += `</table>`
             // * Div Created @ Iter 3
@@ -351,7 +366,7 @@ class CharacterPage {
         return ascensionCards;
     }
     
-    skillUpgrade() {
+    async skillUpgrade() {
         let skillCards = `
         <div class="float-left w100p margin-t16" id="skill-upgrade"><div class="flex-container w100p">
         `;
@@ -360,10 +375,25 @@ class CharacterPage {
         for(let level in this["talents"]["costs"]) {
 
             // * Table Created
-            skillCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th>Skill Upgrade ${level}</th></tr>`
+            skillCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th colspan="2">Skill Upgrade ${level}</th></tr>`
 
             for(let material of this["talents"]["costs"][level]) {
-                skillCards += `<tr class="t-left"><td>${material["count"]} ${material["name"]}</td></tr>`;
+
+                let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+                let image = JSON.parse(matQuery[1])["images"]["fandom"];
+
+                skillCards += `
+                <tr class="t-left">
+                    <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                    <td>
+                        ${
+                            asLinkable(
+                                `${material["count"]} ${material["name"]}`,
+                                material["name"]
+                            )
+                        }
+                    </td>
+                </tr>`;
             }
             skillCards += `</table>`
 
@@ -376,7 +406,7 @@ class CharacterPage {
         return skillCards;
     }
 
-    total() {
+    async total() {
         // ! Tally
         let asccount = {};
         let skillcount = {};
@@ -398,21 +428,51 @@ class CharacterPage {
         }
         // ! HTML
         let totalCards = `
-        <div class="float-left flex-container w100p margin-t16" id="total">`;
+        <div class="float-left flex-container w100p margin-t16 h688" id="total">`;
         // * Table Created
-        totalCards += `<table class="flex-1 h640"><tr class="h64"><th>Total Ascension Cost</th</tr>`
+        totalCards += `<table class="flex-1 h100p"><tr class="h64"><th colspan="2">Total Ascension Cost</th</tr>`
 
         // ? material -> "Mora", asccount["Mora"] -> 425,000
         for(let material in asccount) {
-            totalCards += `<tr class="t-left"><td>${asccount[material]} ${material}</td></tr>`
+
+            let matQuery = await window.electronAPI.queryGenshinDB(material);
+            let image = JSON.parse(matQuery[1])["images"]["fandom"];
+            
+            totalCards += `
+            <tr class="t-left">
+                <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                <td>
+                    ${
+                        asLinkable(
+                            `${asccount[material]} ${material}`,
+                            material
+                        )
+                    }
+                </td>
+            </tr>`
         }
 
         // * Table Created
-        totalCards += `</table><table class="flex-1 h640"><tr class="h64"><th>Total Skill Cost</th</tr>`
+        totalCards += `</table><table class="flex-1 h100p"><tr class="h64"><th colspan="2">Total Skill Cost</th</tr>`
 
         // ? material -> "Mora", skillcount["Mora"] -> 1,265,000
         for(let material in skillcount) {
-            totalCards += `<tr class="t-left"><td>${skillcount[material]} ${material}</td></tr>`
+
+            let matQuery = await window.electronAPI.queryGenshinDB(material);
+            let image = JSON.parse(matQuery[1])["images"]["fandom"];
+
+            totalCards += `
+            <tr class="t-left">
+                <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                <td>
+                    ${
+                        asLinkable(
+                            `${skillcount[material]} ${material}`,
+                            material
+                        )
+                    }
+                </td>
+            </tr>`
         }
         totalCards += `</table></div>`;
         return totalCards;
@@ -455,9 +515,9 @@ class CharacterPage {
         }
     }
 
-    render() {
+    async render() {
         $("#content-window").fadeOut(125);
-        $("#content-window").html(this.HTML()).hide();
+        $("#content-window").html(await this.HTML()).hide();
         $("#content-window").fadeIn(125);
 
         // SUBSECTION Event Listeners
