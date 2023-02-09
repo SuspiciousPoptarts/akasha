@@ -6,8 +6,8 @@ Why? A rewrite was required to correct some serious project issues that made it 
 * Search ✅ (Exact Match, RegEx, Fuzzy Search!)
 * Characters ✅
 * Weapons ✅
-* Artifacts 🏗️ (0%)
-* Materials
+* Artifacts ✅
+* Materials 🏗️ (0%)
 * Food
 * Animals
 * Enemies
