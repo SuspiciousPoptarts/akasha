@@ -7,12 +7,12 @@ Why? A rewrite was required to correct some serious project issues that made it 
 * Characters ✅
 * Weapons ✅
 * Artifacts ✅
-* Materials 🏗️ (0%)
-* Food
+* Materials ✅
+* Food 
 * Animals
-* Enemies
+* Enemies 🏗️ (0%)
 * Theme-ing
-* Linkables
+* Linkables ✅
 * Lists
 
 ## Goals
