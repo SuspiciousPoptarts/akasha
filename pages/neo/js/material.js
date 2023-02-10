@@ -2,6 +2,9 @@
 class Craft {
     constructor(data = "{}") {
         let json = JSON.parse(data);
+        // ? For checking if the recipe properly attributed.
+        this["name"] = json["name"];
+
         this["resultCount"] = json["resultCount"];
         this["recipe"] = json["recipe"];
     }
@@ -47,7 +50,7 @@ class MaterialPage {
             ${button("&#xe5d7;", "Sources", `$("#source").toggle();`)}
             ${this.source()}
 
-            ${(this["craft"]["recipe"])? `${await this.recipe()}`:``}
+            ${(this["craft"]["recipe"] && this["craft"]["name"] == this["material"]["name"])? `${await this.recipe()}`:``}
             <div class="clear-float w100p h16"></div>
         </div>
         `
