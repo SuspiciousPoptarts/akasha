@@ -79,6 +79,9 @@ function gdbQuery(query) {
   else if (artifactList.includes(lowerQuery)) {
     return ["artifact", JSON.stringify(genshindb.artifacts(lowerQuery))]
   }
+  else if (enemyList.includes(lowerQuery)) {
+    return ["enemy", JSON.stringify(genshindb.enemies(lowerQuery))]
+  }
   else if (materialList.includes(lowerQuery)) {
     return [
       "material",
@@ -86,12 +89,9 @@ function gdbQuery(query) {
       JSON.stringify(genshindb.crafts(lowerQuery))
     ]
   }
-  else if (animalList.includes(lowerQuery)) {
-    return ["animal", JSON.stringify(genshindb.animals(lowerQuery))]
-  }
-  else if (enemyList.includes(lowerQuery)) {
-    return ["enemy", JSON.stringify(genshindb.enemies(lowerQuery))]
-  }
+  // else if (animalList.includes(lowerQuery)) {
+  //   return ["animal", JSON.stringify(genshindb.animals(lowerQuery))]
+  // }
 
   // ? NON-EXACT MATCHES
   let matches = [];

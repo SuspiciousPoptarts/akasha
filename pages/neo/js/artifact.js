@@ -44,6 +44,15 @@ class ArtifactPage {
             ${this.header()}
             ${this.images()}
 
+            ${button("&#xe5d7;", "Hide All", `
+                    $("#effect").hide();
+                    $("#circlet").hide();
+                    $("#flower").hide();
+                    $("#feather").hide();
+                    $("#goblet").hide();
+                    $("#sands").hide();
+            `)}
+
             ${button("&#xe5d7;", "Set Bonus", `$("#effect").toggle();`)}
             ${this.effect()}
 

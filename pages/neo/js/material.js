@@ -42,8 +42,12 @@ class MaterialPage {
         let html = `
         <div class="margin-16">
             ${this.header()}
-            ${this.coverInfo()}
-
+            ${this.coverInfo()
+            }
+            ${button("&#xe5d7;", "Hide All", `
+                $("#description").hide();
+                $("#source").hide();
+            `)}
             
             ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.description()}

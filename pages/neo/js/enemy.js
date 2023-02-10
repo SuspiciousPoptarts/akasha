@@ -25,6 +25,11 @@ class EnemyPage {
         <div class="margin-16">
             ${this.header()}
 
+            ${button("&#xe5d7;", "Hide All", `
+                $("#description").hide();
+                $("#drops").hide();
+            `)}
+
             ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.description()}
 

@@ -50,6 +50,10 @@ window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
             let food = new FoodPage(msg[1]);
             food.render()
             break;
+        case 'animal':
+            let animal = new AnimalPage(msg[1]);
+            animal.render()
+            break;
         default:
             console.warn(`Unknown query response:\n[\n\ttype: {${msg[0]}}\n\tdata: {${msg[1]}}\n]`)
             break;

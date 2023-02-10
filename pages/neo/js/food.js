@@ -34,7 +34,14 @@ class FoodPage {
         let html = `
         <div class="margin-16">
             ${this.header()}
-            
+
+            ${button("&#xe5d7;", "Hide All", `
+                $("#description").hide();
+                $("#specialty").hide();
+                $("#effect").hide();
+                $("#recipe").hide();
+            `)}
+
             ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.description()}
             
