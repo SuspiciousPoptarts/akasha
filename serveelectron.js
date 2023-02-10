@@ -74,7 +74,7 @@ function gdbQuery(query) {
     return ["weapon", JSON.stringify(genshindb.weapons(lowerQuery))]
   }
   else if (foodList.includes(lowerQuery)) {
-    return ["food", JSON.stringify(genshindb.foodList(lowerQuery))]
+    return ["food", JSON.stringify(genshindb.foods(lowerQuery))]
   }
   else if (artifactList.includes(lowerQuery)) {
     return ["artifact", JSON.stringify(genshindb.artifacts(lowerQuery))]

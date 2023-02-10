@@ -40,7 +40,11 @@ class MaterialPage {
         <div class="margin-16">
             ${this.header()}
             ${this.coverInfo()}
+
+            
+            ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.description()}
+            ${button("&#xe5d7;", "Sources", `$("#source").toggle();`)}
             ${this.source()}
 
             ${(this["craft"]["recipe"])? `${await this.recipe()}`:``}
@@ -83,7 +87,7 @@ class MaterialPage {
 
     description() {
         let description = `
-            <table class="float-left w100p h100p margin-t16">
+            <table class="float-left w100p h100p margin-t16" id="description">
                 <tr><th>Description</th></tr>
                 <tr>
                     <td>${this["material"]["description"]}</td>
@@ -95,7 +99,7 @@ class MaterialPage {
     }
 
     source() {
-        let sources = `<table class="float-left w100p margin-t16"><tr class="h64"><th>Sources</th></tr>`;
+        let sources = `<table class="float-left w100p margin-t16" id="source"><tr class="h64"><th>Sources</th></tr>`;
 
         for(let source of this["material"]["source"]) {
             sources += `

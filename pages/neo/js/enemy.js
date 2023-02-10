@@ -24,7 +24,11 @@ class EnemyPage {
         let html = `
         <div class="margin-16">
             ${this.header()}
+
+            ${button("&#xe5d7;", "Description", `$("#description").toggle();`)}
             ${this.description()}
+
+            ${button("&#xe5d7;", "Drops", `$("#drops").toggle();`)}
             ${await this.drops()}
             <div class="clear-float w100p h16"></div>
         </div>
@@ -62,7 +66,7 @@ class EnemyPage {
     }
 
     async drops() {
-        let drops = `<table class="w100p float-left margin-t16"><tr class="h64"><th colspan="2">Reward Preview</th></tr>`;
+        let drops = `<table class="w100p float-left margin-t16" id="drops"><tr class="h64"><th colspan="2">Reward Preview</th></tr>`;
 
         for(let material of this["enemy"]["drops"]) {
             
