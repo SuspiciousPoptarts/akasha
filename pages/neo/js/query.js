@@ -24,6 +24,7 @@ window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
     $("#content-window").fadeOut(125, function () {
     switch(msg[0]) {
         case 'character':
+            // ? msg[1] = CharData, msg[2] = TalentData, msg[3] = ConstellationData
             let character = new CharacterPage(msg[1],msg[2],msg[3]);
             if(!character["character"]) { console.warn(`Query responded with Traveler (Aether, Lumine), not defined!`) }
             else { character.render(); }
@@ -37,8 +38,13 @@ window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
             artifact.render()
             break;
         case 'material':
+            // ? msg[1] = MaterialData, msg[2] = RecipeData
             let material = new MaterialPage(msg[1],msg[2]);
             material.render()
+            break;
+        case 'enemy':
+            let enemy = new EnemyPage(msg[1]);
+            enemy.render()
             break;
         default:
             console.warn(`Unknown query response:\n[\n\ttype: {${msg[0]}}\n\tdata: {${msg[1]}}\n]`)

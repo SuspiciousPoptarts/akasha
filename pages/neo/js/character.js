@@ -540,9 +540,6 @@ class CharacterPage {
             $(`#${name}-input`).val(this.value);
         });
     }
-    descriptionToggle() {
-        
-    }
     // !SECTION Event Listeners
     // !SECTION Render-related
     // !SECTION CharacterPage
