@@ -7,6 +7,7 @@ $("#map").click(() => {
     $(":root").get(0).style.setProperty("--accent-color", "");
 })
 
+// SECTION Theme
 $("#theme").click(async() => {
     $("#content-window").fadeOut(125);
     $("#content-window").html(`${theme()}`).hide();
@@ -44,17 +45,30 @@ $("#theme").click(async() => {
 
     $("#content-window").fadeIn(125);
 
-    attachThemeEventListeners();
+    $("#save").click(async() => {
+        window.electronAPI.writeToTheme(await compileTheme());
+    })
+    $("#reset").click(async() => {
+        window.electronAPI.writeToTheme(`@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');:root{--badge:url("https://static.wikia.nocookie.net/gensin-impact/images/b/b5/Icon_Emoji_Paimon%27s_Paintings_19_Nahida_1.png/revision/latest?cb=20221124043001");--badge-radius:32px;--corner-radius:8px;--border-style:solid;--font-family:'Roboto Flex';--background-color:#3b4255;--border-color:#5c6284;--shadow-color:#242632;--accent-color:#ede5d8;--font-color:#f6f3ec;--icon-color:#e0e0e0;--pyro-accent:#d24646;--hydro-accent:#4487d5;--electro-accent:#9f79d7;--dendro-accent:#cfda72;--cryo-accent:#a1cee2;--anemo-accent:#79cda9;--geo-accent:#e4ca86;--five-star-accent:#d3a15a;--four-star-accent:#a083d2;--three-star-accent:#5594dd;--two-star-accent:#98aab3;--one-star-accent:#ababab;--card-shadow:var(--shadow-color) 0px 0px 6px;--accent-font-color:var(--background-color);--universal-transition-time:all 0.5s;--hover-brightness:brightness(110%);--click-brightness:brightness(90%);--highlight-color:#7381d1;--body-margin:16px;--universal-padding:16px;--component-margin:16px;--font-size:12px;--slider-height:6px;--slider-knob-radius:50%;--slider-knob-height:13px;font-family:var(--font-family);background-color:var(--background-color);color:var(--font-color);font-size:var(--font-size);transition:var(--universal-transition-time);--inset-shadow:inset var(--shadow-color) 0px 0px 6px;}::selection{background-color:var(--highlight-color);color:white;}html{height:100%;width:100%;overflow:hidden;}`);
+    })
 
     // ? Set Accent to Default
     $(":root").get(0).style.setProperty("--accent-color", "");
     
 })
 
+function attachChangeListenerMulti(list, func) {
+    for(let element of list) {
+        $(element).change(func);
+    }
+}
+
 function theme() {
     let html = `
     <div class="margin-16">
-        <table class="w100p">
+        <button class="float-left" id="save"><span class="icon padding-r8">&#xe161;</span>Save</button>
+        <button class="float-left margin-l16" id="reset"><span class="icon padding-r8">&#xe28e;</span>Reset</button>
+        <table class="w100p margin-t16 float-left">
             <tr>
                 <th colspan="2">Badge</th>
             </tr>
@@ -68,7 +82,7 @@ function theme() {
             </tr>
         </table>
         
-        <table class="w100p margin-t16">
+        <table class="w100p margin-t16 float-left">
             <tr>
                 <th colspan="2">Universal</th>
             </tr>
@@ -82,7 +96,7 @@ function theme() {
             </tr>
         </table>
 
-        <table class="w100p margin-t16">
+        <table class="w100p margin-t16 float-left">
             <tr>
                 <th colspan="2">Body</th>
             </tr>
@@ -116,7 +130,7 @@ function theme() {
             </tr>
         </table>
 
-        <table class="w100p margin-t16">
+        <table class="w100p margin-t16 float-left">
             <tr>
                 <th colspan="2">Elemental Accents</th>
             </tr>
@@ -150,7 +164,7 @@ function theme() {
             </tr>
         </table>
 
-        <table class="w100p margin-t16">
+        <table class="w100p margin-t16 float-left">
             <tr>
                 <th colspan="2">Rarity Accents</th>
             </tr>
@@ -180,3 +194,79 @@ function theme() {
     `
     return html;
 }
+
+async function compileTheme() {
+    // ? Write to file
+    let newTheme = `
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500;8..144,600;8..144,700;8..144,800;8..144,900;8..144,1000&display=swap');
+
+    :root {
+
+        --badge: ${$("#badge").val()};
+        --badge-radius: ${$("#badge-radius").val()};
+
+        --corner-radius: ${$("#corner").val()};
+        --border-style: ${$("#border-style").val()};
+
+        --font-family: '${$("#font").val()}';
+        --background-color: ${$("#bg-color").val()};
+        --border-color: ${$("#border-color").val()};
+        --shadow-color: ${$("#shadow-color").val()};
+        --accent-color: ${$("#accent-color").val()};
+        --font-color: ${$("#font-color").val()};
+        --icon-color: ${$("#icon-color").val()};
+
+        --pyro-accent: ${$("#pyro").val()};
+        --hydro-accent: ${$("#hydro").val()};
+        --electro-accent: ${$("#electro").val()};
+        --dendro-accent: ${$("#dendro").val()};
+        --cryo-accent: ${$("#cryo").val()};
+        --anemo-accent: ${$("#anemo").val()};
+        --geo-accent: ${$("#geo").val()};
+
+        --five-star-accent: ${$("#five-star-accent").val()};
+        --four-star-accent: ${$("#four-star-accent").val()};
+        --three-star-accent: ${$("#three-star-accent").val()};
+        --two-star-accent: ${$("#two-star-accent").val()};
+        --one-star-accent: ${$("#one-star-accent").val()};
+
+        --card-shadow: var(--shadow-color) 0px 0px 6px;
+
+        --accent-font-color: var(--background-color);
+
+        --universal-transition-time: all 0.5s;
+        --hover-brightness: brightness(110%);
+        --click-brightness: brightness(90%);
+        --highlight-color: #7381d1;
+
+        --body-margin: 16px;
+        --universal-padding: 16px;
+        --component-margin: 16px;
+        --font-size: 12;
+
+        --slider-height: 6px;
+        --slider-knob-radius: 50%;
+        --slider-knob-height: 14px;
+
+        font-family: var(--font-family);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        font-size: var(--font-size);
+        transition: var(--universal-transition-time);
+        --inset-shadow: inset var(--shadow-color) 0px 0px 6px;
+    }
+
+    ::selection {
+        background-color: var(--highlight-color);
+        color: white;
+    }
+
+    html {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    `;
+    await window.electronAPI.writeToTheme(newTheme);
+}
+// !SECTION Theme

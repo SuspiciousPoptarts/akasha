@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const fs = require('fs');
 const path = require('path');
 const genshindb = require('genshin-db');
 
@@ -152,6 +153,12 @@ const createWindow = () => {
 
   ipcMain.handle("gdb-query", async (event, msg) => {
     return gdbQuery(msg);
+  })
+
+  ipcMain.handle("updateTheme", async (event, msg) => {
+    fs.writeFileSync('pages/theme.css', msg);
+    win.webContents.reload();
+    return true;
   })
 
 };

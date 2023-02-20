@@ -1687,8 +1687,8 @@ table th span {
 
 table td {
     position: relative;
-    border-right: var(--border-color) solid 2px;
-    border-bottom: var(--border-color) solid 2px;
+    border-right: var(--border-color) var(--border-style) 2px;
+    border-bottom: var(--border-color) var(--border-style) 2px;
     padding: var(--universal-padding);
 }
 
@@ -1699,7 +1699,6 @@ th:hover {
 
 table td:last-child,
 th:last-child {
-    border-right: none;
     border-right: none;
 }
 
