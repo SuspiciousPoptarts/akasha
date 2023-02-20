@@ -11,7 +11,10 @@ $("#map").click(() => {
 $("#theme").click(async() => {
     $("#content-window").fadeOut(125);
     $("#content-window").html(`${theme()}`).hide();
-    
+
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+
     let currentTheme = getComputedStyle(document.documentElement);
     const filter = (string) => { return string.replaceAll(/[\\"]/g,'').trim(); }
 
