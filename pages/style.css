@@ -157,6 +157,10 @@
     column-gap: var(--component-margin);
 }
 
+.flex-h {
+    flex-direction: column;
+}
+
 .no-gap {
     column-gap: 0px !important;
 }

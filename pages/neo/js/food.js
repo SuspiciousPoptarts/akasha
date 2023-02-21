@@ -136,7 +136,7 @@ class FoodPage {
 
         for(let material of this["food"]["ingredients"]) {
             
-            let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+            let matQuery = await window.api.queryGenshinDB(material["name"]);
             let image = JSON.parse(matQuery[1])["images"]["fandom"];
 
             recipe += `

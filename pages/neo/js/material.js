@@ -125,7 +125,7 @@ class MaterialPage {
 
         for(let material of this["craft"]["recipe"]) {
 
-            let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+            let matQuery = await window.api.queryGenshinDB(material["name"]);
             let image = JSON.parse(matQuery[1])["images"]["fandom"];
 
             recipe += `

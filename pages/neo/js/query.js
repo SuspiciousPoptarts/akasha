@@ -9,7 +9,7 @@ $("#search").keypress(function (e) {
             `${this.value[0].toUpperCase()}${this.value.slice(1)}`
             .replaceAll(filter,"")
         
-            window.electronAPI.queryGenshinDBRender(queryValue);
+            window.api.queryGenshinDBRender(queryValue);
 
         this.value = "";
     }
@@ -19,7 +19,7 @@ $("#search").keypress(function (e) {
 
 // SECTION IPC
 
-window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
+window.api.on("gdb-receiveResponse-render", async(event, msg) => {
     
     $("#content-window").fadeOut(125, function () {
     switch(msg[0]) {
@@ -68,6 +68,6 @@ window.electronAPI.on("gdb-receiveResponse-render", async(event, msg) => {
 
 // SECTION asLinkable (HTML)
     function asLinkable(display, query) {
-        return `<a onclick="window.electronAPI.queryGenshinDBRender('${query.replaceAll(filter,'')}')">${display}</a>`;
+        return `<a onclick="window.api.queryGenshinDBRender('${query.replaceAll(filter,'')}')">${display}</a>`;
     }
 // !SECTION asLinkable

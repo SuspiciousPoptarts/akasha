@@ -149,22 +149,31 @@ const createWindow = () => {
       gdbQuery(msg)
     );
 
-  })
+  });
 
   ipcMain.handle("gdb-query", async (event, msg) => {
     return gdbQuery(msg);
-  })
+  });
 
-  ipcMain.handle("updateTheme", async (event, msg) => {
+  ipcMain.handle("update/theme", async (event, msg) => {
     fs.writeFileSync('pages/theme.css', msg);
     win.webContents.reload();
-    return true;
-  })
+  });
 
 };
 
 app.whenReady().then(() => {
   createWindow();
+});
+
+ipcMain.handle("get/charList", async (event, msg) => {
+  return charList;
+});
+ipcMain.handle("get/wepList", async (event, msg) => {
+  return weaponList;
+});
+ipcMain.handle("get/artiList", async (event, msg) => {
+  return artifactList;
 });
 
 // !SECTION

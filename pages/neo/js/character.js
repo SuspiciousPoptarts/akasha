@@ -340,7 +340,7 @@ class CharacterPage {
 
             for(let material of this["character"]["ascensionCosts"][ascension]) {
 
-                let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+                let matQuery = await window.api.queryGenshinDB(material["name"]);
                 let image = JSON.parse(matQuery[1])["images"]["fandom"];
 
                 ascensionCards += `
@@ -379,7 +379,7 @@ class CharacterPage {
 
             for(let material of this["talents"]["costs"][level]) {
 
-                let matQuery = await window.electronAPI.queryGenshinDB(material["name"]);
+                let matQuery = await window.api.queryGenshinDB(material["name"]);
                 let image = JSON.parse(matQuery[1])["images"]["fandom"];
 
                 skillCards += `
@@ -435,7 +435,7 @@ class CharacterPage {
         // ? material -> "Mora", asccount["Mora"] -> 425,000
         for(let material in asccount) {
 
-            let matQuery = await window.electronAPI.queryGenshinDB(material);
+            let matQuery = await window.api.queryGenshinDB(material);
             let image = JSON.parse(matQuery[1])["images"]["fandom"];
             
             totalCards += `
@@ -458,7 +458,7 @@ class CharacterPage {
         // ? material -> "Mora", skillcount["Mora"] -> 1,265,000
         for(let material in skillcount) {
 
-            let matQuery = await window.electronAPI.queryGenshinDB(material);
+            let matQuery = await window.api.queryGenshinDB(material);
             let image = JSON.parse(matQuery[1])["images"]["fandom"];
 
             totalCards += `

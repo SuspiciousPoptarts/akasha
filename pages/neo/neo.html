@@ -13,18 +13,27 @@
 
     <div class="h100p w100p">
         <!-- SECTION WRAPPER -->
-        <div class="shadow sidebar-wrapper">
-            <div class="sidebar">
+        <div class="shadow sidebar-wrapper flex-container flex-h">
+            <div class="sidebar flex-1">
                 <!-- SUBSECTION BADGE -->
-                <div class="badge"></div>
+                <a class="no-after"><div class="badge" id="theme"></div></a>
                 <!-- SUBSECTION SEARCH  -->
                 <input type="text" class="w100p margin-t32" placeholder="Search..." id="search">
+            </div>
 
-                <!-- ! LOWER SIDEBAR -->
-                <div class="anchor w192 margin-b16">
-                    <button class="w100p" id="map"><span class="icon padding-r8">&#xe2db;</span>HoyoLab Map</button>
-                    <button class="w100p margin-t16" id="theme"><span class="icon padding-r8">&#xe243;</span>Theme</button>
-                </div>
+            <!-- SUBSECTION LISTS -->
+            <div class="float-left margin-t16 flex-1 scrollable">
+                <div class="float-left margin-t16"><a class="no-after" id="char"><span class="icon padding-r8">&#xe241;</span>Characters</a></div>
+                <div class="clear-float w100p h16"></div>
+                <div class="float-left margin-t16"><a class="no-after" id="wep"><span class="icon padding-r8">&#xe241;</span>Weapons</a></div>
+                <div class="clear-float w100p h16"></div>
+                <div class="float-left margin-t16"><a class="no-after" id="arti"><span class="icon padding-r8">&#xe241;</span>Artifacts</a></div>
+            </div>
+
+            <div class="flex-1 w100p h512 margin-t16"> </div>
+            <!-- ! LOWER SIDEBAR -->
+            <div class="anchor w192 margin-b16">
+                <button class="w100p" id="map"><span class="icon padding-r8">&#xe2db;</span>HoyoLab Map</button>
             </div>
         </div>
         <!-- !SECTION -->
