@@ -1,6 +1,7 @@
-# 📦 Neo - Akasha Rewrite
-![image](https://user-images.githubusercontent.com/98726245/216891610-6acbfb88-6da3-44c1-aadd-35a80f14009b.png)
-Why? A rewrite was required to correct some serious project issues that made it extremely unwieldy to call ipc functions from inside a "page" due to being inside an <iframe>
+# 📦 Neo
+
+![electron_9TsBBL8dX3](https://user-images.githubusercontent.com/98726245/220016843-f0e8ad9c-7a2c-4ab5-9d74-0c0675c81a60.gif)
+
 ---
 ## Parity Checklist
 * Search ✅ (Exact Match, RegEx, Fuzzy Search!)
@@ -11,9 +12,9 @@ Why? A rewrite was required to correct some serious project issues that made it 
 * Food ✅
 * Animals ✅
 * Enemies ✅
-* Theme-ing 🏗️ (40%)
+* Theme-ing ✅
 * Linkables ✅
-* Lists
+* Lists 🏗️ (0%)
 
 ## Goals
 * [Genshin Optimizer](https://frzyc.github.io/genshin-optimizer/)-like G.O.O.D. db & management
