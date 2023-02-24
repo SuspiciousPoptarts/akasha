@@ -1,12 +1,30 @@
 {
   "name": "Akasha",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "serveelectron.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
   },
-  "author": "",
+  "build": {
+    "appId": "Akasha",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "asarUnpack": [
+      "pages/theme.css",
+      "node_modules/jquery/dist/jquery.min.js"
+    ]
+  },
+  "author": "SuspiciousPoptarts",
   "license": "ISC",
   "devDependencies": {
     "electron": "^22.2.0"

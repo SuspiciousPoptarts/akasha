@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const genshindb = require('genshin-db');
+const $ = require('jquery');
 
 // SECTION LISTS
 /*
@@ -153,11 +154,6 @@ const createWindow = () => {
 
   ipcMain.handle("gdb-query", async (event, msg) => {
     return gdbQuery(msg);
-  });
-
-  ipcMain.handle("update/theme", async (event, msg) => {
-    fs.writeFileSync('pages/theme.css', msg);
-    win.webContents.reload();
   });
 
 };
