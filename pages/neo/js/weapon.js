@@ -49,7 +49,7 @@ class WeaponPage {
 
     // SECTION Returns HTML
     // NOTE HTML -> String-formatted HTML
-    HTML() {
+    async HTML() {
         let html = `
         <div class="margin-16">
             ${this.header()}
@@ -75,10 +75,10 @@ class WeaponPage {
             ${(this["weapon"]["effect"]["name"] == "")? "":this.effects()}
 
             ${button("&#xe5d7;", "Ascension", `$("#asc").toggle();`)}
-            ${this.ascension()}
+            ${await this.ascension()}
 
             ${button("&#xe5d7;", "Total", `$("#total").toggle();`)}
-            ${this.total()}
+            ${await this.total()}
             <div class="clear-float w100p h16"></div>
         </div>
         `;
@@ -162,7 +162,7 @@ class WeaponPage {
         return effect;
     }
 
-    ascension() {
+    async ascension() {
         let ascensionCards = `
         <div class="float-left w100p margin-t16" id="asc"><div class="flex-container w100p">
         `;
@@ -172,10 +172,18 @@ class WeaponPage {
             // ? (i.e, 1* weapons have no asc5)
             if(this["weapon"]["ascensionCosts"][ascension] == undefined) break; 
             // * Table Created
-            ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th>Ascension ${ascension}</th></tr>`
+            ascensionCards += `<table class="h384 flex-1 w100p"><tr class="h64"><th colspan="2">Ascension ${ascension}</th></tr>`
 
             for(let material of this["weapon"]["ascensionCosts"][ascension]) {
-                ascensionCards += `<tr class="t-left"><td>${material["count"]} ${material["name"]}</td></tr>`;
+                
+                let matQuery = await window.api.queryGenshinDB(material["name"]);
+                let image = JSON.parse(matQuery[1])["images"]["fandom"];
+
+                ascensionCards += `
+                <tr class="t-left">
+                    <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                    <td>${material["count"]} ${material["name"]}</td>
+                </tr>`;
             }
             ascensionCards += `</table>`
             // * Div Created @ Iter 3
@@ -187,7 +195,7 @@ class WeaponPage {
         return ascensionCards;
     }
 
-    total() {
+    async total() {
         // ! Tally
         let asccount = {};
 
@@ -202,13 +210,21 @@ class WeaponPage {
         }
 
         // ! HTML
-
+        console.log(asccount);
         // * Table Created
-        let totalCards = `<table class="float-left margin-t16 h640 w100p" id="total"><tr class="h64"><th>Total Ascension Cost</th</tr>`
+        let totalCards = `<table class="float-left margin-t16 h640 w100p" id="total"><tr class="h64"><th colspan="2">Total Ascension Cost</th</tr>`
 
         // ? material -> "Mora", asccount["Mora"] -> 425,000
         for(let material in asccount) {
-            totalCards += `<tr class="t-left"><td>${asccount[material]} ${material}</td></tr>`
+
+            let matQuery = await window.api.queryGenshinDB(material);
+            let image = JSON.parse(matQuery[1])["images"]["fandom"];
+
+            totalCards += `
+            <tr class="t-left">
+                <td class="w48 padding-4"><img src="${image}" class="no-shadow h48 w48" onerror="this.src='data/qm.png'"></td>
+                <td>${asccount[material]} ${material}</td>
+            </tr>`
         }
 
         totalCards += `</table>`;
@@ -237,9 +253,9 @@ class WeaponPage {
         }
     }
 
-    render() {
+    async render() {
         $("#content-window").fadeOut(125);
-        $("#content-window").html(this.HTML()).hide();
+        $("#content-window").html(await this.HTML()).hide();
         $("#content-window").fadeIn(125);
 
         if(this["weapon"]["effect"]["name"] != "") this.attachRefinementListener(this["weapon"]["effect"]);
