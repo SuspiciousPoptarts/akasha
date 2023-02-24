@@ -73,6 +73,11 @@ function asIcon(string) {
     }
     return "";
 }
+
+function capitalize(string) {
+    string = string.toLowerCase();
+    return string[0].toUpperCase() + string.substr(1);
+}
 // !SECTION
 // SECTION Text as HTML
 function formatParagraph(string) {

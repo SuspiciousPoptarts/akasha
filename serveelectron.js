@@ -90,25 +90,25 @@ function gdbQuery(query) {
       JSON.stringify(genshindb.crafts(lowerQuery))
     ]
   }
-  // else if (animalList.includes(lowerQuery)) {
-  //   return ["animal", JSON.stringify(genshindb.animals(lowerQuery))]
-  // }
+  else if (animalList.includes(lowerQuery)) {
+    return ["animal", JSON.stringify(genshindb.animals(lowerQuery))]
+  }
 
   // ? NON-EXACT MATCHES
   let matches = [];
 
   // ? REGEX LAYER
   const regEx = new RegExp(lowerQuery);
-
-  searchableList.forEach((term) => {
+  
+  for(let term of searchableList) {
     if (term.match(regEx)) matches.push([term, levDistance(term, lowerQuery)]);
-  })
+  }
 
   // ? FUZZY SEARCH LAYER (ONLY ACTIVE IF 0 REGEX MATCHES, ASSUMES FIRST CHARACTER CORRECT)
   if (matches.length == 0) {
-    searchableList.forEach((term) => {
+    for(let term of searchableList) {
       if (lowerQuery[0] == term[0]) matches.push([term, levDistance(term, lowerQuery)]);
-    })
+    }
   }
 
   if (matches.length == 0) return undefined;
@@ -174,6 +174,18 @@ ipcMain.handle("get/wepList", async (event, msg) => {
 });
 ipcMain.handle("get/artiList", async (event, msg) => {
   return artifactList;
+});
+ipcMain.handle("get/matList", async (event, msg) => {
+  return materialList;
+});
+ipcMain.handle("get/eneList", async (event, msg) => {
+  return enemyList;
+});
+ipcMain.handle("get/foodList", async (event, msg) => {
+  return foodList;
+});
+ipcMain.handle("get/aniList", async (event, msg) => {
+  return animalList;
 });
 
 // !SECTION

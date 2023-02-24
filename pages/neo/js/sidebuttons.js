@@ -42,7 +42,7 @@ async function charList() {
         </tr>
         `;
     }
-    charList += `</table></div>`;
+    charList += `</table><div class="clear-float w100p h16"></div></div>`;
     return charList;
 }
 
@@ -86,7 +86,7 @@ async function wepList() {
         </tr>
         `;
     }
-    wepList += `</table></div>`;
+    wepList += `</table><div class="clear-float w100p h16"></div></div>`;
     return wepList;
 }
 
@@ -129,8 +129,170 @@ async function artiList() {
         </tr>
         `;
     }
-    artiList += `</table></div>`;
+    artiList += `</table><div class="clear-float w100p h16"></div></div>`;
     return artiList;
+}
+
+$("#mats").click(async() => {
+    $("#content-window").fadeOut(125);
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+
+    $("#content-window").html(`${await materialList()}`).hide();
+    $("#content-window").fadeIn(125);
+
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+})
+
+async function materialList() {
+    let matList = `
+    <div class="margin-16">
+        <table class="w100p">
+            <tr>
+                <th class="w64">Image</th>
+                <th>Name</th>
+                <th>Set Bonus</th>
+                <th>Stars</th>
+            </tr>`;
+    for(let material of await window.api.getMatList()) {
+        // ?  'filter' is defined in query.js
+        let matInfo = JSON.parse((await window.api.queryGenshinDB(material))[1]);
+        matList += `
+        <tr>
+            <td>
+                <image src="${matInfo["images"]["fandom"]}" class="h64 w64 no-shadow" onerror="this.src='data/qm.png'">
+            </td>
+            <td class="t-left">
+                <a onclick="window.api.queryGenshinDBRender('${matInfo["name"].replaceAll(filter, '')}')">${matInfo["name"]}</a>
+            </td>
+            <td class="t-left">${matInfo["materialtype"]}</td>
+            <td>${(matInfo["rarity"])? matInfo["rarity"]:``}</td>
+        </tr>
+        `;
+    }
+    matList += `</table><div class="clear-float w100p h16"></div></div>`;
+    return matList;
+}
+
+$("#ene").click(async() => {
+    $("#content-window").fadeOut(125);
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+
+    $("#content-window").html(`${await enemyList()}`).hide();
+    $("#content-window").fadeIn(125);
+
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+})
+
+async function enemyList() {
+    let enemyList = `
+    <div class="margin-16">
+        <table class="w100p">
+            <tr>
+                <th>Name</th>
+                <th>Special Name</th>
+                <th>Category</th>
+                <th>Type</th>
+            </tr>`;
+    for(let enemy of await window.api.getEneList()) {
+        // ?  'filter' is defined in query.js
+        let eneInfo = JSON.parse((await window.api.queryGenshinDB(enemy))[1]);
+        enemyList += `
+        <tr>
+            <td class="t-left">
+                <a onclick="window.api.queryGenshinDBRender('${eneInfo["name"].replaceAll(filter, '')}')">${eneInfo["name"]}</a>
+            </td>
+            <td class="t-left">${eneInfo["specialname"]}</td>
+            <td class="t-left">${eneInfo["category"]}</td>
+            <td class="t-left">${capitalize(eneInfo["enemytype"])}</td>
+        </tr>
+        `;
+    }
+    enemyList += `</table><div class="clear-float w100p h16"></div></div>`;
+    return enemyList;
+}
+
+$("#food").click(async() => {
+    $("#content-window").fadeOut(125);
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+
+    $("#content-window").html(`${await foodList()}`).hide();
+    $("#content-window").fadeIn(125);
+
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+})
+
+async function foodList() {
+    let foodList = `
+    <div class="margin-16">
+        <table class="w100p">
+            <tr>
+                <th>Name</th>
+                <th>Effect</th>
+                <th>Category</th>
+                <th>Type</th>
+            </tr>`;
+    for(let food of await window.api.getFoodList()) {
+        // ?  'filter' is defined in query.js
+        let foodInfo = JSON.parse((await window.api.queryGenshinDB(food))[1]);
+        foodList += `
+        <tr>
+            <td class="t-left">
+                <a onclick="window.api.queryGenshinDBRender('${foodInfo["name"].replaceAll(filter, '')}')">${foodInfo["name"]}</a>
+            </td>
+            <td class="t-left">${foodInfo["effect"]}</td>
+            <td class="t-left">${capitalize(foodInfo["foodtype"])}</td>
+            <td class="t-left">${foodInfo["rarity"]}</td>
+        </tr>
+        `;
+    }
+    foodList += `</table><div class="clear-float w100p h16"></div></div>`;
+    return foodList;
+}
+
+$("#ani").click(async() => {
+    $("#content-window").fadeOut(125);
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+
+    $("#content-window").html(`${await animalList()}`).hide();
+    $("#content-window").fadeIn(125);
+
+    // ? Set Accent to Default
+    $(":root").get(0).style.setProperty("--accent-color", "");
+})
+
+async function animalList() {
+    let aniList = `
+    <div class="margin-16">
+        <table class="w100p">
+            <tr>
+                <th>Name</th>
+                <th>Effect</th>
+                <th>Category</th>
+            </tr>`;
+    for(let animal of await window.api.getAniList()) {
+        // ?  'filter' is defined in query.js
+        let aniInfo = JSON.parse((await window.api.queryGenshinDB(animal))[1]);
+        aniList += `
+        <tr>
+            <td class="t-left">
+                <a onclick="window.api.queryGenshinDBRender('${aniInfo["name"].replaceAll(filter, '')}')">${aniInfo["name"]}</a>
+            </td>
+            <td class="t-left">${aniInfo["description"]}</td>
+            <td class="t-left">${
+                (aniInfo["category"])? capitalize(aniInfo["category"]):``
+            }</td>
+        </tr>
+        `;
+    }
+    aniList += `</table><div class="clear-float w100p h16"></div></div>`;
+    return aniList;
 }
 
 // !SECTION Lists

@@ -9,4 +9,8 @@ contextBridge.exposeInMainWorld('api', {
     getCharList: () => ipcRenderer.invoke("get/charList"),
     getWepList: () => ipcRenderer.invoke("get/wepList"),
     getArtiList: () => ipcRenderer.invoke("get/artiList"),
+    getMatList: () => ipcRenderer.invoke("get/matList"),
+    getEneList: () => ipcRenderer.invoke("get/eneList"),
+    getFoodList: () => ipcRenderer.invoke("get/foodList"),
+    getAniList: () => ipcRenderer.invoke("get/aniList"),
 });
